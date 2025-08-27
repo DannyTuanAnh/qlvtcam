@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>🍊 Thông Tin Giống Cam</title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template-->
+    <link href="../../css/sb-admin-2.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/jquery.min.js"></script>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!--Sidebar  -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_nongHo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="./main_nongHo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Trang chủ</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./nhat_ky_canh_tac_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-book"></i>
+            <span>Nhật ký canh tác</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./san_luong_thu_hoach_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Sản lượng thu hoạch</span>
+          </a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./thoi_tiet_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-cloud"></i>
+            <span>Thời tiết</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+        <li class="nav-item active">
+          <a class="nav-link" href="./giong_cay_trong.html">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Giống cây trồng</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link" href="./bao_cao_sau_benh_nongHo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Báo cáo sâu bệnh</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="./thong_tin_ca_nhan_nongHo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!--Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>🍊 THÔNG TIN GIỐNG CAM</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                    >Nông hộ</span
+                  >
+                  <img
+                    class="img-profile rounded-circle"
+                    src="../../img/undraw_profile.svg"
+                  />
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="./thong_tin_ca_nhan_nongHo.html"
+                  >
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#" onclick="confirmLogout()">
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!--Main Content-->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+
+            <!-- Tổng số giống cam -->
+            <div class="row mb-4">
+              <div class="col-xl-3 col-md-6">
+                <div class="card border-left-warning shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+                        >
+                          Tổng số giống cam
+                        </div>
+                        <div
+                          class="h5 mb-0 font-weight-bold text-gray-800"
+                          id="totalVarieties"
+                        >
+                          0
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-seedling fa-2x text-warning"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Bảng thông tin giống cam -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                  📋 Danh sách giống cam sành
+                </h6>
+              </div>
+              <div class="card-body">
+                <!-- Loading indicator -->
+                <div class="text-center my-3" id="loadingIndicator">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Đang tải...</span>
+                  </div>
+                  <p class="mt-2 text-muted">Đang tải thông tin giống cam...</p>
+                </div>
+
+                <!-- Bảng dữ liệu -->
+                <div class="table-responsive d-none" id="tableContainer">
+                  <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                      <tr>
+                        <th width="5%">STT</th>
+                        <th width="12%">Mã giống</th>
+                        <th width="25%">Tên giống cam</th>
+                        <th width="15%">Nguồn gốc</th>
+                        <th width="43%">Đặc tính</th>
+                      </tr>
+                    </thead>
+                    <tbody id="varietiesTableBody">
+                      <!-- Dữ liệu sẽ được load ở đây -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- No data message -->
+                <div class="text-center my-5 d-none" id="noDataMessage">
+                  <i class="fas fa-seedling fa-3x text-muted mb-3"></i>
+                  <h5 class="text-muted">Không tìm thấy thông tin giống cam</h5>
+                  <p class="text-muted">
+                    Hiện tại chưa có dữ liệu về giống cam trong hệ thống.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Cam Sành Vĩnh Long 2024</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <script src="../../js/session_check.js"></script>
+
+    <script>
+      let allVarieties = [];
+
+      $(document).on("sessionValid", function (event, sessionData) {
+        console.log("Session valid, loading giống cam data...");
+        loadGiongCamData();
+      });
+
+      function loadGiongCamData() {
+        $("#loadingIndicator").show();
+        $("#tableContainer").addClass("d-none");
+        $("#noDataMessage").addClass("d-none");
+
+        $.ajax({
+          url: "../../API/api_cay_trong.php",
+          type: "GET",
+          cache: false,
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            console.log("Giống cam response:", res);
+            $("#loadingIndicator").hide();
+
+            if (res.status === "success") {
+              allVarieties = res.data || [];
+
+              updateStats();
+              renderTable(allVarieties);
+
+              if (allVarieties.length === 0) {
+                $("#noDataMessage").removeClass("d-none");
+              } else {
+                $("#tableContainer").removeClass("d-none");
+              }
+            } else {
+              alert("Không thể tải thông tin giống cam");
+              console.error("Error loading giống cam data:", res.message);
+              if (res.message && res.message.includes("Chưa đăng nhập")) {
+                window.sessionChecker.redirectToLogin();
+              }
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Lỗi load giống cam:", { xhr, status, error });
+            $("#loadingIndicator").hide();
+
+            if (xhr.status === 401) {
+              window.sessionChecker.redirectToLogin();
+            } else {
+              alert(
+                "Có lỗi xảy ra khi tải thông tin giống cam. Vui lòng thử lại!"
+              );
+              console.error("Error loading giống cam data:", error);
+            }
+          },
+        });
+      }
+
+      function renderTable(varieties) {
+        const tbody = $("#varietiesTableBody");
+        tbody.empty();
+
+        if (varieties.length === 0) {
+          tbody.append(`
+              <tr>
+                <td colspan="5" class="text-center text-muted py-4">
+                  <i class="fas fa-seedling fa-2x mb-3"></i><br>
+                  Chưa có dữ liệu giống cam
+                </td>
+              </tr>
+            `);
+          return;
+        }
+
+        varieties.forEach((variety, index) => {
+          // Format mã giống với prefix G và padding 3 số
+          const formattedMaGiong = `G${variety.MaGiong.toString().padStart(
+            3,
+            "0"
+          )}`;
+
+          // Xác định icon dựa trên nguồn gốc
+          let originIcon = "📍";
+          if (
+            variety.NguonGoc.includes("Lai tạo") ||
+            variety.NguonGoc.includes("Viện")
+          ) {
+            originIcon = "🧬";
+          } else if (
+            variety.NguonGoc.includes("Vĩnh Long") ||
+            variety.NguonGoc.includes("Hậu Giang") ||
+            variety.NguonGoc.includes("ĐBSCL")
+          ) {
+            originIcon = "🌾";
+          } else if (
+            variety.NguonGoc.includes("Hà Giang") ||
+            variety.NguonGoc.includes("Hòa Bình") ||
+            variety.NguonGoc.includes("Bắc Giang")
+          ) {
+            originIcon = "⛰️";
+          }
+
+          const row = `
+              <tr>
+                <td class="text-center font-weight-bold">${index + 1}</td>
+                <td class="font-weight-bold text-primary">${formattedMaGiong}</td>
+                <td>
+                  <span class="font-weight-bold text-warning">
+                    🍊 ${variety.TenGiong || "Chưa có tên giống"}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-info">
+                    📍 ${variety.NguonGoc || "Chưa rõ"}
+                  </span>
+                </td>
+                <td>
+                  <span class="text-muted">
+                    ${variety.DacTinh || "Chưa có thông tin đặc tính"}
+                  </span>
+                </td>
+              </tr>
+            `;
+          tbody.append(row);
+        });
+      }
+
+      function updateStats() {
+        const total = allVarieties.length;
+        const local = allVarieties.filter(
+          (v) => !v.NguonGoc.includes("Lai tạo") && !v.NguonGoc.includes("Viện")
+        ).length;
+        const hybrid = allVarieties.filter(
+          (v) => v.NguonGoc.includes("Lai tạo") || v.NguonGoc.includes("Viện")
+        ).length;
+        const mekong = allVarieties.filter(
+          (v) =>
+            v.NguonGoc.includes("Vĩnh Long") ||
+            v.NguonGoc.includes("Hậu Giang") ||
+            v.NguonGoc.includes("Đồng Nai")
+        ).length;
+
+        $("#totalVarieties").text(total);
+        $("#localVarieties").text(local);
+        $("#hybridVarieties").text(hybrid);
+        $("#mekongVarieties").text(mekong);
+      }
+    </script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="../../js/log_out_click.js"></script>
+  </body>
+</html>

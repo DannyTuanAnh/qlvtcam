@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Báo cáo sâu bệnh</title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template-->
+    <link href="../../css/sb-admin-2.css" rel="stylesheet" />
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      .custom-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.1rem;
+        font-weight: 800;
+        gap: 12px;
+        padding-bottom: 8px;
+        margin-bottom: 22px;
+        letter-spacing: 0.5px;
+        width: 100%;
+        text-align: center;
+        background: none;
+        border: none;
+      }
+      .custom-title .icon {
+        color: #6c757d;
+        font-size: 1.4em;
+        margin-right: 4px;
+        transform: translateX(-60px) scale(0.2) rotate(-30deg);
+        opacity: 0;
+        animation: worm-crawl 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      @keyframes worm-crawl {
+        0% {
+          transform: translateX(-60px) scale(0.2) rotate(-30deg);
+          opacity: 0;
+        }
+        60% {
+          transform: translateX(10px) scale(1.1) rotate(10deg);
+          opacity: 1;
+        }
+        80% {
+          transform: translateX(-2px) scale(0.95) rotate(-4deg);
+        }
+        100% {
+          transform: translateX(0) scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_nongHo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="./main_nongHo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Trang chủ</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./nhat_ky_canh_tac_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-book"></i>
+            <span>Nhật ký canh tác</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./san_luong_thu_hoach_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Sản lượng thu hoạch</span>
+          </a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./thoi_tiet_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-cloud"></i>
+            <span>Thời tiết</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="./giong_cay_trong.html">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Giống cây trồng</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+          <a class="nav-link collapsed" href="./bao_cao_sau_benh_nongHo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Báo cáo sâu bệnh</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="./thong_tin_ca_nhan_nongHo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>QUẢN LÝ CAM SÀNH TỈNH VĨNH LONG</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown no-arrow mx-1">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="messagesDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-envelope fa-fw"></i>
+                  <!-- Counter - Messages -->
+                  <span class="badge badge-danger badge-counter">7</span>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="messagesDropdown"
+                >
+                  <h6 class="dropdown-header">Message Center</h6>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_1.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                      <div class="text-truncate">
+                        Hi there! I am wondering if you can help me with a
+                        problem I've been having.
+                      </div>
+                      <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_2.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        I have the photos that you ordered last month, how would
+                        you like them sent to you?
+                      </div>
+                      <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_3.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Last month's report looks great, I am very happy with
+                        the progress so far, keep up the good work!
+                      </div>
+                      <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Am I a good boy? The reason I ask is because someone
+                        told me that people say this to all dogs, even if they
+                        aren't good...
+                      </div>
+                      <div class="small text-gray-500">
+                        Chicken the Dog · 2w
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    class="dropdown-item text-center small text-gray-500"
+                    href="#"
+                    >Read More Messages</a
+                  >
+                </div>
+              </li>
+
+              <div class="topbar-divider d-none d-sm-block"></div>
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="mr-2 d-none d-lg-inline"
+                    id="user-fullname"
+                  ></span>
+                  <img
+                    class="img-profile rounded-circle shadow"
+                    id="avatar-img"
+                    src="../../img/undraw_profile.svg"
+                    alt="avatar"
+                  />
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="./thong_tin_ca_nhan_nongHo.html"
+                  >
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#logoutModal"
+                    onclick="confirmLogout()"
+                  >
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <h1 class="custom-title">
+              <i class="fa-solid fa-worm icon"></i>
+              Báo cáo sâu bệnh
+            </h1>
+
+            <!--Nút thông tin sâu bệnh -->
+
+            <div class="text-right mb-4">
+              <button
+                class="btn btn-info mr-2"
+                onclick="window.location.href='thong_tin_sau_benh.html'"
+              >
+                <i class="fas fa-info-circle"></i> Thông tin sâu bệnh
+              </button>
+            </div>
+
+            <!-- Dropdown selector cho thửa đất -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      🌾 Chọn thửa đất để xem báo cáo sâu bệnh
+                    </h6>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control" id="thua-selector">
+                      <option value="">Chọn thửa đất...</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Đây là nơi để bảng hiện ra -->
+            <div id="report-container"></div>
+          </div>
+
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Your Website 2021</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
+
+    <!-- Session check script -->
+    <script src="../../js/log_out_click.js"></script>
+    <script src="../../js/session_check.js"></script>
+
+    <script>
+      $(document).on("sessionValid", function (event, sessionData) {
+        console.log("Session valid, loading pest report data...");
+        loadBaoCaoSauBenh();
+
+        //SỬA: Event handlers cho báo cáo sâu bệnh
+        $(document).on("click", ".edit-btn", function () {
+          const maBaoCao = $(this).data("ma");
+          const ngayPhatHien = $(this)
+            .closest("tr")
+            .find("td[data-ngay]")
+            .data("ngay");
+          const gioPhatHien = $(this)
+            .closest("tr")
+            .find("td[data-gio]")
+            .data("gio");
+          const mucDo = $(this)
+            .closest("tr")
+            .find("td[data-mucdo]")
+            .data("mucdo");
+          const maSau = $(this)
+            .closest("tr")
+            .find("td[data-masau]")
+            .data("masau");
+          const maThua = $("#thua-selector").val();
+          const maVu = $(this).closest("tr").find("td[data-mavu]").data("mavu");
+          const ghiChu = $(this)
+            .closest("tr")
+            .find("td[data-ghichu]")
+            .data("ghichu");
+
+          //lấy số thứ tự của thửa đất từ dropdown
+          const sttThua = $("#thua-selector")
+            .find("option:selected")
+            .text()
+            .match(/\d+/)[0];
+
+          //Lấy thông tin diện tích và vị trí từ reportData
+          const plotData = reportData[maThua];
+          const thuaInfo = plotData[0]; // Lấy thông tin từ record đầu tiên
+          const dienTich = thuaInfo?.DienTich || "0";
+          const viTri = thuaInfo?.ViTri || "Chưa có địa chỉ";
+          const loaiDat = thuaInfo?.LoaiDat || "Không xác định";
+
+          console.log("Chỉnh sửa báo cáo sâu bệnh với mã:", maBaoCao);
+          console.log("Ngày phát hiện:", ngayPhatHien);
+          console.log("Giờ phát hiện:", gioPhatHien);
+          console.log("Mức độ:", mucDo);
+          console.log("Mã sâu:", maSau);
+          console.log("Mã thửa:", maThua);
+          console.log("Mã vụ:", maVu);
+          console.log("Ghi chú:", ghiChu);
+          console.log("Số thứ tự thửa đất:", sttThua);
+          console.log("Diện tích:", dienTich);
+          console.log("Vị trí:", viTri);
+          console.log("Loại đất:", loaiDat);
+
+          //Lưu vào localStorage
+          localStorage.setItem("sttThua", sttThua);
+          localStorage.setItem("maBaoCao", maBaoCao);
+          localStorage.setItem("ngayPhatHien", ngayPhatHien);
+          localStorage.setItem("gioPhatHien", gioPhatHien);
+          localStorage.setItem("mucDo", mucDo);
+          localStorage.setItem("maSau", maSau);
+          localStorage.setItem("maThua", maThua);
+          localStorage.setItem("maVu", maVu);
+          localStorage.setItem("ghiChu", ghiChu);
+
+          //Lưu thông tin thửa đất
+          localStorage.setItem("dienTich", dienTich);
+          localStorage.setItem("viTri", viTri);
+          localStorage.setItem("loaiDat", loaiDat);
+
+          window.location.href = "edit_bao_cao_sau.html";
+        });
+
+        $(document).on("click", ".add-btn", function () {
+          const maThua = $(this).data("mathua");
+          console.log("Thêm báo cáo sâu bệnh cho thửa:", maThua);
+          localStorage.setItem("maThua", maThua);
+          window.location.href = "add_bao_cao_sau_benh.html";
+        });
+      });
+
+      //Xóa báo cáo sâu bệnh
+      $(document).on("click", ".btn-danger", function () {
+        const maBaoCao = $(this).data("ma");
+        Swal.fire({
+          title: "Bạn có chắc muốn xóa báo cáo sâu bệnh này?",
+          text: "Thao tác này không thể hoàn tác!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Xóa",
+          cancelButtonText: "Hủy",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: "../../API/api_xoa_bao_cao_sau_benh.php",
+              method: "POST",
+              data: { MaBaoCao: maBaoCao },
+              success: function (res) {
+                if (res.status === "success") {
+                  Swal.fire({
+                    icon: "success",
+                    title: "Đã xóa báo cáo thành công!",
+                    confirmButtonColor: "#28a745",
+                  }).then(() => {
+                    loadBaoCaoSauBenh();
+                  });
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Lỗi khi xóa",
+                    text: res.message || "Đã xảy ra lỗi khi xóa!",
+                    confirmButtonColor: "#d33",
+                  });
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error("Xóa thất bại:", { xhr, status, error });
+                Swal.fire({
+                  icon: "error",
+                  title: "Xóa thất bại",
+                  text: "Không thể xóa báo cáo sâu bệnh!",
+                  confirmButtonColor: "#d33",
+                });
+              },
+            });
+          }
+        });
+      });
+
+      let reportData = {};
+      let thuaMapping = {}; // Mapping maThua -> số thứ tự
+
+      // Cập nhật format dropdown để hiển thị đầy đủ thông tin
+      function renderReports(data) {
+        console.log("=== RENDERING PEST REPORTS ===");
+        console.log("Total plots:", Object.keys(data).length);
+
+        reportData = data;
+        thuaMapping = {}; //Reset mapping
+
+        const selectorContainer = $("#thua-selector");
+        const contentContainer = $("#report-container");
+
+        selectorContainer.empty();
+        contentContainer.empty();
+
+        selectorContainer.append('<option value="">Chọn thửa đất...</option>');
+
+        Object.keys(data).forEach((maThua, index) => {
+          const reportCount = data[maThua].length;
+          // Lấy thông tin thửa đất từ dữ liệu đầu tiên
+          const thuaInfo = data[maThua][0];
+          const stt = index + 1; //Số thứ tự
+
+          // Lưu mapping
+          thuaMapping[maThua] = stt;
+
+          //Format dropdown với địa chỉ đầy đủ
+          const displayText = `🌾 Thửa ${stt} - ${
+            thuaInfo?.LoaiDat || "Không xác định"
+          } (${thuaInfo?.DienTich || "0"}ha) - ${
+            thuaInfo?.ViTri || "Chưa có địa chỉ"
+          }`;
+
+          selectorContainer.append(`
+            <option value="${maThua}">
+              ${displayText}
+            </option>
+          `);
+        });
+
+        selectorContainer.off("change").on("change", function () {
+          const selectedMaThua = $(this).val();
+          if (selectedMaThua) {
+            //Truyền số thứ tự từ mapping
+            const stt = thuaMapping[selectedMaThua];
+            showReportTable(selectedMaThua, stt);
+          } else {
+            contentContainer.empty();
+          }
+        });
+
+        //Auto-select first plot
+        const firstMaThua = Object.keys(data)[0];
+        if (firstMaThua) {
+          selectorContainer.val(firstMaThua);
+          const stt = thuaMapping[firstMaThua];
+          showReportTable(firstMaThua, stt);
+        }
+      }
+
+      function showReportTable(maThua, stt) {
+        const contentContainer = $("#report-container");
+        const plotData = reportData[maThua];
+
+        if (!plotData) return;
+
+        //Sử dụng số thứ tự thay vì mã thửa
+        const thuaInfo = plotData[0];
+        const thuaDisplay = `Thửa ${stt} - ${
+          thuaInfo?.LoaiDat || "Không xác định"
+        }`;
+
+        // Sắp xếp theo ngày phát hiện mới nhất
+        const sortedData = plotData.sort(
+          (a, b) => new Date(b.NgayPhatHien) - new Date(a.NgayPhatHien)
+        );
+
+        const rows = sortedData
+          .map((item) => {
+            // Tách ngày và thời gian - sử dụng cách an toàn hơn
+            console.log("Ngày giờ phát hiện gốc:", item.NgayPhatHien);
+
+            // Xử lý chuỗi ngày trực tiếp để tránh lỗi múi giờ
+            const dateTimeStr = item.NgayPhatHien;
+            let date, time;
+
+            if (dateTimeStr.includes(" ")) {
+              const parts = dateTimeStr.split(" ");
+              date = parts[0];
+              time = parts[1].substring(0, 5);
+            } else if (dateTimeStr.includes("T")) {
+              const parts = dateTimeStr.split("T");
+              date = parts[0];
+              time = parts[1].substring(0, 5);
+            } else {
+              // Chỉ có ngày
+              date = dateTimeStr.split(" ")[0];
+              time = "00:00";
+            }
+
+            console.log("Ngày đã xử lý:", date, "Thời gian:", time);
+            // Màu sắc theo mức độ
+            let severityClass = "";
+            let severityIcon = "";
+            if (item.MucDo === "Nặng") {
+              severityClass = "text-danger font-weight-bold";
+              severityIcon = "🔴";
+            } else if (item.MucDo === "Trung bình") {
+              severityClass = "text-warning font-weight-bold";
+              severityIcon = "🟡";
+            } else if (item.MucDo === "Nhẹ") {
+              severityClass = "text-success";
+              severityIcon = "🟢";
+            } else {
+              severityClass = "text-info";
+              severityIcon = "🔵";
+            }
+
+            return `
+                    <tr>
+                        <td data-ngay="${date}" data-gio="${time}">${date} ${time}</td>
+                        <td data-mucdo="${item.MucDo}" class="${severityClass}">
+                            ${severityIcon} ${item.MucDo}
+                        </td>
+                        <td data-masau="${item.MaSau}">
+                            🐛 ${item.TenSauBenh || ""}
+                        </td>
+                        <td data-mavu="${item.MaVu}">
+                            📅 ${item.TenVu || ""}
+                        </td>
+                        <td data-ghichu="${item.GhiChu || ""}">
+                            ${item.GhiChu || ""}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-primary edit-btn" 
+                                    data-ma="${item.MaBaoCao}"
+                                    title="Chỉnh sửa">
+                                ✏️
+                            </button>
+                            <button class="btn btn-sm btn-danger" 
+                                    data-ma="${item.MaBaoCao}"
+                                    title="Xóa">
+                                🗑️
+                            </button>
+                        </td>
+                    </tr>
+                `;
+          })
+          .join("");
+
+        //Tính toán thống kê
+        const totalReports = plotData.length;
+        const severeCases = plotData.filter(
+          (item) => item.MucDo === "Nặng"
+        ).length;
+        const moderateCases = plotData.filter(
+          (item) => item.MucDo === "Trung bình"
+        ).length;
+        const mildCases = plotData.filter(
+          (item) => item.MucDo === "Nhẹ"
+        ).length;
+
+        const table = $(`
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            🐛 Báo cáo sâu bệnh ${thuaDisplay}
+                            <span class="badge badge-info ml-2">${totalReports} báo cáo</span>
+                        </h6>
+                        <small class="text-muted">
+                            🔴 Nặng: ${severeCases} | 🟡 Trung bình: ${moderateCases} | 🟢 Nhẹ: ${mildCases}
+                        </small>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                <strong>Chú thích mức độ:</strong> 
+                                <span class="text-danger font-weight-bold">🔴 Nặng (Cần xử lý khẩn cấp)</span> | 
+                                <span class="text-warning font-weight-bold">🟡 Trung bình (Theo dõi sát)</span> | 
+                                <span class="text-success">🟢 Nhẹ (Theo dõi thường xuyên)</span>
+                            </small>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-success add-btn" data-mathua="${maThua}">
+                        <i class="fas fa-plus"></i>Thêm báo cáo
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th><i class="fas fa-calendar"></i> Ngày phát hiện</th>
+                                    <th><i class="fas fa-exclamation-triangle"></i> Mức độ</th>
+                                    <th><i class="fas fa-bug"></i> Loại sâu</th>
+                                    <th><i class="fas fa-calendar-alt"></i> Vụ mùa</th>
+                                    <th><i class="fas fa-comment"></i> Ghi chú</th>
+                                    <th><i class="fas fa-cogs"></i> Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>${rows}</tbody>
+                        </table>
+                    </div>
+                    ${
+                      plotData.length === 0
+                        ? '<p class="text-center text-muted">Chưa có báo cáo sâu bệnh</p>'
+                        : ""
+                    }
+                </div>
+            </div>
+        `);
+
+        contentContainer.html(table);
+      }
+
+      function loadBaoCaoSauBenh() {
+        $("#report-container").html(`
+        <div class="text-center p-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Đang tải...</span>
+            </div>
+            <p class="mt-2">Đang tải dữ liệu báo cáo sâu bệnh...</p>
+        </div>
+    `);
+
+        $.ajax({
+          url: "../../API/api_bao_cao_sau_benh.php",
+          method: "GET",
+          success: function (res) {
+            console.log(res);
+            if (res.status === "success") {
+              renderReports(res.data);
+            } else {
+              console.error("Lỗi dữ liệu:", res.message);
+              Swal.fire({
+                icon: "error",
+                title: "Lỗi dữ liệu",
+                text: res.message || "Không thể tải dữ liệu!",
+                confirmButtonColor: "#d33",
+              });
+              if (res.message && res.message.includes("Chưa đăng nhập")) {
+                window.sessionChecker.redirectToLogin();
+              }
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Lỗi load báo cáo sâu bệnh:", { xhr, status, error });
+            Swal.fire({
+              icon: "error",
+              title: "Không thể tải thông tin báo cáo sâu bệnh",
+              text: "Vui lòng thử lại!",
+              confirmButtonColor: "#d33",
+            });
+            if (xhr.status === 401) {
+              window.sessionChecker.redirectToLogin();
+            }
+          },
+        });
+      }
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Gọi API lấy thông tin cá nhân để lấy avatar và tên
+        $.ajax({
+          url: "../../API/api_profile_nong_ho.php",
+          method: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success" && res.data) {
+              // Gán avatar
+              if (res.data.avatar && res.data.avatar !== "") {
+                $("#avatar-img").attr("src", "../../" + res.data.avatar);
+              } else {
+                $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              }
+              // Gán tên nông hộ lên topbar
+              $("#user-fullname").text(res.data.HoTenNongHo || "Nông hộ");
+            } else {
+              $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              $("#user-fullname").text("Nông hộ");
+            }
+          },
+          error: function () {
+            $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+            $("#user-fullname").text("Nông hộ");
+          },
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "../../API/api_ho_tro_ky_thuat_nongho.php",
+          type: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (messages) {
+            var html = '<h6 class="dropdown-header">Message Center</h6>';
+            if (messages.length === 0) {
+              html +=
+                '<div class="dropdown-item text-center small text-gray-500">Không có hỗ trợ kỹ thuật nào</div>';
+            } else {
+              messages.forEach(function (msg, idx) {
+                html += `
+            <a class="dropdown-item d-flex align-items-center message-item" href="#" data-idx="${idx}">
+              <div class="dropdown-list-image mr-3">
+                <img class="rounded-circle" src="../../${
+                  msg.avatar || "img/undraw_profile.svg"
+                }" alt="...">
+                <div class="status-indicator bg-success"></div>
+              </div>
+              <div class="font-weight-bold">
+                <div class="text-truncate">${msg.noiDung}</div>
+                <div class="small text-gray-500">${msg.hoTen} · ${
+                  msg.thoiGian
+                }</div>
+              </div>
+            </a>
+          `;
+              });
+            }
+            html +=
+              '<a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả hỗ trợ</a>';
+            $(
+              ".dropdown-list.dropdown-menu[aria-labelledby='messagesDropdown']"
+            ).html(html);
+
+            // Thêm sự kiện click cho từng tin nhắn
+            $(".message-item").on("click", function (e) {
+              e.preventDefault();
+              var idx = $(this).data("idx");
+              var msg = messages[idx];
+              Swal.fire({
+                html: `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+      <img src="../../${
+        msg.avatar || "img/undraw_profile.svg"
+      }" style="width:48px;height:48px;border-radius:50%;box-shadow:0 2px 8px #ccc;">
+      <div>
+        <div style="font-weight:bold;font-size:1.1em;">${msg.hoTen}</div>
+        <div style="color:#888;font-size:0.95em;">${msg.thoiGian}</div>
+      </div>
+    </div>
+    <div style="text-align:left;font-size:1.05em;padding:8px 0 0 0;">
+      ${msg.noiDung}
+    </div>
+  `,
+                showConfirmButton: true,
+                confirmButtonText: "Đóng",
+                customClass: {
+                  popup: "swal2-message-popup",
+                },
+              });
+            });
+
+            // Cập nhật badge số lượng tin nhắn
+            $(".fa-envelope.fa-fw")
+              .siblings(".badge-counter")
+              .text(messages.length);
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

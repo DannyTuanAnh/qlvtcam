@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>🐛 Chỉnh Sửa Báo Cáo Sâu Bệnh</title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template-->
+    <link href="../../css/sb-admin-2.css" rel="stylesheet" />
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/jquery.min.js"></script>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_nongHo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="./main_nongHo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Trang chủ</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./nhat_ky_canh_tac_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-book"></i>
+            <span>Nhật ký canh tác</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./san_luong_thu_hoach_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Sản lượng thu hoạch</span>
+          </a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./thoi_tiet_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-cloud"></i>
+            <span>Thời tiết</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="./giong_cay_trong.html">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Giống cây trồng</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+          <a class="nav-link" href="./bao_cao_sau_benh_nongHo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Báo cáo sâu bệnh</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="./thong_tin_ca_nhan_nongHo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>QUẢN LÝ CAM SÀNH TỈNH VĨNH LONG</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown no-arrow mx-1">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="messagesDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-envelope fa-fw"></i>
+                  <!-- Counter - Messages -->
+                  <span class="badge badge-danger badge-counter">7</span>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="messagesDropdown"
+                >
+                  <h6 class="dropdown-header">Message Center</h6>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_1.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                      <div class="text-truncate">
+                        Hi there! I am wondering if you can help me with a
+                        problem I've been having.
+                      </div>
+                      <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_2.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        I have the photos that you ordered last month, how would
+                        you like them sent to you?
+                      </div>
+                      <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_3.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Last month's report looks great, I am very happy with
+                        the progress so far, keep up the good work!
+                      </div>
+                      <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Am I a good boy? The reason I ask is because someone
+                        told me that people say this to all dogs, even if they
+                        aren't good...
+                      </div>
+                      <div class="small text-gray-500">
+                        Chicken the Dog · 2w
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    class="dropdown-item text-center small text-gray-500"
+                    href="#"
+                    >Read More Messages</a
+                  >
+                </div>
+              </li>
+
+              <div class="topbar-divider d-none d-sm-block"></div>
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="mr-2 d-none d-lg-inline"
+                    id="user-fullname"
+                  ></span>
+                  <img
+                    class="img-profile rounded-circle shadow"
+                    id="avatar-img"
+                    src="../../img/undraw_profile.svg"
+                    alt="avatar"
+                  />
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="./thong_tin_ca_nhan_nongHo.html"
+                  >
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#" onclick="confirmLogout()">
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <h1 class="h3 mb-4 text-gray-800">🐛 Chỉnh sửa báo cáo sâu bệnh</h1>
+
+            <!-- ✅ Hiển thị thông tin thửa đất -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                  🌾 Thông tin thửa đất
+                </h6>
+              </div>
+              <div class="card-body">
+                <p class="mb-0">
+                  <strong>Thửa đang chỉnh sửa:</strong>
+                  <span class="text-primary font-weight-bold" id="thuaDisplay">
+                    Đang tải...
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <!-- ✅ Form chỉnh sửa báo cáo sâu bệnh -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                  📝 Thông tin báo cáo
+                </h6>
+              </div>
+              <div class="card-body">
+                <form id="editForm">
+                  <!-- Ngày và giờ phát hiện -->
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="ngay-phat-hien">
+                          <i class="fas fa-calendar"></i> Ngày phát hiện:
+                        </label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="ngay-phat-hien"
+                          name="ngay-phat-hien"
+                          required
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="gio-phat-hien">
+                          <i class="fas fa-clock"></i> Giờ phát hiện:
+                        </label>
+                        <input
+                          type="time"
+                          class="form-control"
+                          id="gio-phat-hien"
+                          name="gio-phat-hien"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Mức độ -->
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="muc-do">
+                          <i class="fas fa-exclamation-triangle"></i> Mức độ:
+                        </label>
+                        <select
+                          class="form-control"
+                          id="muc-do"
+                          name="muc-do"
+                          required
+                        >
+                          <option value="">Chọn mức độ</option>
+                          <option value="Nhẹ">🟢 Nhẹ</option>
+                          <option value="Trung bình">🟡 Trung bình</option>
+                          <option value="Nặng">🔴 Nặng</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="loai-sau">
+                          <i class="fas fa-bug"></i> Loại sâu bệnh:
+                        </label>
+                        <select
+                          class="form-control"
+                          id="loai-sau"
+                          name="loai-sau"
+                          required
+                        >
+                          <option value="">Chọn loại sâu bệnh</option>
+                          <!-- Sẽ được load từ API -->
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Vụ mùa -->
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="vu-mua">
+                          <i class="fas fa-calendar-alt"></i> Vụ mùa:
+                        </label>
+                        <select
+                          class="form-control"
+                          id="vu-mua"
+                          name="vu-mua"
+                          required
+                        >
+                          <option value="">Chọn vụ mùa</option>
+                          <!-- Sẽ được load từ API -->
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Ghi chú -->
+                  <div class="form-group">
+                    <label for="ghi-chu">
+                      <i class="fas fa-comment"></i> Ghi chú:
+                    </label>
+                    <textarea
+                      class="form-control"
+                      id="ghi-chu"
+                      name="ghi-chu"
+                      rows="3"
+                      placeholder="Mô tả chi tiết về tình trạng sâu bệnh..."
+                    ></textarea>
+                  </div>
+
+                  <!-- Buttons -->
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg mr-3">
+                      <i class="fas fa-save"></i> 💾 Cập nhật
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-lg"
+                      onclick="cancelEdit()"
+                    >
+                      <i class="fas fa-times"></i> ❌ Hủy
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Cam Sành Vĩnh Long 2024</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Session check script -->
+    <script src="../../js/session_check.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // Listen for sessionValid event từ session_check.js
+        $(document).on("sessionValid", function (event, sessionData) {
+          console.log("Session valid, loading data for edit...");
+          loadBaoCaoForEdit();
+        });
+
+        //Hàm load thông tin báo cáo sâu bệnh để edit
+        function loadBaoCaoForEdit() {
+          // Lấy dữ liệu từ localStorage
+          const sttThua = localStorage.getItem("sttThua");
+          const maBaoCao = localStorage.getItem("maBaoCao");
+          const ngayPhatHien = localStorage.getItem("ngayPhatHien");
+          const gioPhatHien = localStorage.getItem("gioPhatHien");
+          const mucDo = localStorage.getItem("mucDo");
+          const maSau = localStorage.getItem("maSau");
+          const maThua = localStorage.getItem("maThua");
+          const maVu = localStorage.getItem("maVu");
+          const ghiChu = localStorage.getItem("ghiChu");
+
+          //Lấy thông tin thửa đất từ localStorage
+          const dienTich = localStorage.getItem("dienTich");
+          const viTri = localStorage.getItem("viTri");
+          const loaiDat = localStorage.getItem("loaiDat");
+
+          console.log("=== LOADING EDIT DATA ===");
+          console.log("STT Thửa:", sttThua);
+          console.log("Mã báo cáo:", maBaoCao);
+          console.log("Ngày phát hiện:", ngayPhatHien);
+          console.log("Giờ phát hiện:", gioPhatHien);
+          console.log("Mức độ:", mucDo);
+          console.log("Mã sâu:", maSau);
+          console.log("Mã thửa:", maThua);
+          console.log("Mã vụ:", maVu);
+          console.log("Ghi chú:", ghiChu);
+          // ✅ THÊM: Log thông tin thửa đất
+          console.log("Diện tích:", dienTich);
+          console.log("Vị trí:", viTri);
+          console.log("Loại đất:", loaiDat);
+
+          // Kiểm tra dữ liệu
+          if (!maBaoCao || !maThua) {
+            Swal.fire({
+              icon: "error",
+              title: "Lỗi!",
+              text: "Không tìm thấy thông tin báo cáo cần chỉnh sửa.",
+              confirmButtonColor: "#e74a3b",
+            }).then(() => {
+              window.location.href = "bao_cao_sau_benh_nongHo.html";
+            });
+            return;
+          }
+
+          //Hiển thị thông tin thửa đầy đủ
+          const thuaDisplayText = `🌾 Thửa ${sttThua} - ${
+            loaiDat || "Không xác định"
+          } (${dienTich || "0"}ha) - ${viTri || "Chưa có địa chỉ"}`;
+          $("#thuaDisplay").html(thuaDisplayText);
+
+          // Fill form với dữ liệu hiện tại
+          const dateTime = new Date(ngayPhatHien);
+          const date = dateTime.toISOString().split("T")[0];
+          const time = gioPhatHien || dateTime.toTimeString().slice(0, 5);
+
+          $("#ngay-phat-hien").val(date);
+          $("#gio-phat-hien").val(time);
+          $("#muc-do").val(mucDo);
+          $("#ghi-chu").val(ghiChu || "");
+
+          //Load dropdown data
+          loadSauBenhOptions(maSau);
+          loadVuMuaOptions(maVu);
+        }
+
+        //Load options cho dropdown sâu bệnh
+        function loadSauBenhOptions(selectedMaSau) {
+          $.ajax({
+            url: "../../API/api_thong_tin_sau_benh.php",
+            method: "GET",
+            cache: false,
+            xhrFields: { withCredentials: true },
+            success: function (res) {
+              if (res.status === "success") {
+                const selectElement = $("#loai-sau");
+                selectElement.empty();
+                selectElement.append(
+                  `<option value="">Chọn loại sâu bệnh</option>`
+                );
+
+                res.data.forEach(function (item) {
+                  const selected =
+                    item.MaSau == selectedMaSau ? "selected" : "";
+                  selectElement.append(
+                    `<option value="${item.MaSau}" ${selected}>
+                      🐛 ${item.TenSauBenh || item.TenSau}
+                    </option>`
+                  );
+                });
+
+                console.log("Loaded sâu bệnh options");
+              } else {
+                console.error("Error loading sâu bệnh:", res.message);
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error("Error loading sâu bệnh:", error);
+            },
+          });
+        }
+
+        //Load options cho dropdown vụ mùa
+        function loadVuMuaOptions(selectedMaVu) {
+          $.ajax({
+            url: "../../API/api_ma_vu.php",
+            method: "GET",
+            cache: false,
+            xhrFields: { withCredentials: true },
+            success: function (res) {
+              if (res.status === "success") {
+                const selectElement = $("#vu-mua");
+                selectElement.empty();
+                selectElement.append(`<option value="">Chọn vụ mùa</option>`);
+
+                res.data.forEach(function (item) {
+                  const selected = item.MaVu == selectedMaVu ? "selected" : "";
+                  selectElement.append(
+                    `<option value="${item.MaVu}" ${selected}>
+                      📅 ${item.TenVu}
+                    </option>`
+                  );
+                });
+
+                console.log("Loaded vụ mùa options");
+              } else {
+                console.error("Error loading vụ mùa:", res.message);
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error("Error loading vụ mùa:", error);
+            },
+          });
+        }
+
+        //Submit form
+        $("#editForm").submit(function (e) {
+          e.preventDefault();
+
+          const maBaoCao = localStorage.getItem("maBaoCao");
+          const maThua = localStorage.getItem("maThua");
+
+          const ngayPhatHien = $("#ngay-phat-hien").val();
+          const gioPhatHien = $("#gio-phat-hien").val();
+          const mucDo = $("#muc-do").val();
+          const maSau = $("#loai-sau").val();
+          const maVu = $("#vu-mua").val();
+          const ghiChu = $("#ghi-chu").val();
+
+          // Validation
+          if (!ngayPhatHien || !gioPhatHien || !mucDo || !maSau || !maVu) {
+            Swal.fire({
+              icon: "warning",
+              title: "Thiếu thông tin!",
+              text: "Vui lòng điền đầy đủ thông tin bắt buộc.",
+              confirmButtonColor: "#ffc107",
+            });
+            return;
+          }
+
+          // Tạo datetime
+          const ngayPhatHienFull = `${ngayPhatHien} ${gioPhatHien}:00`;
+
+          const dataSend = {
+            maBaoCao: maBaoCao,
+            ngayPhatHien: ngayPhatHienFull,
+            mucDo: mucDo,
+            maSau: maSau,
+            maThua: maThua,
+            maVu: maVu,
+            ghiChu: ghiChu,
+          };
+
+          console.log("=== UPDATING REPORT ===");
+          console.log("Data to send:", dataSend);
+
+          // Gọi API update
+          $.ajax({
+            url: "../../API/api_update_bao_cao_sau_benh.php", // Bạn cần tạo API này
+            method: "POST",
+            cache: false,
+            xhrFields: { withCredentials: true },
+            data: JSON.stringify(dataSend),
+            contentType: "application/json",
+            success: function (res) {
+              console.log("Update response:", res);
+              if (res.status === "success") {
+                Swal.fire({
+                  icon: "success",
+                  title: "Thành công!",
+                  text: "Cập nhật báo cáo sâu bệnh thành công!",
+                  confirmButtonColor: "#28a745",
+                }).then(() => {
+                  // Xóa localStorage và chuyển hướng
+                  clearLocalStorage();
+                  window.location.href = "bao_cao_sau_benh_nongHo.html";
+                });
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Lỗi!",
+                  text: res.message || "Có lỗi xảy ra khi cập nhật!",
+                  confirmButtonColor: "#e74a3b",
+                });
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error("Lỗi update:", { xhr, status, error });
+              if (xhr.status === 401) {
+                window.sessionChecker.redirectToLogin();
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Lỗi kết nối!",
+                  text: "Không thể cập nhật. Vui lòng thử lại!",
+                  confirmButtonColor: "#e74a3b",
+                });
+              }
+            },
+          });
+        });
+      });
+
+      // ✅ Function hủy edit
+      function cancelEdit() {
+        Swal.fire({
+          title: "Hủy chỉnh sửa?",
+          text: "Các thay đổi sẽ không được lưu.",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonColor: "#6c757d",
+          cancelButtonColor: "#28a745",
+          confirmButtonText: "Hủy",
+          cancelButtonText: "Tiếp tục chỉnh sửa",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            clearLocalStorage();
+            window.location.href = "bao_cao_sau_benh_nongHo.html";
+          }
+        });
+      }
+
+      // ✅ Function clear localStorage
+      function clearLocalStorage() {
+        localStorage.removeItem("sttThua");
+        localStorage.removeItem("maBaoCao");
+        localStorage.removeItem("ngayPhatHien");
+        localStorage.removeItem("gioPhatHien");
+        localStorage.removeItem("mucDo");
+        localStorage.removeItem("maSau");
+        localStorage.removeItem("maThua");
+        localStorage.removeItem("maVu");
+        localStorage.removeItem("ghiChu");
+        // ✅ THÊM: Xóa thông tin thửa đất
+        localStorage.removeItem("dienTich");
+        localStorage.removeItem("viTri");
+        localStorage.removeItem("loaiDat");
+      }
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Gọi API lấy thông tin cá nhân để lấy avatar và tên
+        $.ajax({
+          url: "../../API/api_profile_nong_ho.php",
+          method: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success" && res.data) {
+              // Gán avatar
+              if (res.data.avatar && res.data.avatar !== "") {
+                $("#avatar-img").attr("src", "../../" + res.data.avatar);
+              } else {
+                $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              }
+              // Gán tên nông hộ lên topbar
+              $("#user-fullname").text(res.data.HoTenNongHo || "Nông hộ");
+            } else {
+              $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              $("#user-fullname").text("Nông hộ");
+            }
+          },
+          error: function () {
+            $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+            $("#user-fullname").text("Nông hộ");
+          },
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "../../API/api_ho_tro_ky_thuat_nongho.php",
+          type: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (messages) {
+            var html = '<h6 class="dropdown-header">Message Center</h6>';
+            if (messages.length === 0) {
+              html +=
+                '<div class="dropdown-item text-center small text-gray-500">Không có hỗ trợ kỹ thuật nào</div>';
+            } else {
+              messages.forEach(function (msg, idx) {
+                html += `
+            <a class="dropdown-item d-flex align-items-center message-item" href="#" data-idx="${idx}">
+              <div class="dropdown-list-image mr-3">
+                <img class="rounded-circle" src="../../${
+                  msg.avatar || "img/undraw_profile.svg"
+                }" alt="...">
+                <div class="status-indicator bg-success"></div>
+              </div>
+              <div class="font-weight-bold">
+                <div class="text-truncate">${msg.noiDung}</div>
+                <div class="small text-gray-500">${msg.hoTen} · ${
+                  msg.thoiGian
+                }</div>
+              </div>
+            </a>
+          `;
+              });
+            }
+            html +=
+              '<a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả hỗ trợ</a>';
+            $(
+              ".dropdown-list.dropdown-menu[aria-labelledby='messagesDropdown']"
+            ).html(html);
+
+            // Thêm sự kiện click cho từng tin nhắn
+            $(".message-item").on("click", function (e) {
+              e.preventDefault();
+              var idx = $(this).data("idx");
+              var msg = messages[idx];
+              Swal.fire({
+                html: `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+      <img src="../../${
+        msg.avatar || "img/undraw_profile.svg"
+      }" style="width:48px;height:48px;border-radius:50%;box-shadow:0 2px 8px #ccc;">
+      <div>
+        <div style="font-weight:bold;font-size:1.1em;">${msg.hoTen}</div>
+        <div style="color:#888;font-size:0.95em;">${msg.thoiGian}</div>
+      </div>
+    </div>
+    <div style="text-align:left;font-size:1.05em;padding:8px 0 0 0;">
+      ${msg.noiDung}
+    </div>
+  `,
+                showConfirmButton: true,
+                confirmButtonText: "Đóng",
+                customClass: {
+                  popup: "swal2-message-popup",
+                },
+              });
+            });
+
+            // Cập nhật badge số lượng tin nhắn
+            $(".fa-envelope.fa-fw")
+              .siblings(".badge-counter")
+              .text(messages.length);
+          },
+        });
+      });
+    </script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="../../js/log_out_click.js"></script>
+  </body>
+</html>

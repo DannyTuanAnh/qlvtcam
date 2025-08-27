@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hệ thống quản lý Cam Sành Vĩnh Long</title>
+    <link href="./css/sb-admin-2.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        min-height: 100vh;
+        font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        background: url("img/orange_bg.jpg") repeat fixed;
+        background-size: 320px 320px;
+        position: relative;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(120deg, #fffbe699 0%, #f5f5f599 100%);
+        z-index: 0;
+        pointer-events: none;
+      }
+      #wrapper,
+      .hero-section,
+      .about-section,
+      .contact-section,
+      .footer,
+      nav,
+      .intro-card {
+        position: relative;
+        z-index: 1;
+      }
+      .navbar {
+        background: #fff;
+        box-shadow: 0 2px 12px rgba(255, 152, 0, 0.06);
+        transition: box-shadow 0.3s;
+        border-bottom-left-radius: 24px;
+        border-bottom-right-radius: 24px;
+      }
+      .navbar-brand {
+        color: #ff9800 !important;
+        font-weight: bold;
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+        text-shadow: none;
+        display: flex;
+        align-items: center;
+      }
+      .navbar-brand i {
+        font-size: 1.6rem;
+        margin-right: 8px;
+        color: #ff9800;
+        filter: none;
+      }
+      .nav-link,
+      .navbar-nav .nav-link.active {
+        color: #ff9800 !important;
+        font-weight: 600;
+        position: relative;
+        transition: color 0.2s;
+        text-shadow: 0 1px 4px #fffbe6cc;
+      }
+      .nav-link::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #ff9800;
+        transition: width 0.3s;
+        margin: 0 auto;
+      }
+      .nav-link:hover {
+        color: #ff9800 !important;
+      }
+      .nav-link:hover::after {
+        width: 60%;
+        background: #ff9800;
+      }
+      .hero-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 70vh;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        position: relative;
+        z-index: 1;
+      }
+      .intro-card {
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 4px 18px rgba(255, 152, 0, 0.07);
+        padding: 40px 30px 36px 30px;
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 1.2s cubic-bezier(0.23, 1.01, 0.32, 1) both;
+        color: #333;
+        border: 1.5px solid #ffe0b2;
+      }
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        100% {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .intro-card img {
+        width: 120px;
+        margin-bottom: 20px;
+        filter: drop-shadow(0 4px 12px #ff980055);
+        animation: float 2.5s ease-in-out infinite alternate;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-16px);
+        }
+      }
+      .intro-card h1 {
+        font-size: 2.1rem;
+        color: #ff9800;
+        margin-bottom: 16px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-shadow: none;
+      }
+      .intro-card p {
+        color: #555;
+        margin-bottom: 28px;
+        font-size: 1.07rem;
+        line-height: 1.7;
+        text-shadow: none;
+      }
+      .btn-login {
+        background: #ffe0b2;
+        color: #ff9800;
+        border: none;
+        border-radius: 10px;
+        padding: 13px 34px;
+        font-size: 1.12rem;
+        font-weight: bold;
+        transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px #ff980022;
+        letter-spacing: 1px;
+        outline: none;
+        position: relative;
+        overflow: hidden;
+        border: 1.5px solid #ffe0b2;
+      }
+      .btn-login:active {
+        transform: scale(0.97);
+      }
+      .btn-login:hover {
+        background: #ffecb3;
+        color: #ff9800;
+        box-shadow: 0 4px 16px #ff980022;
+        transform: translateY(-2px) scale(1.03);
+        border-color: #ffecb3;
+      }
+      .btn-login i {
+        margin-right: 8px;
+      }
+      .section-title {
+        color: #ff9800;
+        font-weight: bold;
+        margin-bottom: 18px;
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+        text-shadow: none;
+      }
+      .about-section,
+      .contact-section {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px #ff980011;
+        padding: 32px 24px;
+        margin-bottom: 36px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        animation: fadeInUp 1.2s cubic-bezier(0.23, 1.01, 0.32, 1) both;
+        color: #333;
+        border: 1.5px solid #ffe0b2;
+      }
+      .about-section ul {
+        margin-top: 12px;
+        margin-bottom: 0;
+        padding-left: 20px;
+      }
+      .about-section li {
+        margin-bottom: 7px;
+        font-size: 1.05rem;
+        color: #555;
+        text-shadow: none;
+      }
+      .cam-card {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 2px 12px #ff980011;
+        color: #333;
+        border: 1.5px solid #ffe0b2;
+        transition: transform 0.18s, box-shadow 0.18s;
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        overflow: hidden;
+      }
+      .cam-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 4px 18px #ff980022;
+        border-color: #ffecb3;
+      }
+      .cam-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #ffe0b2;
+        box-shadow: 0 2px 8px #ff980022;
+        background: #fff8;
+        margin-bottom: 12px;
+        transition: box-shadow 0.2s;
+      }
+      .cam-card:hover .cam-img {
+        box-shadow: 0 4px 16px #ff980022;
+      }
+      .cam-title {
+        font-size: 1.18rem;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #ff9800;
+        text-shadow: none;
+      }
+      .cam-desc {
+        font-size: 1.01rem;
+        color: #555;
+        text-shadow: none;
+      }
+      @media (max-width: 767px) {
+        .cam-card {
+          min-height: 220px;
+          padding: 20px 10px;
+        }
+        .cam-img {
+          width: 60px;
+          height: 60px;
+        }
+      }
+      .footer {
+        background: #fff;
+        color: #888;
+        text-align: center;
+        padding: 18px 0 8px 0;
+        font-size: 1rem;
+        border-top: 1px solid #ffe0b2;
+        margin-top: 40px;
+        letter-spacing: 1px;
+        text-shadow: none;
+        border-bottom-left-radius: 24px;
+        border-bottom-right-radius: 24px;
+        box-shadow: 0 -2px 12px #ff980011;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+      <a class="navbar-brand" href="#"
+        ><i class="fa fa-lemon"></i> Cam Sành Vĩnh Long</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              ><i class="fas fa-home"></i> Trang chủ</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about"
+              ><i class="fas fa-users"></i> Về chúng tôi</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact"
+              ><i class="fas fa-envelope"></i> Liên hệ</a
+            >
+          </li>
+          <li class="nav-item">
+            <button
+              class="btn btn-login ml-lg-3 mt-2 mt-lg-0"
+              onclick="window.location.href='./frontend/nongHo_UI/login_nongHo.html'"
+            >
+              <i class="fa fa-sign-in-alt"></i> Đăng nhập Nông hộ
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <script>
+      // Hiệu ứng cuộn mượt khi click navbar
+      $(function () {
+        $(".nav-link[href^='#']").on("click", function (e) {
+          var target = $(this.getAttribute("href"));
+          if (target.length) {
+            e.preventDefault();
+            $("html, body")
+              .stop()
+              .animate({ scrollTop: target.offset().top - 60 }, 700);
+          }
+        });
+      });
+    </script>
+
+    <div class="hero-section position-relative">
+      <div class="intro-card shadow-lg animate__animated animate__fadeInDown">
+        <img
+          src="./img/orange_tree_login.png"
+          alt="Cam Sành Vĩnh Long"
+          style="
+            border-radius: 50%;
+            background: #fffbe6;
+            padding: 10px;
+            box-shadow: 0 4px 24px #ff980033;
+          "
+        />
+        <h1 style="font-size: 2.3rem; letter-spacing: 1.5px; line-height: 1.2">
+          <span style="color: #ff9800"
+            ><i class="fa fa-lemon"></i> Cam Sành Vĩnh Long</span
+          >
+        </h1>
+        <p style="font-size: 1.13rem; line-height: 1.7; color: #444">
+          <b>Chào mừng bạn!</b> <br />Hệ thống quản lý & hỗ trợ sản xuất
+          <span style="color: #ff9800; font-weight: bold">Cam Sành</span> tỉnh
+          Vĩnh Long.<br />
+          <span style="color: #ff9800; font-weight: 600"
+            >Đăng nhập để trải nghiệm quản lý, theo dõi, hỗ trợ kỹ thuật hiện
+            đại.</span
+          >
+        </p>
+        <button
+          class="btn-login pulse-glow"
+          onclick="window.location.href='./frontend/nongHo_UI/login_nongHo.html'"
+          style="
+            font-size: 1.18rem;
+            padding: 15px 38px;
+            box-shadow: 0 6px 24px #ff980044;
+          "
+        >
+          <i class="fa fa-sign-in-alt"></i> Đăng nhập Nông hộ
+        </button>
+      </div>
+      <div
+        class="d-none d-md-block"
+        style="position: absolute; right: 5vw; bottom: 0; z-index: 0"
+      >
+        <img
+          src="./img/undraw_rocket.svg"
+          alt="rocket"
+          style="width: 180px; opacity: 0.13; filter: blur(0.5px)"
+        />
+      </div>
+      <div
+        class="d-none d-md-block"
+        style="position: absolute; left: 3vw; top: 10vh; z-index: 0"
+      >
+        <img
+          src="./img/undraw_profile_3.svg"
+          alt="cam"
+          style="width: 120px; opacity: 0.12"
+        />
+      </div>
+    </div>
+    <style>
+      .pulse-glow {
+        animation: pulse-glow 1.6s infinite;
+        box-shadow: 0 0 0 0 #ff980055;
+      }
+      @keyframes pulse-glow {
+        0% {
+          box-shadow: 0 0 0 0 #ff980055;
+        }
+        70% {
+          box-shadow: 0 0 0 16px #ff980000;
+        }
+        100% {
+          box-shadow: 0 0 0 0 #ff980055;
+        }
+      }
+    </style>
+
+    <div class="about-section" id="about">
+      <div class="section-title">Về chúng tôi</div>
+      <p>
+        <b>Cam Sành Vĩnh Long</b> là hệ thống quản lý và hỗ trợ sản xuất dành
+        cho các nông hộ, cán bộ kỹ thuật và quản lý vùng trồng cam sành tại tỉnh
+        Vĩnh Long. Hệ thống giúp kết nối, quản lý thông tin sản xuất, hỗ trợ kỹ
+        thuật, thống kê sản lượng và nâng cao hiệu quả sản xuất nông nghiệp.
+      </p>
+      <ul>
+        <li>Quản lý vùng trồng, thửa đất, sản lượng, nhật ký canh tác</li>
+        <li>Hỗ trợ kỹ thuật, cập nhật thông tin sâu bệnh, thời tiết</li>
+        <li>Kết nối giữa nông hộ và cán bộ kỹ thuật</li>
+        <li>Báo cáo, thống kê sản xuất nhanh chóng, chính xác</li>
+      </ul>
+    </div>
+
+    <!-- Danh mục các loại cam (carousel) -->
+    <div class="about-section" id="danhmuc-cam">
+      <div class="section-title">
+        <i class="fas fa-apple-alt"></i> Danh mục các loại cam nổi bật
+      </div>
+      <div class="position-relative" style="font-family: 'Nunito', sans-serif">
+        <button
+          id="cam-prev"
+          class="btn btn-light shadow-sm position-absolute"
+          style="
+            left: -32px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            transition: opacity 0.2s;
+          "
+        >
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button
+          id="cam-next"
+          class="btn btn-light shadow-sm position-absolute"
+          style="
+            right: -32px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            transition: opacity 0.2s;
+          "
+        >
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div
+          id="cam-carousel"
+          class="row justify-content-center"
+          style="overflow: hidden; min-height: 340px"
+        ></div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const camList = [
+        {
+          img: "./img/cam_cao_phong.jpg",
+          title: "Cam Cao Phong",
+          desc: "Vỏ dày, vị ngọt thanh, mọng nước, giàu vitamin C. Phù hợp khí hậu miền Bắc, năng suất cao.",
+        },
+        {
+          img: "./img/luc_ngan.jpg",
+          title: "Cam Lục Ngạn",
+          desc: "Đặc sản Nghệ An, vỏ mỏng, vị ngọt đậm, thơm dịu, màu vàng óng đẹp mắt, giá trị kinh tế cao.",
+        },
+        {
+          img: "./img/khong_hat.jpg",
+          title: "Cam Không Hạt",
+          desc: "Nổi tiếng miền Trung, quả tròn, vị ngọt dịu, nhiều nước, dễ trồng, thích hợp xuất khẩu.",
+        },
+        {
+          img: "./img/luc_ngan.jpg",
+          title: "Cam Canh",
+          desc: "Vỏ mỏng, màu vàng cam, vị ngọt sắc, thơm đặc trưng, thường dùng làm quà biếu dịp Tết.",
+        },
+        {
+          img: "./img/cam_cao_phong.jpg",
+          title: "Cam Đường",
+          desc: "Quả nhỏ, vỏ mỏng, vị ngọt đậm, ít hạt, dễ bóc, phù hợp ăn tươi và làm nước ép.",
+        },
+      ];
+      let camStart = 0;
+      function renderCamCarousel(direction) {
+        const $row = $("#cam-carousel");
+        const $cards = [];
+        for (let i = camStart; i < camStart + 3 && i < camList.length; i++) {
+          const cam = camList[i];
+          $cards.push(`
+            <div class="col-md-4 mb-4 cam-slide" style="opacity:0;transform:translateX(${
+              direction === "left"
+                ? "-40px"
+                : direction === "right"
+                ? "40px"
+                : "0"
+            });transition:all 0.35s cubic-bezier(.4,2,.6,1);">
+              <div class="cam-card h-100 text-center p-4" style="font-family:'Nunito',sans-serif;">
+                <img src="${cam.img}" alt="${cam.title}" class="cam-img mb-3" />
+                <div class="cam-title">${cam.title}</div>
+                <div class="cam-desc">${cam.desc}</div>
+              </div>
+            </div>
+          `);
+        }
+        $row.html($cards.join(""));
+        setTimeout(() => {
+          $row
+            .find(".cam-slide")
+            .css({ opacity: 1, transform: "translateX(0)" });
+        }, 10);
+        // Ẩn/hiện nút
+        $("#cam-prev")
+          .css("opacity", camStart === 0 ? 0 : 1)
+          .prop("disabled", camStart === 0);
+        $("#cam-next")
+          .css("opacity", camStart >= camList.length - 3 ? 0 : 1)
+          .prop("disabled", camStart >= camList.length - 3);
+      }
+      $(function () {
+        renderCamCarousel();
+        $("#cam-prev").on("click", function () {
+          if (camStart > 0) {
+            camStart--;
+            renderCamCarousel("left");
+          }
+        });
+        $("#cam-next").on("click", function () {
+          if (camStart < camList.length - 3) {
+            camStart++;
+            renderCamCarousel("right");
+          }
+        });
+      });
+    </script>
+
+    <div class="contact-section" id="contact">
+      <div class="section-title">Liên hệ</div>
+      <p>
+        <b>Địa chỉ:</b> Sở Nông nghiệp & PTNT tỉnh Vĩnh Long<br />
+        <b>Email:</b>
+        <a href="mailto:info@camsanhvinhlong.vn">info@camsanhvinhlong.vn</a
+        ><br />
+        <b>Điện thoại:</b> 0270 3 823 456
+      </p>
+    </div>
+
+    <div class="footer">
+      &copy; 2025 Cam Sành Vĩnh Long. All rights reserved.
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Login Admin</title>
+
+    <!-- Custom fonts -->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900"
+      rel="stylesheet"
+    />
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet" />
+
+    <style>
+      .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: none;
+      }
+
+      .card {
+        border-radius: 22px;
+        box-shadow: 0 8px 32px 0 rgba(186, 120, 0, 0.18),
+          0 1.5px 6px 0 rgba(255, 152, 0, 0.1);
+        background: #fffbe7;
+      }
+
+      .card-body {
+        border-radius: 22px;
+        background: linear-gradient(120deg, #fffbe7 60%, #ffe0b2 100%);
+      }
+
+      .bg-login-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border-top-left-radius: 22px;
+        border-bottom-left-radius: 22px;
+        padding: 24px 0;
+      }
+      .bg-login-image img {
+        width: 80%;
+        max-width: 180px;
+        height: auto;
+        object-fit: contain;
+        margin: 0 auto;
+        display: block;
+      }
+
+      .p-5 {
+        padding: 2.5rem !important;
+      }
+
+      .form-control-user {
+        border-radius: 12px;
+        border: 1.5px solid #ffb74d;
+        background: #fff;
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        transition: border-color 0.2s;
+      }
+      .form-control-user:focus {
+        border-color: #ff9800;
+        box-shadow: 0 0 0 2px #ffe0b2;
+      }
+
+      .btn-user {
+        border-radius: 12px;
+        background: linear-gradient(90deg, #ffb74d 0%, #ff9800 100%);
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.1rem;
+        box-shadow: 0 2px 8px 0 rgba(255, 152, 0, 0.1);
+        border: none;
+        transition: background 0.2s, box-shadow 0.2s;
+      }
+      .btn-user:hover,
+      .btn-user:focus {
+        background: linear-gradient(90deg, #ff9800 0%, #b85c00 100%);
+        color: #fff;
+        box-shadow: 0 4px 16px 0 rgba(255, 152, 0, 0.18);
+      }
+
+      .text-center h1 {
+        color: #b85c00;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+      }
+
+      .custom-control-label {
+        color: #b85c00;
+      }
+
+      .custom-toast {
+        position: fixed;
+        top: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 220px;
+        max-width: 90vw;
+        background: #fff3e0;
+        color: #b85c00;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px 0 rgba(255, 152, 0, 0.18);
+        padding: 14px 32px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        opacity: 0;
+        z-index: 9999;
+        transition: opacity 0.4s, top 0.4s;
+        pointer-events: none;
+      }
+      .custom-toast.show {
+        opacity: 1;
+        top: 56px;
+      }
+      .custom-toast.success {
+        background: linear-gradient(90deg, #ffe0b2 60%, #daba8b 100%);
+        color: #b85c00;
+      }
+      .custom-toast.error {
+        background: linear-gradient(90deg, #ffd6d6 60%, #f4cb8f 100%);
+        color: #b85c00;
+      }
+    </style>
+    <script src="../../js/jquery.min.js"></script>
+  </head>
+
+  <body class="bg-gradient-primary">
+    <div class="container login-container">
+      <div class="card o-hidden border-0">
+        <div class="card-body p-0">
+          <div class="row no-gutters align-items-center">
+            <div class="col-lg-6 d-none d-lg-flex bg-login-image">
+              <img src="../../img/orange_tree_login.png" alt="Orange Tree" />
+            </div>
+            <div class="col-lg-6">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 mb-4">Đăng nhập Cán Bộ</h1>
+                </div>
+                <form class="user">
+                  <div class="form-group">
+                    <input
+                      id="emailCanBo"
+                      type="email"
+                      class="form-control form-control-user"
+                      placeholder="Nhập email..."
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <div style="position: relative">
+                      <input
+                        id="passwordCanBo"
+                        type="password"
+                        class="form-control form-control-user"
+                        placeholder="Mật khẩu"
+                        required
+                        style="padding-right: 40px"
+                      />
+                      <button
+                        type="button"
+                        id="togglePassword"
+                        tabindex="-1"
+                        style="
+                          position: absolute;
+                          top: 50%;
+                          right: 12px;
+                          transform: translateY(-50%);
+                          background: none;
+                          border: none;
+                          outline: none;
+                          cursor: pointer;
+                          color: #b85c00;
+                          font-size: 1.2rem;
+                        "
+                      >
+                        <i class="fas fa-eye" id="iconTogglePassword"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox small">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="customCheck"
+                      />
+                      <label class="custom-control-label" for="customCheck"
+                        >Ghi nhớ đăng nhập</label
+                      >
+                    </div>
+                  </div>
+                  <button
+                    id="btnLoginCanBo"
+                    type="submit"
+                    class="btn btn-user btn-block"
+                  >
+                    Đăng nhập
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+      $(document).ready(function () {
+        // Toggle password visibility
+        $("#togglePassword").on("click", function () {
+          const passwordInput = $("#passwordCanBo");
+          const icon = $("#iconTogglePassword");
+          if (passwordInput.attr("type") === "password") {
+            passwordInput.attr("type", "text");
+            icon.removeClass("fa-eye").addClass("fa-eye-slash");
+          } else {
+            passwordInput.attr("type", "password");
+            icon.removeClass("fa-eye-slash").addClass("fa-eye");
+          }
+        });
+
+        $("#btnLoginCanBo").click(function (e) {
+          e.preventDefault();
+          let email = $("#emailCanBo").val();
+          let password = $("#passwordCanBo").val();
+          if (!email || !password) {
+            showToast("Vui lòng nhập đầy đủ thông tin", false);
+            return;
+          }
+          $.ajax({
+            url: "../../API/api_login_can_bo.php",
+            type: "POST",
+            data: JSON.stringify({ email: email, password: password }),
+            contentType: "application/json; charset=UTF-8",
+            success: function (res) {
+              console.log("Response:", res);
+              if (res.status === "success") {
+                showToast("Đăng nhập thành công!", true);
+                let maCanBo = res.MaCanBo || "";
+                localStorage.setItem("maCanBo", maCanBo);
+                setTimeout(function () {
+                  window.location.href = "main_canBo.html";
+                }, 1200);
+              } else {
+                showToast(res.message || "Đăng nhập thất bại", false);
+              }
+            },
+            error: function (xhr, status, error) {
+              console.log("Error:", error);
+              console.log("Status:", status);
+              console.log("Response:", xhr.responseText);
+              showToast(
+                "Có lỗi xảy ra khi đăng nhập. Vui lòng thử lại!",
+                false
+              );
+            },
+          });
+        });
+      });
+
+      // Toast function
+      function showToast(message, isSuccess) {
+        let toast = document.createElement("div");
+        toast.className = "custom-toast" + (isSuccess ? " success" : " error");
+        toast.innerText = message;
+        document.body.appendChild(toast);
+        setTimeout(function () {
+          toast.classList.add("show");
+        }, 100);
+        setTimeout(function () {
+          toast.classList.remove("show");
+          setTimeout(function () {
+            toast.remove();
+          }, 400);
+        }, 2000);
+      }
+    </script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../js/sb-admin-2.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Trang Chủ</title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template-->
+    <link href="../../css/sb-admin-2.css" rel="stylesheet" />
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/jquery.min.js"></script>
+
+    <style>
+      .text-gray-800 {
+        color: #5a5c69 !important;
+      }
+
+      .sidebar-dark .nav-item .nav-link {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .sidebar-dark .nav-item .nav-link:hover {
+        color: #fff;
+      }
+
+      .card {
+        border: none;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+      }
+
+      .progress {
+        height: 1rem;
+      }
+
+      .card-header {
+        background-color: #f8f9fc;
+        border-bottom: 1px solid #e3e6f0;
+      }
+
+      /* Chart legend styles */
+      #thuaDatLegend {
+        margin-top: 15px;
+        padding: 10px;
+        background: #f8f9fc;
+        border-radius: 5px;
+        border: 1px solid #e3e6f0;
+      }
+
+      #thuaDatNotes {
+        line-height: 1.8;
+      }
+
+      #thuaDatNotes .d-inline-block {
+        white-space: nowrap;
+      }
+
+      /* Table styles */
+      .table th {
+        border-top: none;
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: #5a5c69;
+      }
+
+      .table td {
+        vertical-align: middle;
+        font-size: 0.875rem;
+      }
+
+      /* Badge styles */
+      .badge {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.5rem;
+      }
+
+      /* Chart container */
+      .chart-area {
+        position: relative;
+        height: 20rem;
+        width: 100%;
+      }
+
+      /* Dropdown styles */
+      #vu-mua-dropdown {
+        font-size: 0.875rem;
+      }
+
+      /* Detail cards */
+      .card.border-left-primary {
+        border-left: 0.25rem solid #4e73df !important;
+      }
+
+      .card-body p {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .chart-area {
+          height: 15rem;
+        }
+
+        #thuaDatNotes .d-inline-block {
+          display: block !important;
+          margin-right: 0 !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_nongHo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+          <a class="nav-link" href="./main_nongHo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Trang chủ</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./nhat_ky_canh_tac_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-book"></i>
+            <span>Nhật ký canh tác</span>
+          </a>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./san_luong_thu_hoach_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Sản lượng thu hoạch</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./thoi_tiet_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-cloud"></i>
+            <span>Thời tiết</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="./giong_cay_trong.html">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Giống cây trồng</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="./bao_cao_sau_benh_nongHo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Báo cáo sâu bệnh</span>
+          </a>
+          <hr class="sidebar-divider" />
+
+          <div
+            id="collapsePages"
+            class="collapse"
+            aria-labelledby="headingPages"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <div class="collapse-divider"></div>
+              <h6 class="collapse-header">Other Pages:</h6>
+              <a class="collapse-item" href="404.html">404 Page</a>
+              <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="./thong_tin_ca_nhan_nongHo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>QUẢN LÝ CAM SÀNH TỈNH VĨNH LONG</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="searchDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                  aria-labelledby="searchDropdown"
+                >
+                  <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control bg-light border-0 small"
+                        placeholder="Search for..."
+                        aria-label="Search"
+                        aria-describedby="basic-addon2"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <!-- Nav Item - Messages -->
+              <li class="nav-item dropdown no-arrow mx-1">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="messagesDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-envelope fa-fw"></i>
+                  <!-- Counter - Messages -->
+                  <span class="badge badge-danger badge-counter">7</span>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="messagesDropdown"
+                >
+                  <h6 class="dropdown-header">Message Center</h6>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_1.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                      <div class="text-truncate">
+                        Hi there! I am wondering if you can help me with a
+                        problem I've been having.
+                      </div>
+                      <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_2.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        I have the photos that you ordered last month, how would
+                        you like them sent to you?
+                      </div>
+                      <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_3.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Last month's report looks great, I am very happy with
+                        the progress so far, keep up the good work!
+                      </div>
+                      <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Am I a good boy? The reason I ask is because someone
+                        told me that people say this to all dogs, even if they
+                        aren't good...
+                      </div>
+                      <div class="small text-gray-500">
+                        Chicken the Dog · 2w
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    class="dropdown-item text-center small text-gray-500"
+                    href="#"
+                    >Read More Messages</a
+                  >
+                </div>
+              </li>
+
+              <div class="topbar-divider d-none d-sm-block"></div>
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="mr-2 d-none d-lg-inline"
+                    id="user-fullname"
+                  ></span>
+                  <img
+                    class="img-profile rounded-circle shadow"
+                    id="avatar-img"
+                    src="../../img/undraw_profile.svg"
+                    alt="avatar"
+                  />
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="./thong_tin_ca_nhan_nongHo.html"
+                  >
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#logoutModal"
+                    onclick="confirmLogout()"
+                  >
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <div
+              class="d-sm-flex align-items-center justify-content-between mb-4"
+            >
+              <h1 class="h3 mb-0 text-gray-800">Trang Chủ</h1>
+            </div>
+
+            <!-- Content Row -->
+            <div class="row">
+              <!-- Earnings (Monthly) Card Example -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+                        >
+                          Sản lượng thu hoạch gần nhất
+                        </div>
+                        <div
+                          id="new-san-luong"
+                          class="h5 mb-0 font-weight-bold text-gray-800"
+                        >
+                          Đang tải....
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Earnings (Monthly) Card Example -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-success text-uppercase mb-1"
+                        >
+                          Số Thửa Đất Sở Hữu
+                        </div>
+                        <div
+                          id="tong-so-thua"
+                          class="h5 mb-0 font-weight-bold text-gray-800"
+                        >
+                          Đang tải....
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i
+                          class="fa-solid fa-map-location-dot fa-2x text-gray-300"
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Earnings (Monthly) Card Example -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-info text-uppercase mb-1"
+                        >
+                          Tỉ lệ trúng mùa
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                          <div class="col-auto">
+                            <div
+                              id="ti-le-trung-mua"
+                              class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
+                            >
+                              Đang tải....
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="progress progress-sm mr-2">
+                              <div
+                                class="progress-bar bg-info"
+                                id="progress-bar"
+                                style="width: 0%"
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fa-solid fa-percent fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pending Requests Card Example -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+                        >
+                          Vụ mùa Hiện Tại
+                        </div>
+                        <div
+                          id="vu-mua-hien-tai"
+                          class="h5 mb-0 font-weight-bold text-gray-800"
+                        >
+                          Đang tải....
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fa-solid fa-calendar fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Row -->
+            <div class="row">
+              <!-- Dropdown chọn vụ mùa -->
+              <div class="col-12 mb-4">
+                <div class="card shadow">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      🌾 Chọn Vụ Mùa Để Xem Thống Kê
+                    </h6>
+                  </div>
+                  <div class="card-body">
+                    <select id="vu-mua-dropdown" class="form-control">
+                      <option value="">Đang tải vụ mùa...</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Biểu đồ cột thống kê -->
+            <div class="row">
+              <!-- Area Chart -->
+              <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                  <!-- Card Header - Dropdown -->
+                  <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                  >
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      📊 Thống Kê Sản Lượng Theo Thửa Đất
+                    </h6>
+                    <div class="dropdown no-arrow">
+                      <a
+                        class="dropdown-toggle"
+                        href="#"
+                        role="button"
+                        id="dropdownMenuLink"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <i
+                          class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"
+                        ></i>
+                      </a>
+                      <div
+                        class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink"
+                      >
+                        <div class="dropdown-header">Tùy chọn:</div>
+                        <a
+                          class="dropdown-item"
+                          href="#"
+                          onclick="loadThongKeVuMua()"
+                          >Làm mới dữ liệu</a
+                        >
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Xuất báo cáo</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <div class="chart-area">
+                      <canvas id="myAreaChart"></canvas>
+                    </div>
+                    <!-- Legend vị trí thửa đất -->
+                    <div id="thuaDatLegend" class="mt-3" style="display: none">
+                      <div class="text-center">
+                        <small class="text-muted font-weight-bold"
+                          >Vị trí thửa đất:</small
+                        >
+                      </div>
+                      <div id="thuaDatNotes" class="text-center mt-2"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bảng thống kê chi tiết -->
+              <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                  <!-- Card Header -->
+                  <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                  >
+                    <h6 class="m-0 font-weight-bold text-success">
+                      📋 Chi Tiết Thống Kê
+                    </h6>
+                  </div>
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <div id="thong-ke-detail">
+                      <p class="text-center text-muted">
+                        Chọn vụ mùa để xem chi tiết thống kê
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bảng thống kê tổng quan -->
+            <div class="row">
+              <div class="col-12">
+                <div id="thong-ke-table">
+                  <!-- Bảng sẽ được tạo bởi JavaScript -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Row -->
+            <div class="row">
+              <!-- Content Column -->
+              <div class="col-lg-6 mb-4">
+                <!-- Color System -->
+              </div>
+
+              <div class="col-lg-6 mb-4"></div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Your Website 2021</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+    <script src="../../js/session_check.js"></script>
+    <script>
+      $(document).on("sessionValid", function (event, sessionData) {
+        console.log("Session valid, loading main page data...");
+        loadDashboardData();
+        loadThongKeVuMua(); // Load thống kê vụ mùa
+      });
+
+      $.ajax({
+        url: "../../API/api_san_luong_thu_hoach.php",
+        method: "GET",
+        success: function (res) {
+          console.log(res);
+          if (res.status === "success") {
+            renderPlots(res.data);
+          } else {
+            console.error("Lỗi dữ liệu:", res.message);
+            $("#plot-container").html(`
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> ${res.message}
+                        </div>
+                    `);
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error("Lỗi load thửa đất:", { xhr, status, error });
+          $("#plot-container").html(`
+                    <div class="alert alert-danger">
+                        <i class="fas fa-times"></i> Không thể tải thông tin thửa đất.
+                    </div>
+                `);
+        },
+      });
+
+      let plotsData = {};
+
+      function renderPlots(data) {
+        console.log("=== RENDERING PLOTS ===");
+        console.log("Total plots:", Object.keys(data).length);
+
+        plotsData = data;
+        const selectorContainer = $("#plot-selector");
+        const contentContainer = $("#plot-container");
+
+        selectorContainer.empty();
+        contentContainer.empty();
+
+        updateStatistics(data);
+
+        selectorContainer.append('<option value="">Chọn thửa đất...</option>');
+
+        Object.keys(data).forEach((maThua, index) => {
+          const plotNumber = index + 1;
+          const harvestCount = data[maThua].length;
+          const totalHarvest = data[maThua].reduce(
+            (sum, item) => sum + parseFloat(item.SanLuong || 0),
+            0
+          );
+
+          // Tính tỷ lệ trúng mùa cho từng thửa
+          const successfulHarvests = data[maThua].filter(
+            (item) => parseFloat(item.SanLuong || 0) >= 1400
+          ).length;
+
+          // Tính plotSuccessRate cho thửa này
+          const plotSuccessRate =
+            harvestCount > 0
+              ? Math.round((successfulHarvests / harvestCount) * 100)
+              : 0;
+
+          // Icon và màu sắc theo tỷ lệ
+          let statusIcon = "🔴"; // Thấp
+          if (plotSuccessRate >= 90) statusIcon = "🟢"; // Cao
+          else if (plotSuccessRate >= 70) statusIcon = "🟡"; // Trung bình
+          else if (plotSuccessRate >= 40) statusIcon = "🟠"; // Thấp-trung bình
+
+          selectorContainer.append(`
+            <option value="${maThua}">
+                ${statusIcon} Thửa ${plotNumber} - ${harvestCount} vụ (${successfulHarvests} trúng) - ${totalHarvest.toFixed(
+            1
+          )}kg - ${plotSuccessRate}%
+            </option>
+        `);
+        });
+
+        selectorContainer.off("change").on("change", function () {
+          const selectedMaThua = $(this).val();
+          if (selectedMaThua) {
+            showPlotTable(selectedMaThua);
+          } else {
+            contentContainer.empty();
+          }
+        });
+
+        const firstMaThua = Object.keys(data)[0];
+        if (firstMaThua) {
+          selectorContainer.val(firstMaThua);
+          showPlotTable(firstMaThua);
+        }
+      }
+
+      function updateStatistics(data) {
+        const totalPlots = Object.keys(data).length;
+        let totalHarvest = 0;
+        let totalHarvestCount = 0;
+        let totalSuccessfulHarvests = 0;
+
+        Object.values(data).forEach((plotData) => {
+          totalHarvestCount += plotData.length;
+          plotData.forEach((item) => {
+            const sanLuong = parseFloat(item.SanLuong || 0);
+            totalHarvest += sanLuong;
+
+            if (sanLuong >= 1400) {
+              totalSuccessfulHarvests++;
+            }
+          });
+        });
+
+        const successRate =
+          totalHarvestCount > 0
+            ? Math.round((totalSuccessfulHarvests / totalHarvestCount) * 100)
+            : 0;
+        localStorage.setItem("successRate", successRate);
+        // Cập nhật UI
+        $("#total-plots").text(totalPlots);
+        $("#total-harvest").text(totalHarvest.toFixed(1) + " kg");
+        $("#success-rate").text(successRate + "%");
+        $("#progress-bar").css("width", successRate + "%");
+
+        // Debug log hữu ích
+        console.log("=== THỐNG KÊ ===");
+        console.log(
+          "Tổng vụ:",
+          totalHarvestCount,
+          "| Trúng mùa:",
+          totalSuccessfulHarvests,
+          "| Tỷ lệ:",
+          successRate + "%"
+        );
+
+        // Cập nhật màu progress bar
+        const progressBar = $("#progress-bar");
+        progressBar.removeClass("bg-success bg-info bg-warning bg-danger");
+
+        if (successRate >= 90) progressBar.addClass("bg-success");
+        else if (successRate >= 70) progressBar.addClass("bg-info");
+        else if (successRate >= 40) progressBar.addClass("bg-warning");
+        else progressBar.addClass("bg-danger");
+      }
+
+      let successRate = localStorage.getItem("successRate");
+      successRate = successRate ? parseInt(successRate) : 0;
+
+      // Biến lưu dữ liệu thống kê - khai báo trước
+      let thongKeData = {};
+
+      function showData(data) {
+        console.log("Data received:", data);
+        $("#new-san-luong").text(data[0].SanLuong + " kg");
+        $("#tong-so-thua").text(data[0].SoThuaDat);
+        $("#ti-le-trung-mua").text(successRate + "%");
+        $("#vu-mua-hien-tai").text(data[0].VuHienTai);
+
+        // Cập nhật progress bar
+        const progressBar = $("#progress-bar");
+        progressBar.removeClass("bg-success bg-info bg-warning bg-danger");
+
+        //Cập nhật width của progress bar
+        progressBar.css("width", successRate + "%");
+        progressBar.attr("aria-valuenow", successRate);
+
+        if (successRate >= 90) progressBar.addClass("bg-success");
+        else if (successRate >= 70) progressBar.addClass("bg-info");
+        else if (successRate >= 40) progressBar.addClass("bg-warning");
+        else progressBar.addClass("bg-danger");
+      }
+
+      // Function load thống kê vụ mùa
+      function loadThongKeVuMua() {
+        console.log("🚀 Starting loadThongKeVuMua...");
+        $.ajax({
+          url: "../../API/api_thong_ke_vu_mua.php",
+          method: "GET",
+          dataType: "json",
+          xhrFields: {
+            withCredentials: true,
+          },
+          success: function (response) {
+            console.log("✅ Thống kê vụ mùa response:", response);
+
+            if (response.status === "success") {
+              console.log("✅ Response status is success");
+              thongKeData = response.data;
+              console.log(
+                "✅ Calling renderVuMuaDropdown with:",
+                response.data
+              );
+              renderVuMuaDropdown(response.data);
+              console.log("✅ Calling renderThongKeTable with:", response.data);
+              renderThongKeTable(response.data);
+            } else {
+              console.error("❌ Lỗi load thống kê:", response.message);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("❌ Error loading thống kê:", { xhr, status, error });
+            console.error("❌ XHR responseText:", xhr.responseText);
+          },
+        });
+      }
+
+      // Render dropdown các vụ mùa
+      function renderVuMuaDropdown(data) {
+        console.log("🔧 renderVuMuaDropdown called with data:", data);
+        const dropdownContainer = $("#vu-mua-dropdown");
+        console.log("🔧 Dropdown container found:", dropdownContainer.length);
+
+        dropdownContainer.empty();
+
+        // Option mặc định
+        dropdownContainer.append(
+          '<option value="">-- Chọn vụ mùa để xem biểu đồ --</option>'
+        );
+
+        console.log("🔧 Added default option");
+
+        // Lấy danh sách vụ mùa từ data
+        console.log("🔧 Processing data entries:", Object.keys(data));
+        Object.entries(data).forEach(([maVu, records]) => {
+          console.log("🔧 Processing MaVu:", maVu, "Records:", records.length);
+          const tenVu = records[0].TenVu;
+          const soThua = new Set(records.map((r) => r.MaThua)).size;
+          const tongSanLuong = records.reduce(
+            (sum, r) => sum + parseFloat(r.SanLuong || 0),
+            0
+          );
+
+          const optionHtml = `
+            <option value="${maVu}">
+              ${tenVu} - ${soThua} thửa - ${(tongSanLuong / 1000).toFixed(
+            1
+          )} tấn
+            </option>
+          `;
+          console.log("🔧 Adding option:", optionHtml);
+          dropdownContainer.append(optionHtml);
+        });
+
+        console.log(
+          "🔧 Dropdown populated with",
+          dropdownContainer.find("option").length,
+          "options"
+        );
+
+        // Event handler cho dropdown
+        dropdownContainer.off("change").on("change", function () {
+          const selectedMaVu = $(this).val();
+          if (selectedMaVu) {
+            showVuMuaChart(selectedMaVu, data[selectedMaVu]);
+            showVuMuaDetail(selectedMaVu, data[selectedMaVu]);
+          } else {
+            clearChart();
+            $("#thong-ke-detail").html(
+              '<p class="text-center text-muted">Chọn vụ mùa để xem chi tiết thống kê</p>'
+            );
+          }
+        });
+        // Chọn option cuối cùng nếu có
+        const options = dropdownContainer.find("option");
+        if (options.length > 1) {
+          const lastMaVu = Object.keys(data)[Object.keys(data).length - 1];
+          dropdownContainer.val(lastMaVu).trigger("change");
+        }
+      }
+
+      // Hiển thị biểu đồ cột cho vụ mùa được chọn
+      function showVuMuaChart(maVu, records) {
+        const ctx = document.getElementById("myAreaChart");
+        if (!ctx) return;
+
+        // Đảm bảo mỗi thửa đất chỉ vẽ một cột duy nhất
+        const thuaData = {};
+        records.forEach((record) => {
+          const maThua = record.MaThua;
+          if (!thuaData[maThua]) {
+            thuaData[maThua] = {
+              sanLuong: 0,
+              soLan: 0,
+            };
+          }
+          // Chỉ cộng sản lượng nếu chưa cộng cho thửa này
+          thuaData[maThua].sanLuong += parseFloat(record.SanLuong || 0);
+          thuaData[maThua].soLan = 1; // Chỉ lấy 1 lần cho mỗi thửa
+        });
+
+        // Loại bỏ trùng lặp thửa đất
+        const uniqueThuaKeys = Object.keys(thuaData);
+        const labels = uniqueThuaKeys.map(
+          (maThua, index) => `Thửa ${index + 1}`
+        );
+        const originalData = uniqueThuaKeys.map((maThua) => {
+          let value = Number(thuaData[maThua].sanLuong) / 1000;
+          if (isNaN(value) || value <= 0) value = 0.01;
+          return value;
+        }); // kg -> tấn
+
+        // Tạo copy để tránh Chart.js modify data gốc
+        const data = [...originalData];
+        console.log("Labels:", labels);
+        console.log(
+          "Data:",
+          data,
+          data.map((x) => typeof x)
+        );
+
+        console.log("Chart data:", { labels, data });
+        console.log("🎨 ThuaData keys (unique):", uniqueThuaKeys);
+        console.log("🎨 Number of columns:", data.length);
+        console.log("🎨 TIMESTAMP:", new Date().toISOString()); // Force cache break
+
+        // Màu sắc cho biểu đồ
+        const colors = [
+          "#4e73df", // Xanh dương
+          "#1cc88a", // Xanh lá
+          "#36b9cc", // Xanh cyan
+          "#f6c23e", // Vàng
+          "#e74a3b", // Đỏ
+          "#9c27b0", // Tím
+          "#ff9800", // Cam
+          "#607d8b", // Xám xanh
+        ];
+
+        // Tạo mảng màu cho từng cột (dùng vòng lặp)
+        const chartBackgroundColors = [];
+        const chartBorderColors = [];
+
+        // Destroy existing chart hoàn toàn
+        if (window.myAreaChart) {
+          window.myAreaChart.destroy();
+          window.myAreaChart = null;
+        }
+
+        // Force clear canvas
+        const canvasElement = document.getElementById("myAreaChart");
+        const canvasCtx = canvasElement.getContext("2d");
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+        // Force reset canvas attributes
+        canvasElement.style.width = "";
+        canvasElement.style.height = "";
+        canvasElement.width = canvasElement.width; // Force canvas reset
+
+        for (let i = 0; i < data.length; i++) {
+          chartBackgroundColors.push(colors[i % colors.length]);
+          chartBorderColors.push(colors[i % colors.length]);
+        }
+        console.log("🎨 Colors used for chart:", chartBackgroundColors);
+        console.log("🎨 Chart colors:", {
+          chartBackgroundColors: [...chartBackgroundColors],
+          chartBorderColors: [...chartBorderColors],
+        });
+        console.log("📊 Chart.js version:", Chart.version || "unknown");
+
+        // Debug: Log từng màu cụ thể
+        console.log("🎨 Individual colors:");
+        chartBackgroundColors.forEach((color, index) => {
+          console.log(`  Cột ${index + 1}: ${color}`);
+        });
+
+        // ⚠️ TEST: Force màu cứng để debug
+        const forcedColors =
+          data.length === 3
+            ? ["#4e73df", "#1cc88a", "#36b9cc"]
+            : data.length === 2
+            ? ["#4e73df", "#1cc88a"]
+            : ["#4e73df"];
+
+        console.log("🔥 FORCED COLORS:", forcedColors);
+
+        window.myAreaChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: [...labels],
+            datasets: [
+              {
+                label: "Sản lượng (Tấn)",
+                backgroundColor: forcedColors, // Force màu cứng
+                borderColor: forcedColors, // Force màu cứng
+                borderWidth: 2,
+                data: [...data],
+              },
+            ],
+          },
+          options: {
+            maintainAspectRatio: false,
+            layout: {
+              padding: {
+                left: 10,
+                right: 25,
+                top: 25,
+                bottom: 0,
+              },
+            },
+            scales: {
+              xAxes: [
+                {
+                  gridLines: {
+                    display: false,
+                    drawBorder: false,
+                  },
+                  ticks: {
+                    maxTicksLimit: 10,
+                    fontSize: 10,
+                  },
+                },
+              ],
+              yAxes: [
+                {
+                  ticks: {
+                    min: 0,
+                    max: 3,
+                    stepSize: 0.5,
+                    maxTicksLimit: 7,
+                    padding: 10,
+                    callback: function (value, index, values) {
+                      return value + " tấn";
+                    },
+                  },
+                  gridLines: {
+                    color: "rgb(234, 236, 244)",
+                    zeroLineColor: "rgb(234, 236, 244)",
+                    drawBorder: false,
+                    borderDash: [2],
+                    zeroLineBorderDash: [2],
+                  },
+                },
+              ],
+            },
+            legend: {
+              display: false,
+            },
+            tooltips: {
+              backgroundColor: "rgb(255,255,255)",
+              bodyFontColor: "#858796",
+              titleMarginBottom: 10,
+              titleFontColor: "#6e707e",
+              titleFontSize: 14,
+              borderColor: "#dddfeb",
+              borderWidth: 1,
+              xPadding: 15,
+              yPadding: 15,
+              displayColors: false,
+              intersect: false,
+              mode: "index",
+              caretPadding: 10,
+              callbacks: {
+                label: function (tooltipItem, chart) {
+                  const sortedKeys = Object.keys(thuaData).sort();
+                  const thuaKey = sortedKeys[tooltipItem.index];
+                  const thuaInfo = thuaData[thuaKey];
+                  return [
+                    "Sản lượng: " + tooltipItem.yLabel + " tấn",
+                    "Số lần thu hoạch: " + thuaInfo.soLan + " lần",
+                    "Mã thửa: " + thuaKey,
+                  ];
+                },
+              },
+            },
+          },
+        });
+
+        // Hiển thị legend
+        updateChartLegend(thuaData);
+      }
+
+      // Clear chart
+      function clearChart() {
+        if (window.myAreaChart) {
+          window.myAreaChart.destroy();
+          window.myAreaChart = null;
+        }
+        $("#thuaDatLegend").hide();
+      }
+
+      // Update legend cho biểu đồ
+      function updateChartLegend(thuaData) {
+        const legendContainer = $("#thuaDatNotes");
+        const legendDiv = $("#thuaDatLegend");
+
+        legendContainer.empty();
+
+        const colors = [
+          "#4e73df",
+          "#1cc88a",
+          "#36b9cc",
+          "#f6c23e",
+          "#e74a3b",
+          "#9c27b0",
+          "#ff9800",
+          "#607d8b",
+        ];
+
+        // Sắp xếp theo thứ tự key để đồng bộ với chart
+        const sortedThuaKeys = Object.keys(thuaData).sort();
+        sortedThuaKeys.forEach((maThua, index) => {
+          const color = colors[index % colors.length];
+          legendContainer.append(`
+            <div class="d-inline-block mr-3 mb-1">
+              <small>
+                <i class="fas fa-square" style="color: ${color}"></i>
+                <strong>Thửa ${index + 1}:</strong> Mã ${maThua}
+              </small>
+            </div>
+          `);
+        });
+
+        legendDiv.show();
+      }
+
+      // Hiển thị chi tiết vụ mùa
+      function showVuMuaDetail(maVu, records) {
+        const detailContainer = $("#thong-ke-detail");
+
+        // Nhóm theo thửa đất
+        const thuaData = {};
+        records.forEach((record) => {
+          const maThua = record.MaThua;
+          if (!thuaData[maThua]) {
+            thuaData[maThua] = [];
+          }
+          thuaData[maThua].push(record);
+        });
+
+        let detailHTML = `
+          <h6 class="font-weight-bold text-success mb-3">🌾 ${records[0].TenVu}</h6>
+        `;
+
+        Object.entries(thuaData).forEach(([maThua, thuaRecords], index) => {
+          const thuaNumber = index + 1;
+          const tongSanLuong = thuaRecords.reduce(
+            (sum, r) => sum + parseFloat(r.SanLuong || 0),
+            0
+          );
+          const successful = thuaRecords.filter(
+            (r) => parseFloat(r.SanLuong || 0) >= 1400
+          ).length;
+          const tiLe = Math.round((successful / thuaRecords.length) * 100);
+
+          let badgeClass = "badge-danger";
+          if (tiLe >= 90) badgeClass = "badge-success";
+          else if (tiLe >= 70) badgeClass = "badge-info";
+          else if (tiLe >= 40) badgeClass = "badge-warning";
+
+          detailHTML += `
+            <div class="card border-left-primary mb-3">
+              <div class="card-body p-3">
+                <h6 class="font-weight-bold">🏞️ Thửa ${thuaNumber}</h6>
+                <p class="mb-1"><small>Mã: ${maThua}</small></p>
+                <p class="mb-1"><small>Thu hoạch: ${
+                  thuaRecords.length
+                } lần</small></p>
+                <p class="mb-1"><small>Tổng SL: <strong>${(
+                  tongSanLuong / 1000
+                ).toFixed(1)} tấn</strong></small></p>
+                <p class="mb-0"><small>Tỷ lệ: <span class="badge ${badgeClass}">${tiLe}%</span></small></p>
+              </div>
+            </div>
+          `;
+        });
+
+        detailContainer.html(detailHTML);
+      }
+
+      // Hiển thị bảng thống kê tổng quan
+      function renderThongKeTable(data) {
+        const tableContainer = $("#thong-ke-table");
+
+        let tableHTML = `
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">
+                📊 Bảng Thống Kê Tổng Quan Theo Vụ Mùa
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Vụ Mùa</th>
+                      <th>Số Thửa</th>
+                      <th>Tổng Sản Lượng</th>
+                      <th>Trung Bình/Thửa</th>
+                      <th>Tỷ Lệ Trúng Mùa</th>
+                      <th>Ngày Thu Hoạch Cuối</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+        `;
+
+        Object.entries(data).forEach(([maVu, records]) => {
+          const tenVu = records[0].TenVu;
+          const soThua = new Set(records.map((r) => r.MaThua)).size;
+          const tongSanLuong = records.reduce(
+            (sum, r) => sum + parseFloat(r.SanLuong || 0),
+            0
+          );
+          const trungBinhTheo = tongSanLuong / soThua;
+
+          // Tính tỷ lệ trúng mùa (>= 1400kg)
+          const successful = records.filter(
+            (r) => parseFloat(r.SanLuong || 0) >= 1400
+          ).length;
+          const tiLeTrungMua = Math.round((successful / records.length) * 100);
+
+          // Ngày thu hoạch mới nhất
+          const ngayCuoi = records.reduce((latest, r) => {
+            return new Date(r.NgayThuHoach) > new Date(latest)
+              ? r.NgayThuHoach
+              : latest;
+          }, records[0].NgayThuHoach);
+
+          // Màu badge cho tỷ lệ
+          let badgeClass = "badge-danger";
+          if (tiLeTrungMua >= 90) badgeClass = "badge-success";
+          else if (tiLeTrungMua >= 70) badgeClass = "badge-info";
+          else if (tiLeTrungMua >= 40) badgeClass = "badge-warning";
+
+          tableHTML += `
+            <tr>
+              <td><strong>${tenVu}</strong></td>
+              <td>${soThua} thửa</td>
+              <td>${(tongSanLuong / 1000).toFixed(1)} tấn</td>
+              <td>${(trungBinhTheo / 1000).toFixed(1)} tấn</td>
+              <td><span class="badge ${badgeClass}">${tiLeTrungMua}%</span></td>
+              <td>${formatDate(ngayCuoi)}</td>
+            </tr>
+          `;
+        });
+
+        tableHTML += `
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        `;
+
+        tableContainer.html(tableHTML);
+      }
+
+      // Format date helper
+      function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString("vi-VN");
+      }
+      function staticTable() {
+        $.ajax({
+          url: "../../API/api_new_san_luong.php",
+          method: "GET",
+          success: function (res) {
+            console.log(res);
+            if (res.status === "success") {
+              showData(res.data);
+            } else {
+              console.error("Lỗi dữ liệu:", res.message);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Lỗi load dashboard:", { xhr, status, error });
+          },
+        });
+      }
+      function loadDashboardData() {
+        $.ajax({
+          url: "../../API/api_new_san_luong.php",
+          method: "GET",
+          success: function (res) {
+            console.log(res);
+            if (res.status === "success") {
+              showData(res.data);
+            } else {
+              console.error("Lỗi dữ liệu:", res.message);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Lỗi load dashboard:", { xhr, status, error });
+          },
+        });
+      }
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Gọi API lấy thông tin cá nhân để lấy avatar và tên
+        $.ajax({
+          url: "../../API/api_profile_nong_ho.php",
+          method: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success" && res.data) {
+              // Gán avatar
+              if (res.data.avatar && res.data.avatar !== "") {
+                $("#avatar-img").attr("src", "../../" + res.data.avatar);
+              } else {
+                $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              }
+              // Gán tên nông hộ lên topbar
+              $("#user-fullname").text(res.data.HoTenNongHo || "Nông hộ");
+            } else {
+              $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              $("#user-fullname").text("Nông hộ");
+            }
+          },
+          error: function () {
+            $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+            $("#user-fullname").text("Nông hộ");
+          },
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "../../API/api_ho_tro_ky_thuat_nongho.php",
+          type: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (messages) {
+            var html = '<h6 class="dropdown-header">Message Center</h6>';
+            if (messages.length === 0) {
+              html +=
+                '<div class="dropdown-item text-center small text-gray-500">Không có hỗ trợ kỹ thuật nào</div>';
+            } else {
+              messages.forEach(function (msg, idx) {
+                html += `
+            <a class="dropdown-item d-flex align-items-center message-item" href="#" data-idx="${idx}">
+              <div class="dropdown-list-image mr-3">
+                <img class="rounded-circle" src="../../${
+                  msg.avatar || "img/undraw_profile.svg"
+                }" alt="...">
+                <div class="status-indicator bg-success"></div>
+              </div>
+              <div class="font-weight-bold">
+                <div class="text-truncate">${msg.noiDung}</div>
+                <div class="small text-gray-500">${msg.hoTen} · ${
+                  msg.thoiGian
+                }</div>
+              </div>
+            </a>
+          `;
+              });
+            }
+            html +=
+              '<a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả hỗ trợ</a>';
+            $(
+              ".dropdown-list.dropdown-menu[aria-labelledby='messagesDropdown']"
+            ).html(html);
+
+            // Thêm sự kiện click cho từng tin nhắn
+            $(".message-item").on("click", function (e) {
+              e.preventDefault();
+              var idx = $(this).data("idx");
+              var msg = messages[idx];
+              Swal.fire({
+                html: `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+      <img src="../../${
+        msg.avatar || "img/undraw_profile.svg"
+      }" style="width:48px;height:48px;border-radius:50%;box-shadow:0 2px 8px #ccc;">
+      <div>
+        <div style="font-weight:bold;font-size:1.1em;">${msg.hoTen}</div>
+        <div style="color:#888;font-size:0.95em;">${msg.thoiGian}</div>
+      </div>
+    </div>
+    <div style="text-align:left;font-size:1.05em;padding:8px 0 0 0;">
+      ${msg.noiDung}
+    </div>
+  `,
+                showConfirmButton: true,
+                confirmButtonText: "Đóng",
+                customClass: {
+                  popup: "swal2-message-popup",
+                },
+              });
+            });
+
+            // Cập nhật badge số lượng tin nhắn
+            $(".fa-envelope.fa-fw")
+              .siblings(".badge-counter")
+              .text(messages.length);
+          },
+        });
+      });
+    </script>
+    <!-- Bootstrap core JavaScript-->
+    <!--  -->
+    <script></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../../vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../../js/demo/chart-area-demo.js"></script>
+    <script src="../../js/demo/chart-pie-demo.js"></script>
+    <script src="../../js/log_out_click.js"></script>
+  </body>
+</html>

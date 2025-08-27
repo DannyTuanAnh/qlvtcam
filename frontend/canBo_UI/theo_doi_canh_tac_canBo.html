@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Theo dõi canh tác</title>
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template -->
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this page -->
+    <link
+      href="../../vendor/datatables/dataTables.bootstrap4.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .bg-gradient-primary {
+        background-image: linear-gradient(135deg, #ff9800 0%, #43ea2e 100%);
+        background-size: cover;
+        color: #fff !important;
+      }
+      /* Căn hàng cho phần Show entries và Search */
+      .dataTables_wrapper .dataTables_length,
+      .dataTables_wrapper .dataTables_filter {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 10px;
+        white-space: nowrap;
+      }
+
+      .dataTables_wrapper .dataTables_filter {
+        float: right;
+      }
+
+      .dataTables_wrapper .dataTables_length label,
+      .dataTables_wrapper .dataTables_filter label {
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .dataTables_wrapper .dataTables_filter input {
+        margin-left: 5px;
+      }
+      /* Đổi màu hàng đầu tiên (header) */
+      #dataTable thead tr {
+        background-color: #92927a; /* Màu xanh nhạt - bạn có thể đổi */
+        color: #000; /* Chữ màu đen */
+      }
+    </style>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_canBo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="./main_canBo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Báo cáo – Thống kê</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./quan_ly_vung_trong_canBo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Quản Lý Vùng Trồng</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item active">
+          <a
+            class="nav-link collapsed"
+            href="./theo_doi_canh_tac_canBo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-hammer"></i>
+            <span>Theo Dõi Canh Tác</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="./quan_ly_sau_benh_canBo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Quản lý sâu bệnh</span>
+          </a>
+          <hr class="sidebar-divider" />
+
+          <div
+            id="collapsePages"
+            class="collapse"
+            aria-labelledby="headingPages"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <div class="collapse-divider"></div>
+              <h6 class="collapse-header">Other Pages:</h6>
+              <a class="collapse-item" href="404.html">404 Page</a>
+              <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Nav Item - Charts -->
+
+        <li class="nav-item">
+          <a class="nav-link" href="./ho_tro_ky_thuat_canBo.html">
+            <i class="fa-solid fa-headset"></i>
+            <span>Hỗ trợ kỹ thuật</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="./thong_tin_ca_nhan_canBo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>QUẢN LÝ CAM SÀNH TỈNH VĨNH LONG</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="searchDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                  aria-labelledby="searchDropdown"
+                >
+                  <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control bg-light border-0 small"
+                        placeholder="Search for..."
+                        aria-label="Search"
+                        aria-describedby="basic-addon2"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <!-- Nav Item - Messages -->
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="mr-2 d-none d-lg-inline"
+                    id="user-fullname"
+                  ></span>
+                  <img
+                    class="img-profile rounded-circle"
+                    id="avatar-img-mini"
+                    src="../../img/undraw_profile.svg"
+                  />
+                  <script src="../../vendor/jquery/jquery.min.js"></script>
+                  <script>
+                    $(document).ready(function () {
+                      let maCanBo =
+                        localStorage.getItem("maCanBo") ||
+                        sessionStorage.getItem("maCanBo");
+                      if (!maCanBo) return;
+                      $.ajax({
+                        url: "../../API/api_canbo_kt.php",
+                        type: "GET",
+                        data: { MaCanBo: maCanBo },
+                        dataType: "json",
+                        success: function (res) {
+                          if (res.status === "success" && res.data) {
+                            const cb = res.data;
+                            $("#user-fullname").text(cb.HoTen || "");
+                            if (cb.avatar && cb.avatar !== "") {
+                              $("#avatar-img-mini").attr(
+                                "src",
+                                "../../uploads/avatars/" + cb.avatar
+                              );
+                            } else {
+                              $("#avatar-img-mini").attr(
+                                "src",
+                                "../../img/undraw_profile.svg"
+                              );
+                            }
+                          }
+                        },
+                      });
+                    });
+                  </script>
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="./thong_tin_ca_nhan_canBo.html"
+                  >
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#logoutModal"
+                    onclick="confirmLogout()"
+                  >
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Theo dõi canh tác</h1>
+            <div class="mb-3 d-flex align-items-center">
+              <button
+                class="btn btn-warning me-2"
+                type="button"
+                data-toggle="collapse"
+                data-target="#filterForm"
+                aria-expanded="false"
+                aria-controls="filterForm"
+              >
+                <i class="fa fa-filter"></i> Lọc
+              </button>
+            </div>
+            <div class="collapse mb-3" id="filterForm">
+              <div class="card card-body">
+                <form id="locForm" class="row g-2">
+                  <div class="col-md-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="NongHo"
+                      placeholder="Tên nông hộ"
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="LoaiHoatDong"
+                      placeholder="Loại hoạt động"
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="TenVu"
+                      placeholder="Vụ mùa"
+                    />
+                  </div>
+                  <div class="col-12 mt-2">
+                    <button type="submit" class="btn btn-success">
+                      <i class="fa fa-search"></i> Áp dụng lọc
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary ms-2"
+                      id="resetFilter"
+                    >
+                      Xóa lọc
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- ...existing code... -->
+            <p class="mb-4"></p>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <!-- Thay bảng mẫu bằng bảng này -->
+                <div class="table-responsive">
+                  <table
+                    class="table table-bordered"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Ngày canh tác</th>
+                        <th>Giờ</th>
+                        <th>Nông hộ</th>
+                        <th>Vụ</th>
+                        <th>Loại hoạt động</th>
+                        <th>Nội dung</th>
+                      </tr>
+                    </thead>
+                    <tbody id="canhTacTableBody">
+                      <tr>
+                        <td colspan="8" class="text-center">
+                          Đang tải dữ liệu...
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Your Website 2021</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="../../js/session_check_canBo.js"></script>
+    <script>
+      let canBoFullName = localStorage.getItem("canBoFullName");
+      if (canBoFullName) {
+        $("#user-fullname").text(canBoFullName || "Cán bộ");
+      } else {
+        $("#user-fullname").text("Cán bộ");
+      }
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Gọi API lấy dữ liệu canh tác
+        $.ajax({
+          url: "../../API/api_quan_ly_canh_tac.php",
+          type: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success" && Array.isArray(res.data)) {
+              renderCanhTacTable(res.data);
+            } else {
+              $("#canhTacTableBody").html(
+                `<tr><td colspan="8" class="text-center text-danger">Không có dữ liệu canh tác</td></tr>`
+              );
+            }
+          },
+          error: function () {
+            $("#canhTacTableBody").html(
+              `<tr><td colspan="8" class="text-center text-danger">Lỗi kết nối API</td></tr>`
+            );
+          },
+        });
+
+        // Hàm render bảng
+        function renderCanhTacTable(data) {
+          let html = "";
+          data.forEach((row, idx) => {
+            html += `
+              <tr>
+                <td>${idx + 1}</td>
+                <td>${row.NgayCanhTac || ""}</td>
+                <td>${row.Gio || ""}</td>
+                <td>${row.NongHo || ""}</td>
+                <td>${row.TenVu || ""}</td>
+                <td>${row.LoaiHoatDong || ""}</td>
+                <td>${row.NoiDung || ""}</td>
+              </tr>
+            `;
+          });
+          $("#canhTacTableBody").html(html);
+        }
+      });
+      // ...existing code...
+      // Thêm sau function renderCanhTacTable
+      let originalData = [];
+      function renderCanhTacTable(data) {
+        let html = "";
+        data.forEach((row, idx) => {
+          html += `
+      <tr>
+        <td>${idx + 1}</td>
+        <td>${row.NgayCanhTac || ""}</td>
+        <td>${row.Gio || ""}</td>
+        <td>${row.NongHo || ""}</td>
+        <td>${row.TenVu || ""}</td>
+        <td>${row.LoaiHoatDong || ""}</td>
+        <td>${row.NoiDung || ""}</td>
+      </tr>
+    `;
+        });
+        $("#canhTacTableBody").html(html);
+      }
+
+      let allData = [];
+      $.ajax({
+        url: "../../API/api_quan_ly_canh_tac.php",
+        type: "GET",
+        dataType: "json",
+        xhrFields: { withCredentials: true },
+        success: function (res) {
+          if (res.status === "success" && Array.isArray(res.data)) {
+            allData = res.data;
+            renderCanhTacTable(allData);
+          } else {
+            $("#canhTacTableBody").html(
+              `<tr><td colspan="8" class="text-center text-danger">Không có dữ liệu canh tác</td></tr>`
+            );
+          }
+        },
+        error: function () {
+          $("#canhTacTableBody").html(
+            `<tr><td colspan="8" class="text-center text-danger">Lỗi kết nối API</td></tr>`
+          );
+        },
+      });
+
+      // Xử lý lọc
+      $("#locForm").on("submit", function (e) {
+        e.preventDefault();
+        const form = $(this).serializeArray();
+        let filtered = allData.filter((row) => {
+          return form.every((f) => {
+            if (!f.value) return true;
+            return (row[f.name] || "")
+              .toLowerCase()
+              .includes(f.value.toLowerCase());
+          });
+        });
+        renderCanhTacTable(filtered);
+      });
+
+      // Xóa lọc
+      $("#resetFilter").on("click", function () {
+        $("#locForm")[0].reset();
+        renderCanhTacTable(allData);
+      });
+      // ...existing code...
+    </script>
+    <script src="../../js/log_out_click_canBo.js"></script>
+  </body>
+</html>

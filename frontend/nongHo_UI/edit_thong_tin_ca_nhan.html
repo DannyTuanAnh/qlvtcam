@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Chỉnh Sửa Thông Tin Cá Nhân</title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template-->
+    <link href="../../css/sb-admin-2.css" rel="stylesheet" />
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/jquery.min.js"></script>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_nongHo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="./main_nongHo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Trang chủ</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./nhat_ky_canh_tac_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-book"></i>
+            <span>Nhật ký canh tác</span>
+          </a>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./san_luong_thu_hoach_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Sản lượng thu hoạch</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./thoi_tiet_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-cloud"></i>
+            <span>Thời tiết</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="./giong_cay_trong.html">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Giống cây trồng</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="./bao_cao_sau_benh_nongHo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Báo cáo sâu bệnh</span>
+          </a>
+          <hr class="sidebar-divider" />
+
+          <div
+            id="collapsePages"
+            class="collapse"
+            aria-labelledby="headingPages"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <div class="collapse-divider"></div>
+              <h6 class="collapse-header">Other Pages:</h6>
+              <a class="collapse-item" href="404.html">404 Page</a>
+              <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item active">
+          <a class="nav-link" href="./thong_tin_ca_nhan_nongHo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>QUẢN LÝ CAM SÀNH TỈNH VĨNH LONG</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="searchDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                  aria-labelledby="searchDropdown"
+                >
+                  <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control bg-light border-0 small"
+                        placeholder="Search for..."
+                        aria-label="Search"
+                        aria-describedby="basic-addon2"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <!-- Nav Item - Messages -->
+              <li class="nav-item dropdown no-arrow mx-1">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="messagesDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-envelope fa-fw"></i>
+                  <!-- Counter - Messages -->
+                  <span class="badge badge-danger badge-counter">7</span>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="messagesDropdown"
+                >
+                  <h6 class="dropdown-header">Message Center</h6>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_1.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                      <div class="text-truncate">
+                        Hi there! I am wondering if you can help me with a
+                        problem I've been having.
+                      </div>
+                      <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_2.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        I have the photos that you ordered last month, how would
+                        you like them sent to you?
+                      </div>
+                      <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_3.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Last month's report looks great, I am very happy with
+                        the progress so far, keep up the good work!
+                      </div>
+                      <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Am I a good boy? The reason I ask is because someone
+                        told me that people say this to all dogs, even if they
+                        aren't good...
+                      </div>
+                      <div class="small text-gray-500">
+                        Chicken the Dog · 2w
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    class="dropdown-item text-center small text-gray-500"
+                    href="#"
+                    >Read More Messages</a
+                  >
+                </div>
+              </li>
+
+              <div class="topbar-divider d-none d-sm-block"></div>
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="mr-2 d-none d-lg-inline"
+                    id="user-fullname"
+                  ></span>
+                  <img
+                    class="img-profile rounded-circle shadow"
+                    id="avatar-img"
+                    src="../../img/undraw_profile.svg"
+                    alt="avatar"
+                  />
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="./thong_tin_ca_nhan_nongHo.html"
+                  >
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#logoutModal"
+                    onclick="confirmLogout()"
+                  >
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <h1 class="h3 mb-4 text-gray-800">Chỉnh sửa thông tin cá nhân</h1>
+
+            <form id="editForm">
+              <div class="form-group">
+                <label>Họ tên:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="hoTen"
+                  name="hoTen"
+                  placeholder="Nhập họ tên"
+                  required
+                />
+                <!-- <p
+                  class="form-control-static text-dark font-weight-bold"
+                  id="hoTen"
+                  style="
+                    padding: 10px;
+                    background-color: #f8f9fc;
+                    border: 1px solid #d1d3e2;
+                    border-radius: 0.35rem;
+                  "
+                >
+                  -
+                </p> -->
+              </div>
+              <div class="form-group">
+                <label>Giới tính:</label>
+                <!-- Thanh select chọn giới tính nam/nữ-->
+                <select
+                  class="form-control"
+                  id="gioiTinh"
+                  name="gioiTinh"
+                  required
+                >
+                  <option value="">-- Chọn giới tính --</option>
+                  <option value="Nam">Nam</option>
+                  <option value="Nữ">Nữ</option>
+                </select>
+                <!-- <p
+                  class="form-control-static text-dark font-weight-bold"
+                  id="gioiTinh"
+                  style="
+                    padding: 10px;
+                    background-color: #f8f9fc;
+                    border: 1px solid #d1d3e2;
+                    border-radius: 0.35rem;
+                  "
+                >
+                  -
+                </p> -->
+              </div>
+              <div class="form-group">
+                <label for="ngay-sinh">Ngày sinh:</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="ngay-sinh"
+                  name="ngay-sinh"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="gio-sinh">Giờ:</label>
+                <input
+                  type="time"
+                  step="1"
+                  class="form-control"
+                  id="gio-sinh"
+                  name="gio-sinh"
+                  required
+                />
+              </div>
+
+              <!-- <p
+                  class="form-control-static text-dark font-weight-bold"
+                  id="ngaySinh"
+                  style="
+                    padding: 10px;
+                    background-color: #f8f9fc;
+                    border: 1px solid #d1d3e2;
+                    border-radius: 0.35rem;
+                  "
+                >
+                  -
+                </p> -->
+              <div class="form-group">
+                <label>Địa chỉ:</label>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="tinh">Tỉnh:</label>
+                    <select class="form-control" id="tinh" name="tinh">
+                      <option value="">Chọn tỉnh</option>
+                      <option value="Vĩnh Long">Vĩnh Long</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="huyen">Huyện:</label>
+                    <select
+                      class="form-control"
+                      id="huyen"
+                      name="huyen"
+                      disabled
+                    >
+                      <option value="">Chọn huyện</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="xa">Xã:</label>
+                    <select class="form-control" id="xa" name="xa" disabled>
+                      <option value="">Chọn xã</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="ap">Ấp:</label>
+                    <select class="form-control" id="ap" name="ap" disabled>
+                      <option value="">Chọn ấp</option>
+                    </select>
+                  </div>
+                </div>
+                <input type="hidden" id="diaChi" name="diaChi" />
+              </div>
+              <div class="form-group">
+                <label for="sdt">Số điện thoại:</label>
+                <input type="text" class="form-control" id="sdt" name="sdt" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-success">💾 Lưu</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="cancelEdit()"
+              >
+                ❌ Hủy
+              </button>
+            </form>
+          </div>
+
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Your Website 2021</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Session check script -->
+    <script src="../../js/session_check.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // Dữ liệu địa chỉ theo cấp bậc hành chính
+
+        let diaChiData = {}; // Khởi tạo rỗng
+        // Gọi API lấy dữ liệu địa chỉ khi trang load
+        $.ajax({
+          url: "../../API/api_du_lieu_dia_chi_vt.php", // Đổi thành API của bạn
+          method: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success" && res.data) {
+              diaChiData = res.data; // Gán dữ liệu trả về vào biến
+              console.log("Dữ liệu địa chỉ:", diaChiData);
+              // Nếu muốn render luôn select tỉnh:
+              const tinhSelect = $("#tinh");
+              tinhSelect.empty().append('<option value="">Chọn tỉnh</option>');
+              Object.keys(diaChiData).forEach((tinh) => {
+                tinhSelect.append(`<option value="${tinh}">${tinh}</option>`);
+              });
+              loadProfileForEdit();
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Không thể tải dữ liệu địa chỉ!",
+                confirmButtonColor: "#d33",
+              });
+            }
+          },
+          error: function (e) {
+            console.log("Lỗi tải dữ liệu địa chỉ:", e);
+            Swal.fire({
+              icon: "error",
+              title: "Lỗi kết nối API địa chỉ!",
+              confirmButtonColor: "#d33",
+            });
+          },
+        });
+        // Xử lý khi chọn tỉnh
+        $("#tinh").change(function () {
+          const tinh = $(this).val();
+          const huyenSelect = $("#huyen");
+          const xaSelect = $("#xa");
+          const apSelect = $("#ap");
+
+          huyenSelect
+            .empty()
+            .append('<option value="">Chọn huyện</option>')
+            .prop("disabled", !tinh);
+          xaSelect
+            .empty()
+            .append('<option value="">Chọn xã</option>')
+            .prop("disabled", true);
+          apSelect
+            .empty()
+            .append('<option value="">Chọn ấp</option>')
+            .prop("disabled", true);
+
+          if (tinh && diaChiData[tinh]) {
+            Object.keys(diaChiData[tinh]).forEach((huyen) => {
+              huyenSelect.append(`<option value="${huyen}">${huyen}</option>`);
+            });
+          }
+          updateDiaChi();
+        });
+
+        // Xử lý khi chọn huyện
+        $("#huyen").change(function () {
+          const tinh = $("#tinh").val();
+          const huyen = $(this).val();
+          const xaSelect = $("#xa");
+          const apSelect = $("#ap");
+
+          xaSelect
+            .empty()
+            .append('<option value="">Chọn xã</option>')
+            .prop("disabled", !huyen);
+          apSelect
+            .empty()
+            .append('<option value="">Chọn ấp</option>')
+            .prop("disabled", true);
+
+          if (tinh && huyen && diaChiData[tinh][huyen]) {
+            Object.keys(diaChiData[tinh][huyen]).forEach((xa) => {
+              xaSelect.append(`<option value="${xa}">${xa}</option>`);
+            });
+          }
+          updateDiaChi();
+        });
+
+        // Xử lý khi chọn xã
+        $("#xa").change(function () {
+          const tinh = $("#tinh").val();
+          const huyen = $("#huyen").val();
+          const xa = $(this).val();
+          const apSelect = $("#ap");
+
+          apSelect
+            .empty()
+            .append('<option value="">Chọn ấp</option>')
+            .prop("disabled", !xa);
+
+          if (tinh && huyen && xa && diaChiData[tinh][huyen][xa]) {
+            diaChiData[tinh][huyen][xa].forEach((ap) => {
+              apSelect.append(`<option value="${ap}">${ap}</option>`);
+            });
+          }
+          updateDiaChi();
+        });
+
+        // Xử lý khi chọn ấp
+        $("#ap").change(function () {
+          updateDiaChi();
+        });
+
+        // Hàm cập nhật địa chỉ hoàn chỉnh
+        function updateDiaChi() {
+          const tinh = $("#tinh").val();
+          const huyen = $("#huyen").val();
+          const xa = $("#xa").val();
+          const ap = $("#ap").val();
+
+          let diaChiObj = {};
+          if (ap) diaChiObj.ap = ap;
+          if (xa) diaChiObj.xa = xa;
+          if (huyen) diaChiObj.huyen = huyen;
+          if (tinh) diaChiObj.tinh = tinh;
+
+          $("#diaChi").val(JSON.stringify(diaChiObj));
+        }
+
+        // Hàm load thông tin profile để edit
+        function loadProfileForEdit() {
+          $.ajax({
+            url: "../../API/api_profile_nong_ho.php",
+            method: "GET",
+            cache: false,
+            xhrFields: { withCredentials: true },
+            success: function (res) {
+              if (res.status === "success") {
+                let d = res.data;
+                $("#hoTen").val(d.HoTenNongHo || "Chưa có thông tin");
+                $("#gioiTinh").val(d.GioiTinh || "Chưa có thông tin");
+
+                if (d.NgaySinh) {
+                  // Tách ngày và giờ
+                  const [ngay, gio] = d.NgaySinh.split(" ");
+                  // Đưa vào input type="date" và type="time"
+                  $("#ngay-sinh").val(ngay); // input type="date"
+                  $("#gio-sinh").val(gio || ""); // input type="time"
+                } else {
+                  $("#ngay-sinh").val("");
+                  $("#gio-sinh").val("");
+                }
+
+                $("#sdt").val(d.SDTNongHo);
+                $("#email").val(d.EmailNongHo);
+
+                // Parse và hiển thị địa chỉ nếu có
+                if (d.DiaChi) {
+                  let diaChiObj;
+                  try {
+                    // Nếu là JSON thì parse, nếu là chuỗi thì chuyển đổi
+                    if (d.DiaChi.trim().startsWith("{")) {
+                      diaChiObj = JSON.parse(d.DiaChi);
+                    } else {
+                      // Trường hợp là chuỗi kiểu "Ấp Mỹ Hưng, Xã Trà Côn, Huyện Trà Ôn, Tỉnh Vĩnh Long"
+                      diaChiObj = {};
+                      const parts = d.DiaChi.split(",").map((s) => s.trim());
+                      parts.forEach((part) => {
+                        if (part.startsWith("Ấp")) {
+                          diaChiObj.ap = part.trim();
+                          console.log("Parsed ấp:", diaChiObj.ap);
+                        } else if (part.startsWith("Xã")) {
+                          diaChiObj.xa = part.replace("Xã", "").trim();
+                        } else if (part.startsWith("Huyện")) {
+                          diaChiObj.huyen = part.replace("Huyện", "").trim();
+                        } else if (part.startsWith("Tỉnh")) {
+                          diaChiObj.tinh = part.replace("Tỉnh", "").trim();
+                        }
+                      });
+                    }
+
+                    // Hiển thị lên các select
+                    if (diaChiObj.tinh) {
+                      $("#tinh").val(diaChiObj.tinh).trigger("change");
+                      setTimeout(() => {
+                        if (diaChiObj.huyen) {
+                          $("#huyen").val(diaChiObj.huyen).trigger("change");
+                          setTimeout(() => {
+                            if (diaChiObj.xa) {
+                              $("#xa").val(diaChiObj.xa).trigger("change");
+                              setTimeout(() => {
+                                if (diaChiObj.ap) {
+                                  $("#ap").val(diaChiObj.ap).trigger("change");
+                                }
+                              }, 10);
+                            }
+                          }, 10);
+                        }
+                      }, 10);
+                    }
+                  } catch (e) {
+                    console.log("Không thể parse địa chỉ:", e);
+                  }
+                }
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Lỗi tải thông tin",
+                  text: res.message || "Không thể tải thông tin!",
+                  confirmButtonColor: "#d33",
+                });
+                if (res.message && res.message.includes("Chưa đăng nhập")) {
+                  window.sessionChecker.redirectToLogin();
+                }
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error("Lỗi load profile:", { xhr, status, error });
+              if (xhr.status === 401) {
+                window.sessionChecker.redirectToLogin();
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Không thể tải thông tin.",
+                  confirmButtonColor: "#d33",
+                });
+              }
+            },
+          });
+        }
+
+        // Submit form cập nhật
+        $("#editForm").submit(function (e) {
+          e.preventDefault();
+          updateDiaChi();
+
+          // Validation
+          const sdt = $("#sdt").val().trim();
+          const email = $("#email").val().trim();
+          const diaChi = $("#diaChi").val();
+          const hoTen = $("#hoTen").val().trim();
+          const gioiTinh = $("#gioiTinh").val();
+          const ngaySinh = $("#ngay-sinh").val();
+          const gioSinh = $("#gio-sinh").val();
+          const ngaySinhFull = ngaySinh + " " + gioSinh;
+          if (!hoTen) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng nhập họ tên!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#hoTen").focus();
+            });
+            return;
+          }
+          if (!gioiTinh) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng chọn giới tính!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#gioiTinh").focus();
+            });
+            return;
+          }
+          if (!ngaySinh) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng chọn ngày sinh!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#ngay-sinh").focus();
+            });
+            return;
+          }
+          if (!gioSinh) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng chọn giờ sinh!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#gio-sinh").focus();
+            });
+            return;
+          }
+          if (!sdt) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng nhập số điện thoại!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#sdt").focus();
+            });
+            return;
+          }
+
+          if (!email) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng nhập email!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#email").focus();
+            });
+            return;
+          }
+
+          if (!diaChi || diaChi === "{}") {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng chọn địa chỉ đầy đủ!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#tinh").focus();
+            });
+            return;
+          }
+
+          // Validate email format
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            Swal.fire({
+              icon: "warning",
+              title: "Email không đúng định dạng!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#email").focus();
+            });
+            return;
+          }
+
+          // Validate phone number
+          const phoneRegex = /^[0-9]{10,11}$/;
+          if (!phoneRegex.test(sdt)) {
+            Swal.fire({
+              icon: "warning",
+              title: "Số điện thoại phải có 10-11 chữ số!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#sdt").focus();
+            });
+            return;
+          }
+
+          let dataSend = {
+            hoTen: hoTen,
+            gioiTinh: gioiTinh,
+            ngaySinh: ngaySinhFull,
+            diaChi: diaChi,
+            sdt: sdt,
+            email: email,
+          };
+
+          console.log("Sending data:", dataSend);
+
+          $.ajax({
+            url: "../../API/api_update_profile_nongHo.php",
+            method: "POST",
+            cache: false,
+            xhrFields: { withCredentials: true },
+            data: JSON.stringify(dataSend),
+            contentType: "application/json",
+            success: function (res) {
+              console.log("Update response:", res);
+              if (res.status === "success") {
+                Swal.fire({
+                  icon: "success",
+                  title: "Cập nhật thành công!",
+                  confirmButtonColor: "#28a745",
+                }).then(() => {
+                  window.location.href = "thong_tin_ca_nhan_nongHo.html";
+                });
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Lỗi cập nhật",
+                  text: res.message || "Có lỗi xảy ra khi cập nhật!",
+                  confirmButtonColor: "#d33",
+                });
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error("Lỗi update:", { xhr, status, error });
+              if (xhr.status === 401) {
+                window.sessionChecker.redirectToLogin();
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Không thể cập nhật",
+                  text: "Vui lòng thử lại!",
+                  confirmButtonColor: "#d33",
+                });
+              }
+            },
+          });
+        });
+      });
+
+      // Hàm xác nhận hủy chỉnh sửa
+      function cancelEdit() {
+        Swal.fire({
+          title: "Bạn có chắc muốn hủy chỉnh sửa?",
+          text: "Dữ liệu chưa lưu sẽ bị mất.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Hủy chỉnh sửa",
+          cancelButtonText: "Tiếp tục chỉnh sửa",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "thong_tin_ca_nhan_nongHo.html";
+          }
+        });
+      }
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Gọi API lấy thông tin cá nhân để lấy avatar và tên
+        $.ajax({
+          url: "../../API/api_profile_nong_ho.php",
+          method: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success" && res.data) {
+              // Gán avatar
+              if (res.data.avatar && res.data.avatar !== "") {
+                $("#avatar-img").attr("src", "../../" + res.data.avatar);
+              } else {
+                $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              }
+              // Gán tên nông hộ lên topbar
+              $("#user-fullname").text(res.data.HoTenNongHo || "Nông hộ");
+            } else {
+              $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              $("#user-fullname").text("Nông hộ");
+            }
+          },
+          error: function () {
+            $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+            $("#user-fullname").text("Nông hộ");
+          },
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "../../API/api_ho_tro_ky_thuat_nongho.php",
+          type: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (messages) {
+            var html = '<h6 class="dropdown-header">Message Center</h6>';
+            if (messages.length === 0) {
+              html +=
+                '<div class="dropdown-item text-center small text-gray-500">Không có hỗ trợ kỹ thuật nào</div>';
+            } else {
+              messages.forEach(function (msg, idx) {
+                html += `
+            <a class="dropdown-item d-flex align-items-center message-item" href="#" data-idx="${idx}">
+              <div class="dropdown-list-image mr-3">
+                <img class="rounded-circle" src="../../${
+                  msg.avatar || "img/undraw_profile.svg"
+                }" alt="...">
+                <div class="status-indicator bg-success"></div>
+              </div>
+              <div class="font-weight-bold">
+                <div class="text-truncate">${msg.noiDung}</div>
+                <div class="small text-gray-500">${msg.hoTen} · ${
+                  msg.thoiGian
+                }</div>
+              </div>
+            </a>
+          `;
+              });
+            }
+            html +=
+              '<a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả hỗ trợ</a>';
+            $(
+              ".dropdown-list.dropdown-menu[aria-labelledby='messagesDropdown']"
+            ).html(html);
+
+            // Thêm sự kiện click cho từng tin nhắn
+            $(".message-item").on("click", function (e) {
+              e.preventDefault();
+              var idx = $(this).data("idx");
+              var msg = messages[idx];
+              Swal.fire({
+                html: `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+      <img src="../../${
+        msg.avatar || "img/undraw_profile.svg"
+      }" style="width:48px;height:48px;border-radius:50%;box-shadow:0 2px 8px #ccc;">
+      <div>
+        <div style="font-weight:bold;font-size:1.1em;">${msg.hoTen}</div>
+        <div style="color:#888;font-size:0.95em;">${msg.thoiGian}</div>
+      </div>
+    </div>
+    <div style="text-align:left;font-size:1.05em;padding:8px 0 0 0;">
+      ${msg.noiDung}
+    </div>
+  `,
+                showConfirmButton: true,
+                confirmButtonText: "Đóng",
+                customClass: {
+                  popup: "swal2-message-popup",
+                },
+              });
+            });
+
+            // Cập nhật badge số lượng tin nhắn
+            $(".fa-envelope.fa-fw")
+              .siblings(".badge-counter")
+              .text(messages.length);
+          },
+        });
+      });
+    </script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="../../js/log_out_click.js"></script>
+    <!-- Bootstrap core JavaScript (bổ sung) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

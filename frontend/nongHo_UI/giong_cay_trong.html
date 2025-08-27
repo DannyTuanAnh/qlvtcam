@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Giống cây trồng</title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template-->
+    <link href="../../css/sb-admin-2.css" rel="stylesheet" />
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <style>
+      .hover-row:hover {
+        background-color: #f8f9fc !important;
+        transition: all 0.3s ease;
+      }
+
+      .badge-lg {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+      }
+
+      .badge-outline-success {
+        background-color: transparent;
+        border: 1px solid #28a745;
+        color: #28a745;
+      }
+
+      .card-header.bg-gradient-primary {
+        background: linear-gradient(45deg, #4e73df, #224abe);
+      }
+
+      .table th {
+        border-top: none;
+        font-weight: 600;
+        font-size: 0.85rem;
+      }
+
+      .table td {
+        vertical-align: middle;
+        font-size: 0.9rem;
+      }
+
+      .btn-group .btn {
+        margin: 0 2px;
+      }
+
+      .text-truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .custom-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.1rem;
+        font-weight: 800;
+        gap: 12px;
+        padding-bottom: 8px;
+        margin-bottom: 22px;
+        letter-spacing: 0.5px;
+        width: 100%;
+        text-align: center;
+        background: none;
+        border: none;
+      }
+      .custom-title .icon {
+        font-size: 1.4em;
+        margin-right: 4px;
+        transform: translateY(40px) scale(0.2);
+        opacity: 0;
+        animation: sprout-up 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      @keyframes sprout-up {
+        0% {
+          transform: translateY(40px) scale(0.2) rotate(-30deg);
+          opacity: 0;
+        }
+        60% {
+          transform: translateY(-8px) scale(1.1) rotate(8deg);
+          opacity: 1;
+        }
+        80% {
+          transform: translateY(2px) scale(0.95) rotate(-4deg);
+        }
+        100% {
+          transform: translateY(0) scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_nongHo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="./main_nongHo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Trang chủ</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./nhat_ky_canh_tac_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-book"></i>
+            <span>Nhật ký canh tác</span>
+          </a>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./san_luong_thu_hoach_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Sản lượng thu hoạch</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./thoi_tiet_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-cloud"></i>
+            <span>Thời tiết</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <li class="nav-item active">
+          <a class="nav-link" href="./giong_cay_trong.html">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Giống cây trồng</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="./bao_cao_sau_benh_nongHo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Báo cáo sâu bệnh</span>
+          </a>
+          <hr class="sidebar-divider" />
+
+          <div
+            id="collapsePages"
+            class="collapse"
+            aria-labelledby="headingPages"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <div class="collapse-divider"></div>
+              <h6 class="collapse-header">Other Pages:</h6>
+              <a class="collapse-item" href="404.html">404 Page</a>
+              <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="./thong_tin_ca_nhan_nongHo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>QUẢN LÝ CAM SÀNH TỈNH VĨNH LONG</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="searchDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                  aria-labelledby="searchDropdown"
+                >
+                  <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control bg-light border-0 small"
+                        placeholder="Search for..."
+                        aria-label="Search"
+                        aria-describedby="basic-addon2"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <!-- Nav Item - Messages -->
+              <li class="nav-item dropdown no-arrow mx-1">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="messagesDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-envelope fa-fw"></i>
+                  <!-- Counter - Messages -->
+                  <span class="badge badge-danger badge-counter">7</span>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="messagesDropdown"
+                >
+                  <h6 class="dropdown-header">Message Center</h6>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_1.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                      <div class="text-truncate">
+                        Hi there! I am wondering if you can help me with a
+                        problem I've been having.
+                      </div>
+                      <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_2.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        I have the photos that you ordered last month, how would
+                        you like them sent to you?
+                      </div>
+                      <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_3.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Last month's report looks great, I am very happy with
+                        the progress so far, keep up the good work!
+                      </div>
+                      <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Am I a good boy? The reason I ask is because someone
+                        told me that people say this to all dogs, even if they
+                        aren't good...
+                      </div>
+                      <div class="small text-gray-500">
+                        Chicken the Dog · 2w
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    class="dropdown-item text-center small text-gray-500"
+                    href="#"
+                    >Read More Messages</a
+                  >
+                </div>
+              </li>
+
+              <div class="topbar-divider d-none d-sm-block"></div>
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="mr-2 d-none d-lg-inline"
+                    id="user-fullname"
+                  ></span>
+                  <img
+                    class="img-profile rounded-circle shadow"
+                    id="avatar-img"
+                    src="../../img/undraw_profile.svg"
+                    alt="avatar"
+                  />
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="./thong_tin_ca_nhan_nongHo.html"
+                  >
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#logoutModal"
+                    onclick="confirmLogout()"
+                  >
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <h1 class="custom-title">
+              <i class="fa-solid fa-seedling icon"></i>
+              Quản lý giống cây trồng
+            </h1>
+
+            <!-- Dropdown selector -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3 bg-gradient-primary">
+                <div class="row align-items-center">
+                  <div class="col-md-4">
+                    <div class="d-flex align-items-center">
+                      <button
+                        class="btn btn-light btn-sm shadow-sm"
+                        onclick="window.location.href='thong_tin_giong_cam.html'"
+                        title="Xem thông tin giống cam"
+                      >
+                        <i class="fas fa-info-circle text-primary"></i> Thông
+                        tin giống cam
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="row align-items-center justify-content-end">
+                      <div class="col-auto">
+                        <label class="font-weight-bold text-white mb-0">
+                          <i class="fas fa-calendar-alt"></i> Vụ mùa:
+                        </label>
+                      </div>
+                      <div class="col-auto">
+                        <select
+                          class="form-control form-control-sm shadow-sm"
+                          id="plot-selector"
+                        >
+                          <option value="">📅 Chọn vụ mùa...</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Đây là nơi để bảng hiện ra -->
+            <div id="plot-container"></div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Your Website 2021</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../../vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../../js/demo/chart-area-demo.js"></script>
+    <script src="../../js/demo/chart-pie-demo.js"></script>
+
+    <!-- Session check script -->
+    <script src="../../js/session_check.js"></script>
+
+    <script>
+      $(document).on("sessionValid", function (event, sessionData) {
+        console.log("Session valid, loading page data...");
+        loadCayTrong();
+
+        $(document).on("click", ".edit-btn", function () {
+          const maTrong = $(this).data("ma");
+          const soLuongCay = $(this)
+            .closest("tr")
+            .find("td[data-socay]")
+            .data("socay");
+          const date = $(this).closest("tr").find("td[data-ngay]").data("ngay");
+          const time = $(this).closest("tr").find("td[data-gio]").data("gio");
+
+          console.log("Chỉnh sửa thông tin trồng cây với mã:", maTrong);
+          console.log("Số lượng:", soLuongCay);
+          console.log("Ngày:", date);
+          console.log("Giờ:", time);
+
+          localStorage.setItem("maTrong", maTrong);
+          localStorage.setItem("soLuongCay", soLuongCay);
+          localStorage.setItem("date", date);
+          localStorage.setItem("time", time);
+          window.location.href = "edit_giong_cay_trong.html";
+        });
+
+        $(document).on("click", ".add-btn", function () {
+          window.location.href = "add_giong_cay_trong.html";
+        });
+      });
+
+      $(document).on("click", ".btn-delete", function () {
+        const maTrong = $(this).data("ma");
+        console.log("Xóa thông tin trồng cây với mã:", maTrong);
+        Swal.fire({
+          title: "Bạn có chắc muốn xóa nhật ký này?",
+          text: "Thao tác này không thể hoàn tác!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Xóa",
+          cancelButtonText: "Hủy",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: "../../API/api_xoa_giong_cay.php",
+              method: "POST",
+              data: { MaTrong: maTrong },
+              success: function (res) {
+                if (res.status === "success") {
+                  Swal.fire({
+                    icon: "success",
+                    title: "Thành công!",
+                    text: "Đã xóa thành công!",
+                    confirmButtonColor: "#28a745",
+                  }).then(() => {
+                    loadCayTrong();
+                  });
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Lỗi khi xóa",
+                    text: res.message || "Đã xảy ra lỗi khi xóa!",
+                    confirmButtonColor: "#d33",
+                  });
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error("Xóa thất bại:", { xhr, status, error });
+                Swal.fire({
+                  icon: "error",
+                  title: "Xóa thất bại",
+                  text: "Không thể xóa nhật ký!",
+                  confirmButtonColor: "#d33",
+                });
+              },
+            });
+          }
+        });
+      });
+
+      let plotsData = {};
+
+      function renderPlots(data) {
+        console.log("=== RENDERING DIARY PLOTS ===");
+        console.log("Total plots:", Object.keys(data).length);
+
+        plotsData = data;
+        const selectorContainer = $("#plot-selector");
+        const contentContainer = $("#plot-container");
+
+        selectorContainer.empty();
+        contentContainer.empty();
+
+        selectorContainer.append('<option value="">Chọn vụ mùa...</option>');
+
+        Object.keys(data).forEach((maVu, index) => {
+          //const plotNumber = index + 1;
+          //const activityCount = data[maThua].length;
+
+          selectorContainer.append(`
+                <option value="${maVu}">
+                     ${data[maVu][0].TenVu}
+                </option>
+            `);
+        });
+
+        selectorContainer.off("change").on("change", function () {
+          const selectedMaVu = $(this).val();
+          if (selectedMaVu) {
+            showPlotTable(selectedMaVu);
+          } else {
+            contentContainer.empty();
+          }
+        });
+
+        const firstMaVu = Object.keys(data)[0];
+        if (firstMaVu) {
+          selectorContainer.val(firstMaVu);
+          showPlotTable(firstMaVu);
+        }
+      }
+
+      function showPlotTable(maVu) {
+        const contentContainer = $("#plot-container");
+        const plotData = plotsData[maVu];
+
+        if (!plotData) return;
+
+        // Sắp xếp theo ngày trồng mới nhất
+        const sortedData = plotData.sort(
+          (a, b) => new Date(b.NgayTrong) - new Date(a.NgayTrong)
+        );
+
+        const rows = sortedData
+          .map((item, index) => {
+            const date = item.NgayTrong.split(" ")[0];
+            const time = item.NgayTrong.split(" ")[1].slice(0, 5);
+
+            return `
+                <tr class="hover-row">
+                    <td class="text-center font-weight-bold text-primary">${
+                      index + 1
+                    }</td>
+                    <td data-ngay="${date}" class="text-center">
+                        <i class="fas fa-calendar-alt text-primary"></i> ${date}
+                    </td>
+                    <td data-gio="${time}" class="text-center">
+                        <i class="fas fa-clock text-success"></i> ${time}
+                    </td>
+                    <td class="font-weight-bold text-success">
+                        <i class="fas fa-seedling text-warning"></i> ${
+                          item.TenCayTrong
+                        }
+                    </td>
+                  
+                    <td class="text-center badge-lg">
+                        <span class="badge badge-primary">${
+                          item.DienTich
+                        } m²</span>
+                    </td>
+                    <td class="text-truncate" style="max-width: 200px;" >
+                        <i class="fas fa-map-marker-alt text-danger"></i> ${
+                          item.ViTri
+                        }
+                    </td>
+                    <td class="text-center" data-socay="${item.SoLuongCay}">
+                        <span class="badge badge-success badge-lg">${
+                          item.SoLuongCay
+                        } cây</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-sm btn-outline-primary edit-btn"
+                                    data-ma="${item.MaTrong}"
+                                    title="Chỉnh sửa thông tin">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger btn-delete"  
+                                    data-ma="${item.MaTrong}"
+                                    title="Xóa thông tin">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+          })
+          .join("");
+
+        const vuInfo = sortedData[0];
+        const totalTrees = sortedData.reduce(
+          (sum, item) => sum + parseInt(item.SoLuongCay),
+          0
+        );
+        const totalArea = sortedData.reduce(
+          (sum, item) => sum + parseFloat(item.DienTich),
+          0
+        );
+        const uniqueVarieties = [
+          ...new Set(sortedData.map((item) => item.TenCayTrong)),
+        ];
+
+        const table = $(`
+            <div class="card shadow-lg mb-4">
+                <div class="card-header bg-gradient-primary text-white py-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h5 class="m-0 font-weight-bold">
+                                <i class="fas fa-seedling"></i> ${vuInfo.TenVu}
+                            </h5>
+                            <small class="text-light">Thông tin giống cây trồng</small>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button class="btn btn-success btn-sm add-btn">
+                                <i class="fas fa-plus"></i> Thêm thông tin trồng cây
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Thống kê tổng quan -->
+                <div class="card-body bg-light py-2">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <div class="p-2">
+                                <i class="fas fa-tree text-success fa-2x"></i>
+                                <div class="font-weight-bold text-success">${totalTrees}</div>
+                                <small class="text-muted">Tổng số cây</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2">
+                                <i class="fas fa-expand-arrows-alt text-info fa-2x"></i>
+                                <div class="font-weight-bold text-info">${totalArea.toFixed(
+                                  1
+                                )} m²</div>
+                                <small class="text-muted">Tổng diện tích</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2">
+                                <i class="fas fa-layer-group text-warning fa-2x"></i>
+                                <div class="font-weight-bold text-warning">${
+                                  uniqueVarieties.length
+                                }</div>
+                                <small class="text-muted">Loại giống</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2">
+                                <i class="fas fa-chart-line text-primary fa-2x"></i>
+                                <div class="font-weight-bold text-primary">${
+                                  sortedData.length
+                                }</div>
+                                <small class="text-muted">Lần trồng</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center"><i class="fas fa-hashtag"></i> STT</th>
+                                    <th class="text-center"><i class="fas fa-calendar-alt"></i> Ngày trồng</th>
+                                    <th class="text-center"><i class="fas fa-clock"></i> Giờ</th>
+                                    <th><i class="fas fa-seedling"></i> Tên giống cam</th>
+                                    <th class="text-center"><i class="fas fa-expand-arrows-alt"></i> Diện tích</th>
+                                    <th><i class="fas fa-map-marker-alt"></i> Vị trí trồng</th>
+                                    <th class="text-center"><i class="fas fa-tree"></i> Số lượng cây</th>
+                                    <th class="text-center"><i class="fas fa-cogs"></i> Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>${rows}</tbody>
+                        </table>
+                    </div>
+                    ${
+                      plotData.length === 0
+                        ? `<div class="text-center p-5">
+                               <i class="fas fa-seedling fa-3x text-muted mb-3"></i>
+                               <p class="text-muted">Chưa có thông tin trồng cây cho vụ mùa này</p>
+                           </div>`
+                        : ""
+                    }
+                </div>
+                
+                <!-- Footer với thông tin giống cây -->
+                <div class="card-footer bg-light">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6 class="font-weight-bold text-primary mb-2">
+                                <i class="fas fa-list"></i> Các giống cam đã trồng:
+                            </h6>
+                            <div class="d-flex flex-wrap">
+                                ${uniqueVarieties
+                                  .map(
+                                    (variety) =>
+                                      `<span class="badge badge-outline-success mr-2 mb-1 p-2">
+                                    <i class="fas fa-seedling"></i> ${variety}
+                                </span>`
+                                  )
+                                  .join("")}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `);
+
+        contentContainer.html(table);
+      }
+
+      function loadCayTrong() {
+        $("#plot-container").html(`
+            <div class="text-center p-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Đang tải...</span>
+                </div>
+                <p class="mt-2">Đang tải thông tin trồng cây...</p>
+            </div>
+        `);
+
+        $.ajax({
+          url: "../../API/api_giong_cay_trong.php",
+          method: "GET",
+          success: function (res) {
+            console.log(res);
+            if (res.status === "success") {
+              renderPlots(res.data);
+            } else {
+              console.error("Lỗi dữ liệu:", res.message);
+              $("#plot-container").html(`
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> ${res.message}
+                        </div>
+                    `);
+              if (res.message.includes("Chưa đăng nhập")) {
+                window.sessionChecker.redirectToLogin();
+              }
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Lỗi load thửa đất:", { xhr, status, error });
+            if (xhr.status === 401) {
+              window.sessionChecker.redirectToLogin();
+            } else {
+              $("#plot-container").html(`
+                        <div class="alert alert-danger">
+                            <i class="fas fa-times"></i> Không thể tải thông tin nhật ký.
+                        </div>
+                    `);
+            }
+          },
+        });
+      }
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Gọi API lấy thông tin cá nhân để lấy avatar và tên
+        $.ajax({
+          url: "../../API/api_profile_nong_ho.php",
+          method: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success" && res.data) {
+              // Gán avatar
+              if (res.data.avatar && res.data.avatar !== "") {
+                $("#avatar-img").attr("src", "../../" + res.data.avatar);
+              } else {
+                $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              }
+              // Gán tên nông hộ lên topbar
+              $("#user-fullname").text(res.data.HoTenNongHo || "Nông hộ");
+            } else {
+              $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              $("#user-fullname").text("Nông hộ");
+            }
+          },
+          error: function () {
+            $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+            $("#user-fullname").text("Nông hộ");
+          },
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "../../API/api_ho_tro_ky_thuat_nongho.php",
+          type: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (messages) {
+            var html = '<h6 class="dropdown-header">Message Center</h6>';
+            if (messages.length === 0) {
+              html +=
+                '<div class="dropdown-item text-center small text-gray-500">Không có hỗ trợ kỹ thuật nào</div>';
+            } else {
+              messages.forEach(function (msg, idx) {
+                html += `
+            <a class="dropdown-item d-flex align-items-center message-item" href="#" data-idx="${idx}">
+              <div class="dropdown-list-image mr-3">
+                <img class="rounded-circle" src="../../${
+                  msg.avatar || "img/undraw_profile.svg"
+                }" alt="...">
+                <div class="status-indicator bg-success"></div>
+              </div>
+              <div class="font-weight-bold">
+                <div class="text-truncate">${msg.noiDung}</div>
+                <div class="small text-gray-500">${msg.hoTen} · ${
+                  msg.thoiGian
+                }</div>
+              </div>
+            </a>
+          `;
+              });
+            }
+            html +=
+              '<a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả hỗ trợ</a>';
+            $(
+              ".dropdown-list.dropdown-menu[aria-labelledby='messagesDropdown']"
+            ).html(html);
+
+            // Thêm sự kiện click cho từng tin nhắn
+            $(".message-item").on("click", function (e) {
+              e.preventDefault();
+              var idx = $(this).data("idx");
+              var msg = messages[idx];
+              Swal.fire({
+                html: `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+      <img src="../../${
+        msg.avatar || "img/undraw_profile.svg"
+      }" style="width:48px;height:48px;border-radius:50%;box-shadow:0 2px 8px #ccc;">
+      <div>
+        <div style="font-weight:bold;font-size:1.1em;">${msg.hoTen}</div>
+        <div style="color:#888;font-size:0.95em;">${msg.thoiGian}</div>
+      </div>
+    </div>
+    <div style="text-align:left;font-size:1.05em;padding:8px 0 0 0;">
+      ${msg.noiDung}
+    </div>
+  `,
+                showConfirmButton: true,
+                confirmButtonText: "Đóng",
+                customClass: {
+                  popup: "swal2-message-popup",
+                },
+              });
+            });
+
+            // Cập nhật badge số lượng tin nhắn
+            $(".fa-envelope.fa-fw")
+              .siblings(".badge-counter")
+              .text(messages.length);
+          },
+        });
+      });
+    </script>
+    <script src="../../js/log_out_click.js"></script>
+  </body>
+</html>

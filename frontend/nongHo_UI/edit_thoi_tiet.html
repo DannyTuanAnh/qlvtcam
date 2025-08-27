@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Chỉnh Sửa Thời Tiết</title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template-->
+    <link href="../../css/sb-admin-2.css" rel="stylesheet" />
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/jquery.min.js"></script>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_nongHo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="./main_nongHo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Trang chủ</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./nhat_ky_canh_tac_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-book"></i>
+            <span>Nhật ký canh tác</span>
+          </a>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./san_luong_thu_hoach_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Sản lượng thu hoạch</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item active">
+          <a
+            class="nav-link collapsed"
+            href="./thoi_tiet_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-cloud"></i>
+            <span>Thời tiết</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="./giong_cay_trong.html">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Giống cây trồng</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="./bao_cao_sau_benh_nongHo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Báo cáo sâu bệnh</span>
+          </a>
+          <hr class="sidebar-divider" />
+
+          <div
+            id="collapsePages"
+            class="collapse"
+            aria-labelledby="headingPages"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <div class="collapse-divider"></div>
+              <h6 class="collapse-header">Other Pages:</h6>
+              <a class="collapse-item" href="404.html">404 Page</a>
+              <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="./thong_tin_ca_nhan_nongHo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>QUẢN LÝ CAM SÀNH TỈNH VĨNH LONG</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="searchDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                  aria-labelledby="searchDropdown"
+                >
+                  <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control bg-light border-0 small"
+                        placeholder="Search for..."
+                        aria-label="Search"
+                        aria-describedby="basic-addon2"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <!-- Nav Item - Messages -->
+              <li class="nav-item dropdown no-arrow mx-1">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="messagesDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-envelope fa-fw"></i>
+                  <!-- Counter - Messages -->
+                  <span class="badge badge-danger badge-counter">7</span>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="messagesDropdown"
+                >
+                  <h6 class="dropdown-header">Message Center</h6>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_1.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                      <div class="text-truncate">
+                        Hi there! I am wondering if you can help me with a
+                        problem I've been having.
+                      </div>
+                      <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_2.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        I have the photos that you ordered last month, how would
+                        you like them sent to you?
+                      </div>
+                      <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_3.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Last month's report looks great, I am very happy with
+                        the progress so far, keep up the good work!
+                      </div>
+                      <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Am I a good boy? The reason I ask is because someone
+                        told me that people say this to all dogs, even if they
+                        aren't good...
+                      </div>
+                      <div class="small text-gray-500">
+                        Chicken the Dog · 2w
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    class="dropdown-item text-center small text-gray-500"
+                    href="#"
+                    >Read More Messages</a
+                  >
+                </div>
+              </li>
+
+              <div class="topbar-divider d-none d-sm-block"></div>
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="mr-2 d-none d-lg-inline"
+                    id="user-fullname"
+                  ></span>
+                  <img
+                    class="img-profile rounded-circle shadow"
+                    id="avatar-img"
+                    src="../../img/undraw_profile.svg"
+                    alt="avatar"
+                  />
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="./thong_tin_ca_nhan_nongHo.html"
+                  >
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#logoutModal"
+                    onclick="confirmLogout()"
+                  >
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <h1 class="h3 mb-4 text-gray-800">
+              🌤️ Chỉnh sửa dữ liệu thời tiết
+            </h1>
+
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                  <i class="fas fa-edit"></i> Thông tin thời tiết
+                </h6>
+              </div>
+              <div class="card-body">
+                <form id="editThoiTietForm">
+                  <!-- ✅ THÊM: Thời gian đo -->
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="ngay-do">
+                          <i class="fas fa-calendar"></i> Ngày đo:
+                        </label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="ngay-do"
+                          name="ngay-do"
+                          required
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="gio-do">
+                          <i class="fas fa-clock"></i> Giờ đo:
+                        </label>
+                        <input
+                          type="time"
+                          class="form-control"
+                          id="gio-do"
+                          name="gio-do"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ✅ THÊM: Nhiệt độ -->
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="nhiet-do">
+                          <i class="fas fa-thermometer-half"></i> Nhiệt độ (°C):
+                        </label>
+                        <input
+                          type="number"
+                          step="0.1"
+                          min="-10"
+                          max="50"
+                          class="form-control"
+                          id="nhiet-do"
+                          name="nhiet-do"
+                          placeholder="Ví dụ: 28.5"
+                          required
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="do-am">
+                          <i class="fas fa-tint"></i> Độ ẩm (%):
+                        </label>
+                        <input
+                          type="number"
+                          step="0.1"
+                          min="0"
+                          max="100"
+                          class="form-control"
+                          id="do-am"
+                          name="do-am"
+                          placeholder="Ví dụ: 85"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ✅ THÊM: Lượng mưa và Thời tiết -->
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="luong-mua">
+                          <i class="fas fa-cloud-rain"></i> Lượng mưa (mm):
+                        </label>
+                        <input
+                          type="number"
+                          step="0.1"
+                          min="0"
+                          class="form-control"
+                          id="luong-mua"
+                          name="luong-mua"
+                          placeholder="Ví dụ: 12.5"
+                          required
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="thoi-tiet">
+                          <i class="fas fa-sun"></i> Thời tiết:
+                        </label>
+                        <select
+                          class="form-control"
+                          id="thoi-tiet"
+                          name="thoi-tiet"
+                          required
+                        >
+                          <option value="">Chọn loại thời tiết</option>
+                          <option value="Nắng">☀️ Nắng</option>
+                          <option value="Nắng nhẹ">🌤️ Nắng nhẹ</option>
+                          <option value="Âm u">☁️ Âm u</option>
+                          <option value="Mưa nhẹ">🌦️ Mưa nhẹ</option>
+                          <option value="Mưa vừa">🌧️ Mưa vừa</option>
+                          <option value="Mưa to">⛈️ Mưa to</option>
+                          <option value="Sương mù">🌫️ Sương mù</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ✅ THÊM: Ghi chú -->
+                  <div class="form-group">
+                    <label for="ghi-chu">
+                      <i class="fas fa-comment"></i> Ghi chú:
+                    </label>
+                    <textarea
+                      class="form-control"
+                      id="ghi-chu"
+                      name="ghi-chu"
+                      rows="3"
+                      placeholder="Ghi chú thêm về thời tiết (có thể để trống)"
+                    ></textarea>
+                  </div>
+
+                  <!-- ✅ THÊM: Buttons -->
+                  <div class="form-group text-right">
+                    <button type="submit" class="btn btn-success mr-2">
+                      <i class="fas"></i> 💾 Cập nhật
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      onclick="cancelEdit()"
+                    >
+                      <i class="fas"></i> ❌ Hủy
+                    </button>
+                  </div>
+                </form>
+
+                <!-- ✅ THÊM: Chú thích -->
+                <div class="mt-3">
+                  <small class="text-muted">
+                    <strong>Lưu ý:</strong>
+                    Nhiệt độ từ -10°C đến 50°C | Độ ẩm từ 0% đến 100% | Lượng
+                    mưa tính bằng mm
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Your Website 2021</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Session check script -->
+    <script src="../../js/session_check.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // Listen for sessionValid event từ session_check.js
+        $(document).on("sessionValid", function (event, sessionData) {
+          console.log("Session valid, loading weather data for edit...");
+          loadThoiTietForEdit();
+        });
+
+        // ✅ THÊM: Hàm load thông tin thời tiết để edit
+        function loadThoiTietForEdit() {
+          const maThoiTiet = localStorage.getItem("maThoiTiet");
+          const nhietDo = localStorage.getItem("nhietDo");
+          const doAm = localStorage.getItem("doAm");
+          const luongMua = localStorage.getItem("luongMua");
+          const thoiTiet = localStorage.getItem("thoiTiet");
+          const ghiChu = localStorage.getItem("ghiChu");
+          const date = localStorage.getItem("date");
+          const time = localStorage.getItem("time");
+
+          console.log("=== LOADING WEATHER DATA FOR EDIT ===");
+          console.log("Mã thời tiết:", maThoiTiet);
+          console.log("Nhiệt độ:", nhietDo);
+          console.log("Độ ẩm:", doAm);
+          console.log("Lượng mưa:", luongMua);
+          console.log("Thời tiết:", thoiTiet);
+          console.log("Ghi chú:", ghiChu);
+          console.log("Ngày:", date);
+          console.log("Giờ:", time);
+
+          if (!maThoiTiet) {
+            Swal.fire({
+              icon: "error",
+              title: "Không tìm thấy dữ liệu thời tiết cần chỉnh sửa.",
+              confirmButtonColor: "#d33",
+            }).then(() => {
+              window.location.href = "thoi_tiet_nongHo.html";
+            });
+            return;
+          }
+
+          // ✅ Điền dữ liệu vào form
+          $("#ngay-do").val(date || "");
+          $("#gio-do").val(time || "");
+          $("#nhiet-do").val(nhietDo || "");
+          $("#do-am").val(doAm || "");
+          $("#luong-mua").val(luongMua || "");
+          $("#thoi-tiet").val(thoiTiet || "");
+          $("#ghi-chu").val(ghiChu || "");
+
+          console.log("✅ Đã điền dữ liệu vào form");
+        }
+
+        // ✅ THÊM: Xử lý submit form
+        $("#editThoiTietForm").submit(function (e) {
+          e.preventDefault();
+
+          const maThoiTiet = localStorage.getItem("maThoiTiet");
+          const ngayDo = $("#ngay-do").val();
+          const gioDo = $("#gio-do").val();
+          const nhietDo = $("#nhiet-do").val();
+          const doAm = $("#do-am").val();
+          const luongMua = $("#luong-mua").val();
+          const thoiTiet = $("#thoi-tiet").val();
+          const ghiChu = $("#ghi-chu").val();
+          const thoiGianDo = `${ngayDo} ${gioDo}:00`;
+
+          console.log("=== UPDATING WEATHER DATA ===");
+          console.log("Mã thời tiết:", maThoiTiet);
+          console.log("Thời gian đo:", thoiGianDo);
+          console.log("Nhiệt độ:", nhietDo);
+          console.log("Độ ẩm:", doAm);
+          console.log("Lượng mưa:", luongMua);
+          console.log("Thời tiết:", thoiTiet);
+          console.log("Ghi chú:", ghiChu);
+
+          if (!maThoiTiet) {
+            Swal.fire({
+              icon: "error",
+              title: "Không tìm thấy mã thời tiết!",
+              confirmButtonColor: "#d33",
+            });
+            return;
+          }
+
+          // ✅ Validation
+          if (!ngayDo) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng chọn ngày đo!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#ngay-do").focus();
+            });
+            return;
+          }
+          if (!gioDo) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng chọn giờ đo!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#gio-do").focus();
+            });
+            return;
+          }
+          if (!nhietDo) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng nhập nhiệt độ!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#nhiet-do").focus();
+            });
+            return;
+          }
+          if (!doAm) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng nhập độ ẩm!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#do-am").focus();
+            });
+            return;
+          }
+          if (!luongMua) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng nhập lượng mưa!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#luong-mua").focus();
+            });
+            return;
+          }
+          if (!thoiTiet) {
+            Swal.fire({
+              icon: "warning",
+              title: "Vui lòng chọn loại thời tiết!",
+              confirmButtonColor: "#3085d6",
+            }).then(() => {
+              $("#thoi-tiet").focus();
+            });
+            return;
+          }
+
+          // ✅ Dữ liệu gửi đi
+          let dataSend = {
+            maThoiTiet: maThoiTiet,
+            thoiGianDo: thoiGianDo,
+            nhietDo: parseFloat(nhietDo),
+            doAm: parseInt(doAm),
+            luongMua: parseFloat(luongMua),
+            thoiTiet: thoiTiet,
+            ghiChu: ghiChu || null,
+          };
+
+          console.log("Data to send:", dataSend);
+
+          // ✅ Gửi AJAX
+          $.ajax({
+            url: "../../API/api_update_thoi_tiet.php",
+            method: "POST",
+            cache: false,
+            xhrFields: { withCredentials: true },
+            data: JSON.stringify(dataSend),
+            contentType: "application/json",
+            success: function (res) {
+              console.log("Update response:", res);
+              if (res.status === "success") {
+                Swal.fire({
+                  icon: "success",
+                  title: "Cập nhật dữ liệu thời tiết thành công!",
+                  confirmButtonColor: "#28a745",
+                }).then(() => {
+                  localStorage.removeItem("maThoiTiet");
+                  localStorage.removeItem("nhietDo");
+                  localStorage.removeItem("doAm");
+                  localStorage.removeItem("luongMua");
+                  localStorage.removeItem("thoiTiet");
+                  localStorage.removeItem("ghiChu");
+                  localStorage.removeItem("date");
+                  localStorage.removeItem("time");
+                  window.location.href = "thoi_tiet_nongHo.html";
+                });
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Lỗi cập nhật",
+                  text: res.message || "Có lỗi xảy ra khi cập nhật!",
+                  confirmButtonColor: "#d33",
+                });
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error("Lỗi update thời tiết:", { xhr, status, error });
+              if (xhr.status === 401) {
+                window.sessionChecker.redirectToLogin();
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Không thể cập nhật",
+                  text: "Vui lòng thử lại!",
+                  confirmButtonColor: "#d33",
+                });
+              }
+            },
+          });
+        });
+      });
+
+      // ✅ THÊM: Hàm hủy
+      function cancelEdit() {
+        Swal.fire({
+          title: "Bạn có chắc muốn hủy chỉnh sửa?",
+          text: "Dữ liệu chưa lưu sẽ bị mất.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Hủy chỉnh sửa",
+          cancelButtonText: "Tiếp tục chỉnh sửa",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            localStorage.removeItem("maThoiTiet");
+            localStorage.removeItem("nhietDo");
+            localStorage.removeItem("doAm");
+            localStorage.removeItem("luongMua");
+            localStorage.removeItem("thoiTiet");
+            localStorage.removeItem("ghiChu");
+            localStorage.removeItem("date");
+            localStorage.removeItem("time");
+            window.location.href = "thoi_tiet_nongHo.html";
+          }
+        });
+      }
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Gọi API lấy thông tin cá nhân để lấy avatar và tên
+        $.ajax({
+          url: "../../API/api_profile_nong_ho.php",
+          method: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success" && res.data) {
+              // Gán avatar
+              if (res.data.avatar && res.data.avatar !== "") {
+                $("#avatar-img").attr("src", "../../" + res.data.avatar);
+              } else {
+                $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              }
+              // Gán tên nông hộ lên topbar
+              $("#user-fullname").text(res.data.HoTenNongHo || "Nông hộ");
+            } else {
+              $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              $("#user-fullname").text("Nông hộ");
+            }
+          },
+          error: function () {
+            $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+            $("#user-fullname").text("Nông hộ");
+          },
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "../../API/api_ho_tro_ky_thuat_nongho.php",
+          type: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (messages) {
+            var html = '<h6 class="dropdown-header">Message Center</h6>';
+            if (messages.length === 0) {
+              html +=
+                '<div class="dropdown-item text-center small text-gray-500">Không có hỗ trợ kỹ thuật nào</div>';
+            } else {
+              messages.forEach(function (msg, idx) {
+                html += `
+            <a class="dropdown-item d-flex align-items-center message-item" href="#" data-idx="${idx}">
+              <div class="dropdown-list-image mr-3">
+                <img class="rounded-circle" src="../../${
+                  msg.avatar || "img/undraw_profile.svg"
+                }" alt="...">
+                <div class="status-indicator bg-success"></div>
+              </div>
+              <div class="font-weight-bold">
+                <div class="text-truncate">${msg.noiDung}</div>
+                <div class="small text-gray-500">${msg.hoTen} · ${
+                  msg.thoiGian
+                }</div>
+              </div>
+            </a>
+          `;
+              });
+            }
+            html +=
+              '<a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả hỗ trợ</a>';
+            $(
+              ".dropdown-list.dropdown-menu[aria-labelledby='messagesDropdown']"
+            ).html(html);
+
+            // Thêm sự kiện click cho từng tin nhắn
+            $(".message-item").on("click", function (e) {
+              e.preventDefault();
+              var idx = $(this).data("idx");
+              var msg = messages[idx];
+              Swal.fire({
+                html: `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+      <img src="../../${
+        msg.avatar || "img/undraw_profile.svg"
+      }" style="width:48px;height:48px;border-radius:50%;box-shadow:0 2px 8px #ccc;">
+      <div>
+        <div style="font-weight:bold;font-size:1.1em;">${msg.hoTen}</div>
+        <div style="color:#888;font-size:0.95em;">${msg.thoiGian}</div>
+      </div>
+    </div>
+    <div style="text-align:left;font-size:1.05em;padding:8px 0 0 0;">
+      ${msg.noiDung}
+    </div>
+  `,
+                showConfirmButton: true,
+                confirmButtonText: "Đóng",
+                customClass: {
+                  popup: "swal2-message-popup",
+                },
+              });
+            });
+
+            // Cập nhật badge số lượng tin nhắn
+            $(".fa-envelope.fa-fw")
+              .siblings(".badge-counter")
+              .text(messages.length);
+          },
+        });
+      });
+    </script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="../../vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../../js/demo/chart-area-demo.js"></script>
+    <script src="../../js/demo/chart-pie-demo.js"></script>
+    <script src="../../js/log_out_click.js"></script>
+  </body>
+</html>

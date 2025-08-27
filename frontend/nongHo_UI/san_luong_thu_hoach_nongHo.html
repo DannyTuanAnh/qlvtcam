@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Sản Lượng Thu Hoạch</title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template-->
+    <link href="../../css/sb-admin-2.css" rel="stylesheet" />
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      /* .card.border-left-info {
+        background: linear-gradient(
+          to right,
+          #36b9cc 0%,
+          #3bc4d7ad 5%,
+          #ffffff 100%
+        );
+        color: #000;
+      }
+      .card.border-left-success {
+        background: linear-gradient(
+          to right,
+          #5cdeae 0%,
+          #81e3bf 5%,
+          #ffffff 100%
+        );
+        color: #000;
+      }
+      .card.border-left-primary {
+        background: linear-gradient(
+          to right,
+          #4e73df 0%,
+          #8da8f9 10%,
+          #ffffff 100%
+        );
+      } */
+      .custom-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.1rem;
+        font-weight: 800;
+        gap: 12px;
+        padding-bottom: 8px;
+        margin-bottom: 22px;
+        letter-spacing: 0.5px;
+        width: 100%;
+        text-align: center;
+        background: none;
+        border: none;
+      }
+      .custom-title .icon {
+        font-size: 1.5em;
+        margin-right: 4px;
+        transition: transform 0.4s cubic-bezier(0.4, 2, 0.6, 1);
+      }
+      .custom-title .icon.animate-kick {
+        animation: icon-kick 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      @keyframes icon-kick {
+        0% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(38deg);
+        }
+        45% {
+          transform: rotate(52deg);
+        }
+        60% {
+          transform: rotate(45deg);
+        }
+        80% {
+          transform: rotate(-10deg);
+        }
+        90% {
+          transform: rotate(8deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_nongHo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="./main_nongHo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Trang chủ</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./nhat_ky_canh_tac_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-book"></i>
+            <span>Nhật ký canh tác</span>
+          </a>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item active">
+          <a class="nav-link collapsed" href="#" aria-expanded="true">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Sản lượng thu hoạch</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./thoi_tiet_nongHo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-cloud"></i>
+            <span>Thời tiết</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="./giong_cay_trong.html">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Giống cây trồng</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="./bao_cao_sau_benh_nongHo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Báo cáo sâu bệnh</span>
+          </a>
+          <hr class="sidebar-divider" />
+
+          <div
+            id="collapsePages"
+            class="collapse"
+            aria-labelledby="headingPages"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <div class="collapse-divider"></div>
+              <h6 class="collapse-header">Other Pages:</h6>
+              <a class="collapse-item" href="404.html">404 Page</a>
+              <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="./thong_tin_ca_nhan_nongHo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>QUẢN LÝ CAM SÀNH TỈNH VĨNH LONG</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="searchDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                  aria-labelledby="searchDropdown"
+                >
+                  <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control bg-light border-0 small"
+                        placeholder="Search for..."
+                        aria-label="Search"
+                        aria-describedby="basic-addon2"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <!-- Nav Item - Messages -->
+              <li class="nav-item dropdown no-arrow mx-1">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="messagesDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-envelope fa-fw"></i>
+                  <!-- Counter - Messages -->
+                  <span class="badge badge-danger badge-counter">7</span>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="messagesDropdown"
+                >
+                  <h6 class="dropdown-header">Message Center</h6>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_1.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                      <div class="text-truncate">
+                        Hi there! I am wondering if you can help me with a
+                        problem I've been having.
+                      </div>
+                      <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_2.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        I have the photos that you ordered last month, how would
+                        you like them sent to you?
+                      </div>
+                      <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="../../img/undraw_profile_3.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Last month's report looks great, I am very happy with
+                        the progress so far, keep up the good work!
+                      </div>
+                      <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Am I a good boy? The reason I ask is because someone
+                        told me that people say this to all dogs, even if they
+                        aren't good...
+                      </div>
+                      <div class="small text-gray-500">
+                        Chicken the Dog · 2w
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    class="dropdown-item text-center small text-gray-500"
+                    href="#"
+                    >Read More Messages</a
+                  >
+                </div>
+              </li>
+
+              <div class="topbar-divider d-none d-sm-block"></div>
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="mr-2 d-none d-lg-inline"
+                    id="user-fullname"
+                  ></span>
+                  <img
+                    class="img-profile rounded-circle shadow"
+                    id="avatar-img"
+                    src="../../img/undraw_profile.svg"
+                    alt="avatar"
+                  />
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="./thong_tin_ca_nhan_nongHo.html"
+                  >
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#logoutModal"
+                    onclick="confirmLogout()"
+                  >
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <h1 class="custom-title">
+              <i class="fa-solid fa-basket-shopping icon"></i>
+              Sản Lượng Thu Hoạch
+            </h1>
+
+            <!-- Card: Tỉ lệ trúng mùa -->
+            <div class="row mb-3">
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-info text-uppercase mb-1"
+                        >
+                          Tỉ lệ trúng mùa
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                          <div class="col-auto">
+                            <div
+                              class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
+                              id="success-rate"
+                            >
+                              0%
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="progress progress-sm mr-2">
+                              <div
+                                class="progress-bar bg-info"
+                                id="progress-bar"
+                                style="width: 0%"
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fa-solid fa-percent fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--Card thống kê -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+                        >
+                          Tổng số thửa
+                        </div>
+                        <div
+                          class="h5 mb-0 font-weight-bold text-gray-800"
+                          id="total-plots"
+                        >
+                          0
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i
+                          class="fa-solid fa-map-location-dot fa-2x text-gray-300"
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-success text-uppercase mb-1"
+                        >
+                          Tổng sản lượng
+                        </div>
+                        <div
+                          class="h5 mb-0 font-weight-bold text-gray-800"
+                          id="total-harvest"
+                        >
+                          0 kg
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i
+                          class="fas fa-weight-hanging fa-2x text-gray-300"
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--  Dropdown selector thay vì button -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      Chọn thửa đất để xem chi tiết
+                    </h6>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control" id="plot-selector">
+                      <option value="">Chọn thửa đất...</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Đây là nơi để bảng hiện ra -->
+            <div id="plot-container"></div>
+          </div>
+
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Your Website 2021</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../../vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../../js/demo/chart-area-demo.js"></script>
+    <script src="../../js/demo/chart-pie-demo.js"></script>
+
+    <!-- Session check script -->
+    <script src="../../js/session_check.js"></script>
+
+    <script>
+      $(document).on("sessionValid", function (event, sessionData) {
+        console.log("Session valid, loading page data...");
+        loadNhatKy();
+
+        $(document).on("click", ".edit-btn", function () {
+          const maThua = $(this).data("mathua");
+          const maThuHoach = $(this).data("mathuhoach");
+          const sanLuong = $(this)
+            .closest("tr")
+            .find("td[data-sanluong]")
+            .data("sanluong");
+          const chatLuong = $(this)
+            .closest("tr")
+            .find("td[data-chatluong]")
+            .data("chatluong");
+          const ghiChu = $(this)
+            .closest("tr")
+            .find("td[data-ghichu]")
+            .data("ghichu");
+          const date = $(this).closest("tr").find("td[data-ngay]").data("ngay");
+          const time = $(this).closest("tr").find("td[data-gio]").data("gio");
+
+          console.log("Chỉnh sửa thu hoạch với mã thửa:", maThua);
+          console.log("Chỉnh sửa thu hoạch với mã thu hoạch:", maThuHoach);
+
+          localStorage.setItem("maThua", maThua);
+          localStorage.setItem("maThuHoach", maThuHoach);
+          localStorage.setItem("sanLuong", sanLuong);
+          localStorage.setItem("chatLuong", chatLuong);
+          localStorage.setItem("ghiChu", ghiChu);
+          localStorage.setItem("date", date);
+          localStorage.setItem("time", time);
+          window.location.href = "edit_thu_hoach.html";
+        });
+
+        $(document).on("click", ".add-btn", function () {
+          const maThua = $(this).data("mathua");
+          console.log("Thêm thu hoạch cho thửa:", maThua);
+          localStorage.setItem("maThua", maThua);
+          window.location.href = "add_thu_hoach.html";
+        });
+      });
+
+      $(document).on("click", ".btn-danger", function () {
+        const maThuHoach = $(this).data("mathuhoach");
+        console.log("Xóa mã thu hoạch: ", maThuHoach);
+        Swal.fire({
+          title: "Bạn có chắc muốn xóa đợt thu hoạch này?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Xóa",
+          cancelButtonText: "Hủy",
+          reverseButtons: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: "../../API/api_xoa_thu_hoach.php",
+              method: "POST",
+              data: { MaThuHoach: maThuHoach },
+              success: function (res) {
+                if (res.status === "success") {
+                  Swal.fire({
+                    icon: "success",
+                    title: "Đã xóa thành công!",
+                    confirmButtonText: "OK",
+                  }).then(() => {
+                    loadNhatKy();
+                  });
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Lỗi khi xóa",
+                    text: res.message || "Có lỗi xảy ra khi xóa!",
+                    confirmButtonText: "Đóng",
+                  });
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error("Xóa thất bại:", { xhr, status, error });
+                Swal.fire({
+                  icon: "error",
+                  title: "Xóa thất bại",
+                  text: "Không thể xóa. Vui lòng thử lại!",
+                  confirmButtonText: "Đóng",
+                });
+              },
+            });
+          }
+        });
+      });
+
+      let plotsData = {};
+
+      function renderPlots(data) {
+        console.log("=== RENDERING PLOTS ===");
+        console.log("Total plots:", Object.keys(data).length);
+
+        plotsData = data;
+        const selectorContainer = $("#plot-selector");
+        const contentContainer = $("#plot-container");
+
+        selectorContainer.empty();
+        contentContainer.empty();
+
+        updateStatistics(data);
+
+        selectorContainer.append('<option value="">Chọn thửa đất...</option>');
+
+        Object.keys(data).forEach((maThua, index) => {
+          const plotNumber = index + 1;
+          const harvestCount = data[maThua].length;
+          const totalHarvest = data[maThua].reduce(
+            (sum, item) => sum + parseFloat(item.SanLuong || 0),
+            0
+          );
+
+          // Tính tỷ lệ trúng mùa cho từng thửa
+          const successfulHarvests = data[maThua].filter(
+            (item) => parseFloat(item.SanLuong || 0) >= 1400
+          ).length;
+
+          // Tính plotSuccessRate cho thửa này
+          const plotSuccessRate =
+            harvestCount > 0
+              ? Math.round((successfulHarvests / harvestCount) * 100)
+              : 0;
+
+          // Icon và màu sắc theo tỷ lệ
+          let statusIcon = "🔴"; // Thấp
+          if (plotSuccessRate >= 90) statusIcon = "🟢"; // Cao
+          else if (plotSuccessRate >= 70) statusIcon = "🟡"; // Trung bình
+          else if (plotSuccessRate >= 40) statusIcon = "🟠"; // Thấp-trung bình
+
+          selectorContainer.append(`
+            <option value="${maThua}">
+                ${statusIcon} Thửa ${plotNumber} - ${harvestCount} vụ (${successfulHarvests} trúng) - ${totalHarvest.toFixed(
+            1
+          )}kg - ${plotSuccessRate}%
+            </option>
+        `);
+        });
+
+        selectorContainer.off("change").on("change", function () {
+          const selectedMaThua = $(this).val();
+          if (selectedMaThua) {
+            showPlotTable(selectedMaThua);
+          } else {
+            contentContainer.empty();
+          }
+        });
+
+        const firstMaThua = Object.keys(data)[0];
+        if (firstMaThua) {
+          selectorContainer.val(firstMaThua);
+          showPlotTable(firstMaThua);
+        }
+      }
+
+      function showPlotTable(maThua) {
+        const contentContainer = $("#plot-container");
+        const plotData = plotsData[maThua];
+
+        if (!plotData) return;
+
+        const plotIndex = Object.keys(plotsData).indexOf(maThua) + 1;
+
+        // Tính thống kê cho thửa này
+        const successfulHarvests = plotData.filter(
+          (item) => parseFloat(item.SanLuong || 0) >= 1400 // ✅ 1400kg
+        ).length;
+
+        const plotSuccessRate =
+          plotData.length > 0
+            ? Math.round((successfulHarvests / plotData.length) * 100)
+            : 0;
+
+        const rows = plotData
+          .map((item) => {
+            const date = item.NgayThuHoach.split(" ")[0];
+            const time = item.NgayThuHoach.split(" ")[1].slice(0, 5);
+            const sanLuong = parseFloat(item.SanLuong || 0);
+
+            // Icon trúng mùa
+            const isSuccess = sanLuong >= 1400; // ✅ 1400kg
+            const successIcon = isSuccess ? "🟢" : "🔴";
+            const rowClass = isSuccess ? "table-success" : "";
+
+            return `
+                    <tr class="${rowClass}">
+                        <td data-ngay="${date}">${date}</td>
+                        <td data-gio="${time}">${time}</td>
+                        <td>${item.TenVu}</td> 
+                        <td data-sanluong="${item.SanLuong}">
+                            ${successIcon} ${item.SanLuong} kg
+                            ${
+                              isSuccess
+                                ? '<small class="text-success">(Trúng mùa)</small>'
+                                : '<small class="text-danger">(Chưa đạt)</small>'
+                            }
+                        </td>
+                        <td data-chatluong="${item.ChatLuong}">${
+              item.ChatLuong
+            }</td>
+                        <td data-ghichu="${item.GhiChu}">${
+              item.GhiChu || "Không có"
+            }</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary edit-btn" 
+                                    data-mathua="${maThua}" 
+                                    data-mathuhoach="${item.MaThuHoach}"
+                                    title="Chỉnh sửa">
+                                ✏️
+                            </button>
+                            <button class="btn btn-sm btn-danger" 
+                                    data-mathua="${maThua}" 
+                                    data-mathuhoach="${item.MaThuHoach}"
+                                    title="Xóa">
+                                🗑️
+                            </button>
+                        </td>
+                    </tr>
+                `;
+          })
+          .join("");
+
+        //  Badge màu cho tỷ lệ trúng mùa
+        let badgeClass = "badge-danger";
+        if (plotSuccessRate >= 90) badgeClass = "badge-success";
+        else if (plotSuccessRate >= 70) badgeClass = "badge-info";
+        else if (plotSuccessRate >= 40) badgeClass = "badge-warning";
+
+        const table = $(`
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            📋 Thu hoạch Thửa số ${plotIndex}
+                            <span class="badge badge-info ml-2">${
+                              plotData.length
+                            } vụ</span>
+                        </h6>
+                        <small class="text-muted">
+                            Tỷ lệ trúng mùa: <span class="badge ${badgeClass}">${plotSuccessRate}%</span>
+                            (${successfulHarvests}/${
+          plotData.length
+        } vụ >= 1400kg)
+                        </small>
+                    </div>
+                    <button class="btn btn-sm btn-success add-btn" data-mathua="${maThua}">
+                        <i class="fas fa-plus"></i> Thêm thu hoạch
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th><i class="fas fa-calendar"></i> Ngày</th>
+                                    <th><i class="fas fa-clock"></i> Giờ</th>
+                                    <th><i class="fas fa-seedling"></i> Vụ mùa</th>
+                                    <th><i class="fas fa-weight-hanging"></i> Sản lượng</th>
+                                    <th><i class="fas fa-star"></i> Chất lượng</th>
+                                    <th><i class="fas fa-comment"></i> Ghi chú</th>
+                                    <th><i class="fas fa-cogs"></i> Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>${rows}</tbody>
+                        </table>
+                    </div>
+                    ${
+                      plotData.length === 0
+                        ? '<p class="text-center text-muted">Chưa có dữ liệu thu hoạch</p>'
+                        : ""
+                    }
+                    
+                    <!-- ✅ THÊM: Chú thích -->
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            <strong>Tiêu chí trúng mùa:</strong> Sản lượng >= 1400 kg | 
+                            🟢 Trúng mùa | 🔴 Chưa đạt
+                        </small>
+                    </div>
+                </div>
+            </div>
+        `);
+
+        contentContainer.html(table);
+      }
+
+      function updateStatistics(data) {
+        const totalPlots = Object.keys(data).length;
+        let totalHarvest = 0;
+        let totalHarvestCount = 0;
+        let totalSuccessfulHarvests = 0;
+
+        Object.values(data).forEach((plotData) => {
+          totalHarvestCount += plotData.length;
+          plotData.forEach((item) => {
+            const sanLuong = parseFloat(item.SanLuong || 0);
+            totalHarvest += sanLuong;
+
+            if (sanLuong >= 1400) {
+              totalSuccessfulHarvests++;
+            }
+          });
+        });
+
+        const successRate =
+          totalHarvestCount > 0
+            ? Math.round((totalSuccessfulHarvests / totalHarvestCount) * 100)
+            : 0;
+        localStorage.setItem("successRate", successRate);
+        // Cập nhật UI
+        $("#total-plots").text(totalPlots);
+        $("#total-harvest").text(totalHarvest.toFixed(1) + " kg");
+        $("#success-rate").text(successRate + "%");
+        $("#progress-bar").css("width", successRate + "%");
+
+        // Debug log hữu ích
+        console.log("=== THỐNG KÊ ===");
+        console.log(
+          "Tổng vụ:",
+          totalHarvestCount,
+          "| Trúng mùa:",
+          totalSuccessfulHarvests,
+          "| Tỷ lệ:",
+          successRate + "%"
+        );
+
+        // Cập nhật màu progress bar
+        const progressBar = $("#progress-bar");
+        progressBar.removeClass("bg-success bg-info bg-warning bg-danger");
+
+        if (successRate >= 90) progressBar.addClass("bg-success");
+        else if (successRate >= 70) progressBar.addClass("bg-info");
+        else if (successRate >= 40) progressBar.addClass("bg-warning");
+        else progressBar.addClass("bg-danger");
+      }
+
+      function loadNhatKy() {
+        $("#plot-container").html(`
+            <div class="text-center p-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Đang tải...</span>
+                </div>
+                <p class="mt-2">Đang tải dữ liệu thu hoạch...</p>
+            </div>
+        `);
+
+        $.ajax({
+          url: "../../API/api_san_luong_thu_hoach.php",
+          method: "GET",
+          success: function (res) {
+            console.log(res);
+            if (res.status === "success") {
+              renderPlots(res.data);
+            } else {
+              console.error("Lỗi dữ liệu:", res.message);
+              $("#plot-container").html(`
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> ${res.message}
+                        </div>
+                    `);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Lỗi load thửa đất:", { xhr, status, error });
+            $("#plot-container").html(`
+                    <div class="alert alert-danger">
+                        <i class="fas fa-times"></i> Không thể tải thông tin thửa đất.
+                    </div>
+                `);
+          },
+        });
+      }
+    </script>
+    <script src="../../js/log_out_click.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const icon = document.querySelector(".custom-title .icon");
+        if (icon) {
+          icon.classList.add("animate-kick");
+          icon.addEventListener(
+            "animationend",
+            function () {
+              icon.classList.remove("animate-kick");
+            },
+            { once: true }
+          );
+        }
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Gọi API lấy thông tin cá nhân để lấy avatar và tên
+        $.ajax({
+          url: "../../API/api_profile_nong_ho.php",
+          method: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success" && res.data) {
+              // Gán avatar
+              if (res.data.avatar && res.data.avatar !== "") {
+                $("#avatar-img").attr("src", "../../" + res.data.avatar);
+              } else {
+                $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              }
+              // Gán tên nông hộ lên topbar
+              $("#user-fullname").text(res.data.HoTenNongHo || "Nông hộ");
+            } else {
+              $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+              $("#user-fullname").text("Nông hộ");
+            }
+          },
+          error: function () {
+            $("#avatar-img").attr("src", "../../img/undraw_profile.svg");
+            $("#user-fullname").text("Nông hộ");
+          },
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "../../API/api_ho_tro_ky_thuat_nongho.php",
+          type: "GET",
+          dataType: "json",
+          xhrFields: { withCredentials: true },
+          success: function (messages) {
+            var html = '<h6 class="dropdown-header">Message Center</h6>';
+            if (messages.length === 0) {
+              html +=
+                '<div class="dropdown-item text-center small text-gray-500">Không có hỗ trợ kỹ thuật nào</div>';
+            } else {
+              messages.forEach(function (msg, idx) {
+                html += `
+            <a class="dropdown-item d-flex align-items-center message-item" href="#" data-idx="${idx}">
+              <div class="dropdown-list-image mr-3">
+                <img class="rounded-circle" src="../../${
+                  msg.avatar || "img/undraw_profile.svg"
+                }" alt="...">
+                <div class="status-indicator bg-success"></div>
+              </div>
+              <div class="font-weight-bold">
+                <div class="text-truncate">${msg.noiDung}</div>
+                <div class="small text-gray-500">${msg.hoTen} · ${
+                  msg.thoiGian
+                }</div>
+              </div>
+            </a>
+          `;
+              });
+            }
+            html +=
+              '<a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả hỗ trợ</a>';
+            $(
+              ".dropdown-list.dropdown-menu[aria-labelledby='messagesDropdown']"
+            ).html(html);
+
+            // Thêm sự kiện click cho từng tin nhắn
+            $(".message-item").on("click", function (e) {
+              e.preventDefault();
+              var idx = $(this).data("idx");
+              var msg = messages[idx];
+              Swal.fire({
+                html: `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+      <img src="../../${
+        msg.avatar || "img/undraw_profile.svg"
+      }" style="width:48px;height:48px;border-radius:50%;box-shadow:0 2px 8px #ccc;">
+      <div>
+        <div style="font-weight:bold;font-size:1.1em;">${msg.hoTen}</div>
+        <div style="color:#888;font-size:0.95em;">${msg.thoiGian}</div>
+      </div>
+    </div>
+    <div style="text-align:left;font-size:1.05em;padding:8px 0 0 0;">
+      ${msg.noiDung}
+    </div>
+  `,
+                showConfirmButton: true,
+                confirmButtonText: "Đóng",
+                customClass: {
+                  popup: "swal2-message-popup",
+                },
+              });
+            });
+
+            // Cập nhật badge số lượng tin nhắn
+            $(".fa-envelope.fa-fw")
+              .siblings(".badge-counter")
+              .text(messages.length);
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

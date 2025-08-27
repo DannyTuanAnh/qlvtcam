@@ -1,0 +1,3593 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>🗺️ Quản lý vùng trồng</title>
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template -->
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this page -->
+    <link
+      href="../../vendor/datatables/dataTables.bootstrap4.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Custom styles for region detail modal -->
+    <style>
+      .badge-lg {
+        font-size: 0.9rem;
+        padding: 0.5em 0.75em;
+      }
+
+      .region-stats-card {
+        transition: transform 0.2s;
+      }
+
+      .region-stats-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .table-responsive {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      #regionDetailModal .modal-dialog {
+        max-width: 90%;
+      }
+
+      @media (max-width: 768px) {
+        #regionDetailModal .modal-dialog {
+          max-width: 95%;
+        }
+      }
+    </style>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_canBo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="./main_canBo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Báo cáo – Thống kê</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item active">
+          <a
+            class="nav-link collapsed"
+            href="./quan_ly_vung_trong_canBo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Quản Lý Vùng Trồng</span>
+          </a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./theo_doi_canh_tac_canBo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-hammer"></i>
+            <span>Theo Dõi Canh Tác</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="./quan_ly_sau_benh_canBo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Quản lý sâu bệnh</span>
+          </a>
+        </li>
+        <hr class="sidebar-divider" />
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="./ho_tro_ky_thuat_canBo.html">
+            <i class="fa-solid fa-headset"></i>
+            <span>Hỗ trợ kỹ thuật</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="./thong_tin_ca_nhan_canBo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>QUẢN LÝ CAM SÀNH TỈNH VĨNH LONG</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="mr-2 d-none d-lg-inline"
+                    id="user-fullname"
+                  ></span>
+                  <img
+                    class="img-profile rounded-circle"
+                    id="avatar-img-mini"
+                    src="../../img/undraw_profile.svg"
+                  />
+                  <script src="../../vendor/jquery/jquery.min.js"></script>
+                  <script>
+                    $(document).ready(function () {
+                      let maCanBo =
+                        localStorage.getItem("maCanBo") ||
+                        sessionStorage.getItem("maCanBo");
+                      if (!maCanBo) return;
+                      $.ajax({
+                        url: "../../API/api_canbo_kt.php",
+                        type: "GET",
+                        data: { MaCanBo: maCanBo },
+                        dataType: "json",
+                        success: function (res) {
+                          if (res.status === "success" && res.data) {
+                            const cb = res.data;
+                            $("#user-fullname").text(cb.HoTen || "");
+                            if (cb.avatar && cb.avatar !== "") {
+                              $("#avatar-img-mini").attr(
+                                "src",
+                                "../../uploads/avatars/" + cb.avatar
+                              );
+                            } else {
+                              $("#avatar-img-mini").attr(
+                                "src",
+                                "../../img/undraw_profile.svg"
+                              );
+                            }
+                          }
+                        },
+                      });
+                    });
+                  </script>
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="./thong_tin_ca_nhan_canBo.html"
+                  >
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#" onclick="confirmLogout()">
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <div
+              class="d-sm-flex align-items-center justify-content-between mb-4"
+            >
+              <h1 class="h3 mb-0 text-gray-800">🗺️ Quản Lý Vùng Trồng</h1>
+              <div>
+                <button
+                  class="btn btn-info btn-sm shadow-sm mr-2"
+                  id="addPlotBtn"
+                >
+                  <i class="fas fa-map"></i> Thêm thửa đất
+                </button>
+                <button
+                  class="btn btn-primary btn-sm shadow-sm"
+                  id="addRegionBtn"
+                >
+                  <i class="fas fa-plus"></i> Thêm vùng trồng
+                </button>
+              </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <ul class="nav nav-tabs" id="managementTabs" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  id="regions-tab"
+                  data-toggle="tab"
+                  href="#regions"
+                  role="tab"
+                >
+                  <i class="fas fa-map-marked-alt"></i> Vùng trồng
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="plots-tab"
+                  data-toggle="tab"
+                  href="#plots"
+                  role="tab"
+                >
+                  <i class="fas fa-map"></i> Thửa đất
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="farmers-tab"
+                  data-toggle="tab"
+                  href="#farmers"
+                  role="tab"
+                >
+                  <i class="fas fa-users"></i> Nông hộ
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="crops-tab"
+                  data-toggle="tab"
+                  href="#crops"
+                  role="tab"
+                >
+                  <i class="fas fa-seedling"></i> Mùa vụ & Cây trồng
+                </a>
+              </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="managementTabsContent">
+              <!-- Vùng trồng Tab -->
+              <div
+                class="tab-pane fade show active"
+                id="regions"
+                role="tabpanel"
+              >
+                <div class="card shadow mt-3">
+                  <div class="card-header py-3">
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                          📋 Danh sách vùng trồng
+                        </h6>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <input
+                              type="text"
+                              class="form-control form-control-sm"
+                              id="searchRegion"
+                              placeholder="🔍 Tìm kiếm vùng..."
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <select
+                              class="form-control form-control-sm"
+                              id="filterRegionStatus"
+                            >
+                              <option value="">Tất cả trạng thái</option>
+                              <option value="1">Hoạt động</option>
+                              <option value="0">Không hoạt động</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <!-- Thống kê nhanh -->
+                    <div class="row mb-3">
+                      <div class="col-md-3">
+                        <div class="card border-left-primary shadow-sm">
+                          <div class="card-body p-3">
+                            <div class="text-xs font-weight-bold text-primary">
+                              Tổng vùng trồng
+                            </div>
+                            <div
+                              class="h6 mb-0 font-weight-bold"
+                              id="totalRegions"
+                            >
+                              0
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card border-left-success shadow-sm">
+                          <div class="card-body p-3">
+                            <div class="text-xs font-weight-bold text-success">
+                              Tổng diện tích (ha)
+                            </div>
+                            <div
+                              class="h6 mb-0 font-weight-bold"
+                              id="totalArea"
+                            >
+                              0
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card border-left-info shadow-sm">
+                          <div class="card-body p-3">
+                            <div class="text-xs font-weight-bold text-info">
+                              Tổng nông hộ
+                            </div>
+                            <div
+                              class="h6 mb-0 font-weight-bold"
+                              id="totalFarmers"
+                            >
+                              0
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card border-left-warning shadow-sm">
+                          <div class="card-body p-3">
+                            <div class="text-xs font-weight-bold text-warning">
+                              Vùng hoạt động
+                            </div>
+                            <div
+                              class="h6 mb-0 font-weight-bold"
+                              id="activeRegions"
+                            >
+                              0
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Bảng vùng trồng -->
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-hover">
+                        <thead class="thead-light">
+                          <tr>
+                            <th width="5%">STT</th>
+                            <th width="10%">Mã vùng</th>
+                            <th width="20%">Tên vùng</th>
+                            <th width="25%">Địa chỉ</th>
+                            <th width="10%">Diện tích</th>
+                            <th width="8%">Nông hộ</th>
+                            <th width="10%">Trạng thái</th>
+                            <th width="12%">Thao tác</th>
+                          </tr>
+                        </thead>
+                        <tbody id="regionsTableBody">
+                          <tr>
+                            <td colspan="8" class="text-center">
+                              <div
+                                class="spinner-border text-primary"
+                                role="status"
+                              >
+                                <span class="sr-only">Đang tải...</span>
+                              </div>
+                              <p class="mt-2">
+                                Đang tải danh sách vùng trồng...
+                              </p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Thửa đất Tab -->
+              <div class="tab-pane fade" id="plots" role="tabpanel">
+                <div class="card shadow mt-3">
+                  <div class="card-header py-3">
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                          🗺️ Quản lý thửa đất
+                        </h6>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <select
+                              class="form-control form-control-sm"
+                              id="filterPlotRegion"
+                            >
+                              <option value="">Tất cả vùng trồng</option>
+                            </select>
+                          </div>
+                          <div class="col-md-6">
+                            <input
+                              type="text"
+                              class="form-control form-control-sm"
+                              id="searchPlot"
+                              placeholder="🔍 Tìm kiếm thửa..."
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-hover">
+                        <thead class="thead-light">
+                          <tr>
+                            <th width="5%">STT</th>
+                            <th width="10%">Mã thửa</th>
+                            <th width="15%">Vùng trồng</th>
+                            <th width="15%">Nông hộ</th>
+                            <th width="15%">Loại đất</th>
+                            <th width="10%">Diện tích</th>
+                            <th width="20%">Vị trí</th>
+                            <th width="10%">Thao tác</th>
+                          </tr>
+                        </thead>
+                        <tbody id="plotsTableBody">
+                          <tr>
+                            <td colspan="8" class="text-center">
+                              <p class="text-muted">
+                                Chọn tab "Thửa đất" để xem dữ liệu
+                              </p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Nông hộ Tab -->
+              <div class="tab-pane fade" id="farmers" role="tabpanel">
+                <div class="card shadow mt-3">
+                  <div class="card-header py-3">
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                          👥 Quản lý nông hộ
+                        </h6>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <select
+                              class="form-control form-control-sm"
+                              id="filterFarmerRegion"
+                            >
+                              <option value="">Tất cả vùng trồng</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <input
+                              type="text"
+                              class="form-control form-control-sm"
+                              id="searchFarmer"
+                              placeholder="🔍 Tìm kiếm nông hộ..."
+                            />
+                          </div>
+                          <button
+                            class="btn btn-success btn-sm"
+                            id="addFarmerBtn"
+                          >
+                            <i class="fa-solid fa-plus"></i> Thêm nông hộ
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-hover">
+                        <thead class="thead-light">
+                          <tr>
+                            <th width="5%">STT</th>
+                            <th width="10%">Mã nông hộ</th>
+                            <th width="20%">Họ tên</th>
+                            <th width="15%">Vùng trồng</th>
+                            <th width="15%">Số điện thoại</th>
+                            <th width="20%">Địa chỉ</th>
+                            <th width="8%">Số thửa</th>
+                            <th width="7%">Thao tác</th>
+                          </tr>
+                        </thead>
+                        <tbody id="farmersTableBody">
+                          <tr>
+                            <td colspan="8" class="text-center">
+                              <p class="text-muted">
+                                Chọn tab "Nông hộ" để xem dữ liệu
+                              </p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mùa vụ & Cây trồng Tab -->
+              <div class="tab-pane fade" id="crops" role="tabpanel">
+                <div class="card shadow mt-3">
+                  <div class="card-header py-3">
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                          🌱 Quản lý mùa vụ & cây trồng
+                        </h6>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <select
+                              class="form-control form-control-sm"
+                              id="filterCropSeason"
+                            >
+                              <option value="">Tất cả vụ mùa</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <!-- Thay đổi text button -->
+                            <button
+                              class="btn btn-success btn-sm"
+                              id="addCropBtn"
+                            >
+                              <i class="fas fa-seedling"></i> Thêm
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <!-- Thêm sub-tabs cho Mùa vụ và Giống cam -->
+                    <ul
+                      class="nav nav-pills mb-3"
+                      id="cropSubTabs"
+                      role="tablist"
+                    >
+                      <li class="nav-item">
+                        <a
+                          class="nav-link active"
+                          id="seasons-subtab"
+                          data-toggle="pill"
+                          href="#seasons-content"
+                          role="tab"
+                        >
+                          📅 Mùa vụ
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link"
+                          id="varieties-subtab"
+                          data-toggle="pill"
+                          href="#varieties-content"
+                          role="tab"
+                        >
+                          🍊 Giống cam
+                        </a>
+                      </li>
+                    </ul>
+
+                    <!-- Sub-tab content -->
+                    <div class="tab-content" id="cropSubTabsContent">
+                      <!-- Mùa vụ content -->
+                      <div
+                        class="tab-pane fade show active"
+                        id="seasons-content"
+                        role="tabpanel"
+                      >
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-hover">
+                            <thead class="thead-light">
+                              <tr>
+                                <th width="5%">STT</th>
+                                <th width="15%">Mã vụ</th>
+                                <th width="25%">Tên vụ mùa</th>
+                                <th width="20%">Thời gian bắt đầu</th>
+                                <th width="20%">Thời gian kết thúc</th>
+                                <th width="15%">Thao tác</th>
+                              </tr>
+                            </thead>
+                            <tbody id="seasonsTableBody">
+                              <tr>
+                                <td colspan="6" class="text-center">
+                                  <p class="text-muted">
+                                    Chọn tab "Mùa vụ" để xem dữ liệu
+                                  </p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <!-- Giống cam content -->
+                      <div
+                        class="tab-pane fade"
+                        id="varieties-content"
+                        role="tabpanel"
+                      >
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-hover">
+                            <thead class="thead-light">
+                              <tr>
+                                <th width="5%">STT</th>
+                                <th width="15%">Mã giống</th>
+                                <th width="20%">Tên giống</th>
+                                <th width="30%">Đặc tính</th>
+                                <th width="20%">Nguồn gốc</th>
+                                <th width="10%">Thao tác</th>
+                              </tr>
+                            </thead>
+                            <tbody id="varietiesTableBody">
+                              <tr>
+                                <td colspan="7" class="text-center">
+                                  <p class="text-muted">
+                                    Chọn tab "Giống cam" để xem dữ liệu
+                                  </p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Cam Sành Vĩnh Long 2024</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Modal Vùng trồng -->
+    <div class="modal fade" id="regionModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="regionModalTitle">
+              Thêm vùng trồng mới
+            </h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="regionForm">
+              <input type="hidden" id="regionId" />
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="regionName">Tên vùng trồng *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="regionName"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="regionArea">Diện tích (km)*</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      class="form-control"
+                      id="regionArea"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="regionProvince">Tỉnh *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="regionProvince"
+                      value="Vĩnh Long"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="regionDistrict">Huyện *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="regionDistrict"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="regionWard">Xã/Phường *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="regionWard"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="regionAddress">Địa chỉ chi tiết</label>
+                <textarea
+                  class="form-control"
+                  id="regionAddress"
+                  rows="2"
+                ></textarea>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="regionHouseholds">Số hộ dân</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="regionHouseholds"
+                      min="0"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="regionStatus">Trạng thái</label>
+                    <select class="form-control" id="regionStatus">
+                      <option value="1">Hoạt động</option>
+                      <option value="0">Không hoạt động</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="regionDescription">Mô tả</label>
+                <textarea
+                  class="form-control"
+                  id="regionDescription"
+                  rows="3"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Hủy
+            </button>
+            <button type="button" class="btn btn-primary" id="saveRegionBtn">
+              Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Thửa đất -->
+    <div class="modal fade" id="plotModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="plotModalTitle">Thêm thửa đất mới</h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="plotForm">
+              <input type="hidden" id="plotId" />
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="plotRegion">Vùng trồng *</label>
+                    <select class="form-control" id="plotRegion" required>
+                      <option value="">Chọn vùng trồng...</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="plotFarmer">Nông hộ *</label>
+                    <select class="form-control" id="plotFarmer" required>
+                      <option value="">Chọn nông hộ...</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="plotArea">Diện tích (km)*</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      class="form-control"
+                      id="plotArea"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="plotType">Loại đất *</label>
+                    <select class="form-control" id="plotType" required>
+                      <option value="">Chọn loại đất...</option>
+                      <option value="Đất phù sa">Đất phù sa</option>
+                      <option value="Đất cát">Đất cát</option>
+                      <option value="Đất sét">Đất sét</option>
+                      <option value="Đất pha">Đất pha</option>
+                      <option value="Đất mặn">Đất mặn</option>
+                      <option value="Đất chua">Đất chua</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="plotLocation">Vị trí thửa đất *</label>
+                <textarea
+                  class="form-control"
+                  id="plotLocation"
+                  rows="3"
+                  required
+                  placeholder="Nhập địa chỉ chi tiết của thửa đất..."
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Hủy
+            </button>
+            <button type="button" class="btn btn-primary" id="savePlotBtn">
+              Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Chỉnh sửa nông hộ -->
+    <div class="modal fade" id="editFarmerModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editFarmerModalTitle">
+              Chỉnh sửa thông tin nông hộ
+            </h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="editFarmerForm">
+              <input type="hidden" id="editFarmerId" />
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="editFarmerName">Họ tên *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="editFarmerName"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="editFarmerGender">Giới tính</label>
+                    <select class="form-control" id="editFarmerGender">
+                      <option value="Nam">Nam</option>
+                      <option value="Nữ">Nữ</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="editFarmerPhone">Số điện thoại *</label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="editFarmerPhone"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="editFarmerEmail">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="editFarmerEmail"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="editFarmerBirthdate">Ngày sinh</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="editFarmerBirthdate"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="editFarmerRegion">Vùng trồng *</label>
+                    <select class="form-control" id="editFarmerRegion" required>
+                      <option value="">Chọn vùng trồng...</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="editFarmerAddress">Địa chỉ *</label>
+                <textarea
+                  class="form-control"
+                  id="editFarmerAddress"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Hủy
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="saveEditFarmerBtn"
+            >
+              Cập nhật
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Giống cam -->
+    <div class="modal fade" id="varietyModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="varietyModalTitle">
+              Thêm giống cam mới
+            </h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="varietyForm">
+              <input type="hidden" id="varietyId" />
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="varietyName">Tên giống cam *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="varietyName"
+                      required
+                      placeholder="VD: Cam sành, Cam canh..."
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="varietyCharacteristics">Đặc tính *</label>
+                <textarea
+                  class="form-control"
+                  id="varietyCharacteristics"
+                  rows="3"
+                  required
+                  placeholder="Mô tả đặc tính của giống cam..."
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="varietyOrigin">Nguồn gốc *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="varietyOrigin"
+                  required
+                  placeholder="VD: Việt Nam, Nhật Bản, Trung Quốc..."
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Hủy
+            </button>
+            <button type="button" class="btn btn-primary" id="saveVarietyBtn">
+              Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Chi tiết nông hộ -->
+    <div class="modal fade" id="farmerDetailModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="farmerDetailModalTitle">
+              Chi tiết nông hộ
+            </h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="farmerDetailContent">
+              <!-- Nội dung chi tiết sẽ được load ở đây -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Đóng
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Chi tiết vùng trồng -->
+    <div class="modal fade" id="regionDetailModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="regionDetailModalTitle">
+              Chi tiết vùng trồng
+            </h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="regionDetailContent">
+              <!-- Nội dung chi tiết sẽ được load ở đây -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Đóng
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Mùa vụ -->
+    <div class="modal fade" id="seasonModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="seasonModalTitle">Thêm mùa vụ mới</h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="seasonForm">
+              <input type="hidden" id="seasonId" />
+              <div class="form-group">
+                <label for="seasonName">Tên mùa vụ *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="seasonName"
+                  required
+                  placeholder="VD: Vụ xuân, Vụ mùa..."
+                />
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="seasonStartDate">Ngày bắt đầu *</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="seasonStartDate"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="seasonEndDate">Ngày kết thúc* </label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="seasonEndDate"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="seasonDescription">Mô tả</label>
+                <textarea
+                  class="form-control"
+                  id="seasonDescription"
+                  rows="3"
+                  placeholder="Mô tả về mùa vụ..."
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Hủy
+            </button>
+            <button type="button" class="btn btn-primary" id="saveSeasonBtn">
+              Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <script src="../../js/session_check_canBo.js"></script>
+    <script>
+      let canBoFullName = localStorage.getItem("canBoFullName");
+      if (canBoFullName) {
+        $("#user-fullname").text(canBoFullName || "Cán bộ");
+      } else {
+        $("#user-fullname").text("Cán bộ");
+      }
+
+      // Modal HTML cho thêm nông hộ
+      const addFarmerModalHtml = `
+      <div class="modal fade" id="addFarmerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Thêm nông hộ mới</h5>
+              <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form id="addFarmerForm">
+                <div class="form-group">
+                  <label for="ho-ten">Họ tên *</label>
+                  <input type="text" class="form-control" id="ho-ten" name="ho-ten" required />
+                </div>
+                <div class="form-group">
+                  <label for="gioi-tinh">Giới tính *</label>
+                  <select class="form-control" id="gioi-tinh" name="gioi-tinh" required>
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="ngay-sinh">Ngày sinh *</label>
+                  <input type="date" class="form-control" id="ngay-sinh" name="ngay-sinh" required />
+                </div>
+                <div class="form-group">
+                <label for="gio-sinh">Giờ sinh *</label>
+                <input
+                  type="time"
+                  step="1"
+                  class="form-control"
+                  id="gio-sinh"
+                  name="gio-sinh"
+                  required
+                />
+              </div>
+                <div class="form-group">
+                  <label for="tinh">Tỉnh *</label>
+                  <select class="form-control" id="tinh" name="tinh" required></select>
+                </div>
+                <div class="form-group">
+                  <label for="huyen">Huyện *</label>
+                  <select class="form-control" id="huyen" name="huyen" required disabled></select>
+                </div>
+                <div class="form-group">
+                  <label for="xa">Xã *</label>
+                  <select class="form-control" id="xa" name="xa" required disabled></select>
+                </div>
+                <div class="form-group">
+                  <label for="ap">Ấp *</label>
+                  <select class="form-control" id="ap" name="ap" required disabled></select>
+                </div>
+                <div class="form-group">
+                  <label for="diaChi">Địa chỉ </label>
+                  <input type="text" class="form-control" id="diaChi" name="diaChi" />
+                </div>
+                <div class="form-group">
+                  <label for="sdt">Số điện thoại *</label>
+                  <input type="tel" class="form-control" id="sdt" name="sdt" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" class="form-control" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="pass">Mật khẩu tài khoản *</label>
+                  <input type="password" class="form-control" id="pass" name="pass" required />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+              <button type="button" class="btn btn-primary" id="saveAddFarmerBtn">Lưu</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+      // Thêm modal vào body nếu chưa có
+      if ($("#addFarmerModal").length === 0) {
+        $("body").append(addFarmerModalHtml);
+      }
+
+      let diaChiData = {};
+      // Gọi API lấy dữ liệu địa chỉ khi trang load
+      $.ajax({
+        url: "../../API/api_du_lieu_dia_chi_vt.php",
+        method: "GET",
+        dataType: "json",
+        xhrFields: { withCredentials: true },
+        success: function (res) {
+          if (res.status === "success" && res.data) {
+            diaChiData = res.data;
+            const tinhSelect = $("#tinh");
+            tinhSelect.empty().append('<option value="">Chọn tỉnh</option>');
+            Object.keys(diaChiData).forEach((tinh) => {
+              tinhSelect.append(`<option value="${tinh}">${tinh}</option>`);
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Không thể tải dữ liệu địa chỉ!",
+              confirmButtonColor: "#d33",
+            });
+          }
+        },
+        error: function () {
+          Swal.fire({
+            icon: "error",
+            title: "Lỗi kết nối API địa chỉ!",
+            confirmButtonColor: "#d33",
+          });
+        },
+      });
+
+      // Xử lý khi chọn tỉnh
+      $(document).on("change", "#tinh", function () {
+        const tinh = $(this).val();
+        const huyenSelect = $("#huyen");
+        const xaSelect = $("#xa");
+        const apSelect = $("#ap");
+        huyenSelect
+          .empty()
+          .append('<option value="">Chọn huyện</option>')
+          .prop("disabled", !tinh);
+        xaSelect
+          .empty()
+          .append('<option value="">Chọn xã</option>')
+          .prop("disabled", true);
+        apSelect
+          .empty()
+          .append('<option value="">Chọn ấp</option>')
+          .prop("disabled", true);
+        if (tinh && diaChiData[tinh]) {
+          Object.keys(diaChiData[tinh]).forEach((huyen) => {
+            huyenSelect.append(`<option value="${huyen}">${huyen}</option>`);
+          });
+        }
+        updateDiaChi();
+      });
+      // Xử lý khi chọn huyện
+      $(document).on("change", "#huyen", function () {
+        const tinh = $("#tinh").val();
+        const huyen = $(this).val();
+        const xaSelect = $("#xa");
+        const apSelect = $("#ap");
+        xaSelect
+          .empty()
+          .append('<option value="">Chọn xã</option>')
+          .prop("disabled", !huyen);
+        apSelect
+          .empty()
+          .append('<option value="">Chọn ấp</option>')
+          .prop("disabled", true);
+        if (tinh && huyen && diaChiData[tinh][huyen]) {
+          Object.keys(diaChiData[tinh][huyen]).forEach((xa) => {
+            xaSelect.append(`<option value="${xa}">${xa}</option>`);
+          });
+        }
+        updateDiaChi();
+      });
+      // Xử lý khi chọn xã
+      $(document).on("change", "#xa", function () {
+        const tinh = $("#tinh").val();
+        const huyen = $("#huyen").val();
+        const xa = $(this).val();
+        const apSelect = $("#ap");
+        apSelect
+          .empty()
+          .append('<option value="">Chọn ấp</option>')
+          .prop("disabled", !xa);
+        if (tinh && huyen && xa && diaChiData[tinh][huyen][xa]) {
+          diaChiData[tinh][huyen][xa].forEach((ap) => {
+            apSelect.append(`<option value="${ap}">${ap}</option>`);
+          });
+        }
+        updateDiaChi();
+      });
+      // Xử lý khi chọn ấp
+      $(document).on("change", "#ap", function () {
+        updateDiaChi();
+      });
+
+      // Hàm cập nhật địa chỉ hoàn chỉnh
+      function updateDiaChi() {
+        const tinh = $("#tinh").val();
+        const huyen = $("#huyen").val();
+        const xa = $("#xa").val();
+        const ap = $("#ap").val();
+        let diaChiObj = {};
+        if (ap) diaChiObj.ap = ap;
+        if (xa) diaChiObj.xa = xa;
+        if (huyen) diaChiObj.huyen = huyen;
+        if (tinh) diaChiObj.tinh = tinh;
+        const diaChi = Object.values(diaChiObj).filter(Boolean).join(", ");
+        console.log("Cập nhật địa chỉ:", diaChi);
+      }
+
+      // Xử lý khi bấm nút Thêm nông hộ
+      $(document).on("click", "#addFarmerBtn", function () {
+        $("#addFarmerModal").modal("show");
+        // Reset form khi mở modal
+        $("#addFarmerForm")[0].reset();
+        $("#huyen, #xa, #ap").prop("disabled", true);
+        $("#diaChi").val("");
+      });
+      // Xử lý khi bấm nút Lưu trong modal Thêm nông hộ
+      $(document).on("click", "#saveAddFarmerBtn", function () {
+        const hoTen = $("#ho-ten").val().trim();
+        const gioiTinh = $("#gioi-tinh").val();
+        const ngaySinh = $("#ngay-sinh").val();
+        const gioSinh = $("#gio-sinh").val();
+        const tinh = $("#tinh").val();
+        const huyen = $("#huyen").val();
+        const xa = $("#xa").val();
+        const ap = $("#ap").val();
+        const sdt = $("#sdt").val().trim();
+        const email = $("#email").val().trim();
+        const pass = $("#pass").val().trim();
+        const diaChi = $("#diaChi").val().trim();
+        const ngaySinhFull = ngaySinh + " " + gioSinh;
+        // Kiểm tra các trường bắt buộc
+        if (
+          !hoTen ||
+          !tinh ||
+          !huyen ||
+          !xa ||
+          !ap ||
+          !ngaySinh ||
+          !gioSinh ||
+          !gioiTinh ||
+          !pass ||
+          !sdt ||
+          !email
+        ) {
+          Swal.fire({
+            icon: "warning",
+            title: "Vui lòng điền đầy đủ thông tin bắt buộc!",
+            confirmButtonColor: "#d33",
+          });
+          return;
+        }
+
+        console.log("Thông tin nông hộ:", {
+          hoTen,
+          gioiTinh,
+          ngaySinhFull,
+          tinh,
+          huyen,
+          xa,
+          ap,
+          sdt,
+          email,
+          diaChi,
+          pass,
+        });
+
+        let dataSend = {
+          hoTen: hoTen,
+          gioiTinh: gioiTinh,
+          ngaySinh: ngaySinhFull,
+          tinh: tinh,
+          huyen: huyen,
+          xa: xa,
+          ap: ap,
+          sdt: sdt,
+          email: email,
+          diaChi: diaChi,
+          pass: pass,
+        };
+
+        // Gọi API thêm nông hộ
+
+        $.ajax({
+          url: "../../API/api_quan_ly_nong_ho.php",
+          method: "POST",
+          data: JSON.stringify(dataSend),
+          contentType: "application/json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              Swal.fire({
+                icon: "success",
+                title: "Thêm nông hộ thành công!",
+                confirmButtonColor: "#28a745",
+              }).then(() => {
+                $("#addFarmerModal").modal("hide");
+                loadFarmers(); // Tải lại danh sách nông hộ
+              });
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: `Lỗi: ${res.message}`,
+                confirmButtonColor: "#d33",
+              });
+            }
+          },
+          error: function (e) {
+            Swal.fire({
+              icon: "error",
+              title: "Lỗi kết nối API!",
+              confirmButtonColor: "#d33",
+            });
+            console.log("Error adding farmer:", e);
+          },
+        });
+      });
+    </script>
+    <script>
+      // Global variables
+      let allRegions = [];
+      let allPlots = [];
+      let allFarmers = [];
+      let allCrops = [];
+      let allSeasons = [];
+      let allVarieties = [];
+
+      $(document).on("sessionValid", function (event, sessionData) {
+        console.log("Session valid, loading data...");
+        initializeData();
+      });
+
+      function initializeData() {
+        loadRegions();
+        loadPlots(false); // Load dữ liệu thửa đất ngay từ đầu nhưng không hiển thị spinner
+        loadFarmersForDropdown(); // Load dữ liệu nông hộ cho dropdown
+        loadDropdownData();
+      }
+
+      // Load all regions
+      function loadRegions() {
+        $("#regionsTableBody").html(`
+              <tr>
+                <td colspan="8" class="text-center">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Đang tải...</span>
+                  </div>
+                  <p class="mt-2">Đang tải danh sách vùng trồng...</p>
+                </td>
+              </tr>
+            `);
+
+        $.ajax({
+          url: "../../API/api_quan_ly_vung_trong.php",
+          type: "GET",
+          cache: false,
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              allRegions = res.data || [];
+              renderRegionsTable(allRegions);
+              updateRegionStats();
+              populateRegionDropdowns();
+            } else {
+              $("#regionsTableBody").html(`
+                    <tr>
+                      <td colspan="8" class="text-center text-danger">
+                        Lỗi: ${res.message}
+                      </td>
+                    </tr>
+                  `);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error loading regions:", error);
+            $("#regionsTableBody").html(`
+                  <tr>
+                    <td colspan="8" class="text-center text-danger">
+                      Có lỗi xảy ra khi tải dữ liệu
+                    </td>
+                  </tr>
+                `);
+          },
+        });
+      }
+
+      // Load farmers for dropdown (without showing spinner)
+      function loadFarmersForDropdown() {
+        $.ajax({
+          url: "../../API/api_quan_ly_nong_ho.php",
+          type: "GET",
+          cache: false,
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              allFarmers = res.data || [];
+              populateFarmerDropdowns();
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error loading farmers for dropdown:", error);
+          },
+        });
+      }
+
+      // Load dropdown data
+      function loadDropdownData() {
+        // Load seasons
+        $.ajax({
+          url: "../../API/api_quan_ly_vu_mua.php",
+          type: "GET",
+          cache: false,
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              allSeasons = res.data || [];
+              populateSeasonDropdowns();
+            }
+          },
+        });
+
+        // Load varieties
+        $.ajax({
+          url: "../../API/api_quan_ly_cay_trong.php",
+          type: "GET",
+          cache: false,
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              allVarieties = res.data || [];
+              populateVarietyDropdowns();
+            }
+          },
+        });
+      }
+
+      // Load data by tab
+      function loadTabData(tabName) {
+        switch (tabName) {
+          case "plots":
+            loadPlots();
+            break;
+          case "farmers":
+            loadFarmers();
+            break;
+          case "crops":
+            loadCrops();
+            break;
+        }
+      }
+
+      // Load plots
+      function loadPlots(showSpinner = true) {
+        if (showSpinner) {
+          $("#plotsTableBody").html(`
+              <tr>
+                <td colspan="8" class="text-center">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Đang tải...</span>
+                  </div>
+                  <p class="mt-2">Đang tải danh sách thửa đất...</p>
+                </td>
+              </tr>
+            `);
+        }
+
+        $.ajax({
+          url: "../../API/api_quan_ly_thua_dat.php",
+          type: "GET",
+          cache: false,
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              allPlots = res.data || [];
+              console.log("All plots loaded:", allPlots);
+              console.log(
+                "Plot regions mapping:",
+                allPlots.map((p) => ({ MaThua: p.MaThua, MaVung: p.MaVung }))
+              );
+              if (showSpinner) {
+                renderPlotsTable(allPlots);
+              }
+            } else {
+              if (showSpinner) {
+                $("#plotsTableBody").html(`
+                    <tr>
+                      <td colspan="8" class="text-center text-danger">
+                        Lỗi: ${res.message}
+                      </td>
+                    </tr>
+                  `);
+              }
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error loading plots:", error);
+            if (showSpinner) {
+              $("#plotsTableBody").html(`
+                  <tr>
+                    <td colspan="8" class="text-center text-danger">
+                      Có lỗi xảy ra khi tải dữ liệu thửa đất
+                    </td>
+                  </tr>
+                `);
+            }
+          },
+        });
+      }
+
+      // Load farmers
+      function loadFarmers() {
+        $("#farmersTableBody").html(`
+              <tr>
+                <td colspan="8" class="text-center">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Đang tải...</span>
+                  </div>
+                  <p class="mt-2">Đang tải danh sách nông hộ...</p>
+                </td>
+              </tr>
+            `);
+
+        $.ajax({
+          url: "../../API/api_quan_ly_nong_ho.php",
+          type: "GET",
+          cache: false,
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              allFarmers = res.data || [];
+              renderFarmersTable(allFarmers);
+            } else {
+              $("#farmersTableBody").html(`
+                    <tr>
+                      <td colspan="8" class="text-center text-danger">
+                        Lỗi: ${res.message}
+                      </td>
+                    </tr>
+                  `);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error loading farmers:", error);
+            $("#farmersTableBody").html(`
+                  <tr>
+                    <td colspan="8" class="text-center text-danger">
+                      Có lỗi xảy ra khi tải dữ liệu nông hộ
+                    </td>
+                  </tr>
+                `);
+          },
+        });
+      }
+
+      // Load crops
+      function loadCrops() {
+        // Load dữ liệu cho sub-tab đang active
+        const activeSubTab = $("#cropSubTabs .nav-link.active").attr("href");
+
+        if (activeSubTab === "#varieties-content") {
+          loadVarieties(); // Load giống cam
+        } else {
+          loadSeasons(); // Load mùa vụ
+        }
+      }
+
+      // Render functions
+      function renderRegionsTable(regions) {
+        const tbody = $("#regionsTableBody");
+        tbody.empty();
+
+        if (regions.length === 0) {
+          tbody.html(`
+                <tr>
+                  <td colspan="8" class="text-center">
+                    <i class="fas fa-map-marker-alt fa-3x text-muted mb-3"></i><br>
+                    <p class="text-muted">Chưa có vùng trồng nào</p>
+                  </td>
+                </tr>
+              `);
+          return;
+        }
+
+        regions.forEach((region, index) => {
+          const statusBadge =
+            region.TrangThai == 1
+              ? '<span class="badge badge-success">Hoạt động</span>'
+              : '<span class="badge badge-secondary">Không hoạt động</span>';
+
+          const address = [region.DiaChi, region.Xa, region.Huyen, region.Tinh]
+            .filter(Boolean)
+            .join(", ");
+
+          const row = `
+                <tr>
+                  <td class="text-center font-weight-bold">${index + 1}</td>
+                  <td class="font-weight-bold text-primary">VT${region.MaVung.toString().padStart(
+                    3,
+                    "0"
+                  )}</td>
+                  <td>
+                    <span class="font-weight-bold">🗺️ ${
+                      region.TenVung || "Chưa có tên"
+                    }</span>
+                  </td>
+                  <td><small class="text-muted">${address}</small></td>
+                  <td class="text-center">
+                    <span class="badge badge-info">${
+                      region.DienTich || 0
+                    } ha</span>
+                  </td>
+                  <td class="text-center">${region.SoHoDan || 0}</td>
+                  <td class="text-center">${statusBadge}</td>
+                  <td class="text-center">
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-info" onclick="viewRegionDetails(${
+                        region.MaVung
+                      })" title="Xem chi tiết">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-sm btn-warning" onclick="editRegion(${
+                        region.MaVung
+                      })" title="Chỉnh sửa">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger" onclick="deleteRegion(${
+                        region.MaVung
+                      })" title="Xóa">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              `;
+          tbody.append(row);
+        });
+      }
+
+      function renderPlotsTable(plots) {
+        const tbody = $("#plotsTableBody");
+        tbody.empty();
+
+        if (plots.length === 0) {
+          tbody.html(`
+                <tr>
+                  <td colspan="8" class="text-center">
+                    <i class="fas fa-map fa-3x text-muted mb-3"></i><br>
+                    <p class="text-muted">Chưa có thửa đất nào</p>
+                  </td>
+                </tr>
+              `);
+          return;
+        }
+
+        plots.forEach((plot, index) => {
+          const region = allRegions.find((r) => r.MaVung == plot.MaVung);
+          const farmer = allFarmers.find((f) => f.MaHo == plot.MaHo);
+
+          console.log(
+            `Rendering plot ${plot.MaThua}: MaVung=${plot.MaVung}, Region found:`,
+            region ? region.TenVung : "Not found"
+          );
+
+          const row = `
+                <tr data-mavung="${plot.MaVung}">
+                  <td class="text-center font-weight-bold">${index + 1}</td>
+                  <td class="font-weight-bold text-primary">TD${plot.MaThua.toString().padStart(
+                    3,
+                    "0"
+                  )}</td>
+                  <td>🗺️ ${region ? region.TenVung : "Chưa xác định"}</td>
+                  <td>👤 ${farmer ? farmer.HoTen : "Chưa có chủ"}</td>
+                  <td>
+                    <span class="badge badge-secondary">${
+                      plot.LoaiDat || "Chưa xác định"
+                    }</span>
+                  </td>
+                  <td class="text-center">
+                    <span class="badge badge-info">${
+                      plot.DienTich || 0
+                    } ha</span>
+                  </td>
+                  <td><small class="text-muted">${
+                    plot.ViTri || "Chưa có vị trí"
+                  }</small></td>
+                  <td class="text-center">
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-warning" onclick="editPlot(${
+                        plot.MaThua
+                      })" title="Chỉnh sửa">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger" onclick="deletePlot(${
+                        plot.MaThua
+                      })" title="Xóa">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              `;
+          tbody.append(row);
+        });
+      }
+
+      function renderFarmersTable(farmers) {
+        const tbody = $("#farmersTableBody");
+        tbody.empty();
+
+        if (farmers.length === 0) {
+          tbody.html(`
+                <tr>
+                  <td colspan="8" class="text-center">
+                    <i class="fas fa-users fa-3x text-muted mb-3"></i><br>
+                    <p class="text-muted">Chưa có nông hộ nào</p>
+                  </td>
+                </tr>
+              `);
+          return;
+        }
+
+        farmers.forEach((farmer, index) => {
+          const region = allRegions.find((r) => r.MaVung == farmer.MaVung);
+          const plotCount = allPlots.filter(
+            (p) => p.MaHo == farmer.MaHo
+          ).length;
+
+          const row = `
+                <tr>
+                  <td class="text-center font-weight-bold">${index + 1}</td>
+                  <td class="font-weight-bold text-primary">NH${farmer.MaHo.toString().padStart(
+                    3,
+                    "0"
+                  )}</td>
+                  <td>
+                    <span class="font-weight-bold">👤 ${
+                      farmer.HoTen || "Chưa có tên"
+                    }</span><br>
+                    <small class="text-muted">${farmer.GioiTinh || ""}</small>
+                  </td>
+                  <td>🗺️ ${region ? region.TenVung : "Chưa xác định"}</td>
+                  <td>📞 ${farmer.SoDienThoai || "Chưa có SĐT"}</td>
+                  <td><small class="text-muted">${
+                    farmer.DiaChi || "Chưa có địa chỉ"
+                  }</small></td>
+                  <td class="text-center">
+                    <span class="badge badge-info">${plotCount} thửa</span>
+                  </td>
+                  <td class="text-center">
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-info" onclick="viewFarmerDetails(${
+                        farmer.MaHo
+                      })" title="Xem chi tiết">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-sm btn-warning" onclick="editFarmer(${
+                        farmer.MaHo
+                      })" title="Chỉnh sửa">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              `;
+          tbody.append(row);
+        });
+      }
+
+      function renderVarietiesTable(varieties) {
+        const tbody = $("#varietiesTableBody");
+        tbody.empty();
+
+        if (varieties.length === 0) {
+          tbody.html(`
+                <tr>
+                  <td colspan="7" class="text-center">
+                    <i class="fas fa-seedling fa-3x text-muted mb-3"></i><br>
+                    <p class="text-muted">Chưa có giống cam nào</p>
+                  </td>
+                </tr>
+              `);
+          return;
+        }
+
+        varieties.forEach((variety, index) => {
+          const row = `
+                <tr>
+                  <td class="text-center font-weight-bold">${index + 1}</td>
+                  <td class="font-weight-bold text-primary">GC${variety.MaGiong.toString().padStart(
+                    3,
+                    "0"
+                  )}</td>
+                  <td>
+                    <span class="font-weight-bold">🍊 ${
+                      variety.TenGiong || "Chưa có tên"
+                    }</span>
+                  </td>
+                  <td><small class="text-muted">${
+                    variety.DacTinh || "Chưa có thông tin"
+                  }</small></td>
+                  <td><small class="text-muted">${
+                    variety.NguonGoc || "Chưa có thông tin"
+                  }</small></td>
+                  <td class="text-center">
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-warning" onclick="editVariety(${
+                        variety.MaGiong
+                      })" title="Chỉnh sửa">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger" onclick="deleteVariety(${
+                        variety.MaGiong
+                      })" title="Xóa">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              `;
+          tbody.append(row);
+        });
+      }
+
+      // Thêm event handlers cho filtering và searching
+      $("#searchRegion, #filterRegionStatus").on("input change", function () {
+        filterRegionsTable();
+      });
+
+      // Function để lọc bảng vùng trồng
+      function filterRegionsTable() {
+        const searchText = $("#searchRegion").val().toLowerCase();
+        const statusFilter = $("#filterRegionStatus").val();
+
+        let filteredRegions = allRegions;
+
+        // Lọc theo text search
+        if (searchText) {
+          filteredRegions = filteredRegions.filter((region) => {
+            const searchableText = [
+              region.TenVung,
+              region.DiaChi,
+              region.Xa,
+              region.Huyen,
+              region.Tinh,
+              `VT${region.MaVung.toString().padStart(3, "0")}`,
+            ]
+              .join(" ")
+              .toLowerCase();
+
+            return searchableText.includes(searchText);
+          });
+        }
+
+        // Lọc theo trạng thái
+        if (statusFilter !== "") {
+          filteredRegions = filteredRegions.filter((region) => {
+            return region.TrangThai == statusFilter;
+          });
+        }
+
+        renderRegionsTable(filteredRegions);
+      }
+
+      // Thêm event handlers cho tab switching
+      $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+        const targetTab = $(e.target).attr("href").substring(1);
+        loadTabData(targetTab);
+      });
+
+      // Thêm filtering cho các tab khác
+      $("#searchPlot, #filterPlotRegion").on("input change", function () {
+        filterPlotsTable();
+      });
+
+      $("#searchFarmer, #filterFarmerRegion").on("input change", function () {
+        filterFarmersTable();
+      });
+
+      //$(" #filterCropSeason, #filterCropVariety").on("change", function () {
+      //  filterCropsTable();
+      //});
+      $("#filterCropSeason").on("change", function () {
+        let selectedValue = $(this).val();
+        $("table tbody tr").each(function () {
+          var maVu = $(this).data("ma-vu"); // Lấy thuộc tính data-ma-vu của hàng
+
+          if (selectedValue === "" || maVu == selectedValue) {
+            $(this).show(); // Hiển thị nếu trùng
+          } else {
+            $(this).hide(); // Ẩn nếu không trùng
+          }
+        });
+      });
+
+      // Function để lọc bảng thửa đất
+      function filterPlotsTable() {
+        const searchText = $("#searchPlot").val().toLowerCase();
+        const regionFilter = $("#filterPlotRegion").val();
+
+        let filteredPlots = allPlots;
+
+        // Lọc theo text search
+        if (searchText) {
+          filteredPlots = filteredPlots.filter((plot) => {
+            const region = allRegions.find((r) => r.MaVung == plot.MaVung);
+            const farmer = allFarmers.find((f) => f.MaHo == plot.MaHo);
+
+            const searchableText = [
+              `TD${plot.MaThua.toString().padStart(3, "0")}`,
+              region ? region.TenVung : "",
+              farmer ? farmer.HoTen : "",
+              plot.LoaiDat,
+              plot.ViTri,
+              plot.DienTich,
+            ]
+              .join(" ")
+              .toLowerCase();
+
+            return searchableText.includes(searchText);
+          });
+        }
+
+        // Lọc theo vùng trồng
+        if (regionFilter) {
+          filteredPlots = filteredPlots.filter(
+            (plot) => plot.MaVung == regionFilter
+          );
+        }
+
+        renderPlotsTable(filteredPlots);
+      }
+
+      // Function để lọc bảng nông hộ
+      function filterFarmersTable() {
+        const searchText = $("#searchFarmer").val().toLowerCase();
+        const regionFilter = $("#filterFarmerRegion").val();
+
+        let filteredFarmers = allFarmers;
+
+        if (searchText) {
+          filteredFarmers = filteredFarmers.filter((farmer) => {
+            const region = allRegions.find((r) => r.MaVung == farmer.MaVung);
+
+            const searchableText = [
+              `NH${farmer.MaHo.toString().padStart(3, "0")}`,
+              farmer.HoTen,
+              farmer.SoDienThoai,
+              farmer.DiaChi,
+              region ? region.TenVung : "",
+            ]
+              .join(" ")
+              .toLowerCase();
+
+            return searchableText.includes(searchText);
+          });
+        }
+
+        if (regionFilter) {
+          filteredFarmers = filteredFarmers.filter(
+            (farmer) => farmer.MaVung == regionFilter
+          );
+          console.log(
+            `Filtered farmers by region ${regionFilter}:`,
+            filteredFarmers
+          );
+        }
+
+        renderFarmersTable(filteredFarmers);
+      }
+
+      // Function để lọc bảng cây trồng
+      function filterCropsTable() {
+        const seasonFilter = $("#filterCropSeason").val();
+        const varietyFilter = $("#filterCropVariety").val();
+        //lọc thê mùa vụ
+        let filteredSeasons = allSeasons;
+        let filteredVarieties = allVarieties;
+        if (seasonFilter) {
+          filteredSeasons = filteredSeasons.filter(
+            (season) => season.MaVu == seasonFilter
+          );
+          // Render bảng mùa vụ
+          renderVarietiesTable(filteredSeasons);
+        }
+        // lọc theo giống cam
+        if (varietyFilter) {
+          filteredVarieties = filteredVarieties.filter(
+            (crop) => crop.MaGiong == varietyFilter
+          );
+          // Render bảng giống cam
+          renderVarietiesTable(filteredVarieties);
+        }
+      }
+
+      // Cập nhật function updateRegionStats để tính toán chính xác
+      function updateRegionStats() {
+        const total = allRegions.length;
+        const totalArea = allRegions.reduce(
+          (sum, region) => sum + parseFloat(region.DienTich || 0),
+          0
+        );
+        const active = allRegions.filter(
+          (region) => region.TrangThai == 1
+        ).length;
+
+        // Load farmers để tính tổng số nông hộ nếu chưa có
+        if (allFarmers.length === 0) {
+          $.ajax({
+            url: "../../API/api_quan_ly_nong_ho.php",
+            type: "GET",
+            cache: false,
+            xhrFields: { withCredentials: true },
+            success: function (res) {
+              if (res.status === "success") {
+                allFarmers = res.data || [];
+                $("#totalFarmers").text(allFarmers.length);
+              }
+            },
+          });
+        } else {
+          $("#totalFarmers").text(allFarmers.length);
+        }
+
+        $("#totalRegions").text(total);
+        $("#totalArea").text(totalArea.toFixed(1));
+        $("#activeRegions").text(active);
+      }
+
+      // Populate dropdowns
+      function populateRegionDropdowns() {
+        const selectors = [
+          "#plotRegion",
+          "#farmerRegion",
+          "#cropRegion",
+          "#filterPlotRegion",
+          "#filterFarmerRegion",
+        ];
+
+        selectors.forEach((selector) => {
+          const $select = $(selector);
+          const currentVal = $select.val();
+          $select.empty();
+
+          if (selector.includes("filter")) {
+            $select.append('<option value="">Tất cả vùng trồng</option>');
+          } else {
+            $select.append('<option value="">Chọn vùng trồng...</option>');
+          }
+
+          allRegions.forEach((region) => {
+            let viTri = [region.DiaChi, region.Xa, region.Huyen, region.Tinh]
+              .filter(Boolean)
+              .join(", ");
+            console.log(
+              `Adding region option: MaVung=${region.MaVung}, Text=${region.DienTich}ha - ${viTri}`
+            );
+            $select.append(
+              `<option value="${region.MaVung}">${region.DienTich}ha - ${viTri}</option>`
+            );
+          });
+
+          if (currentVal) $select.val(currentVal);
+        });
+
+        // Also populate farmer dropdowns when regions are updated
+        if (allFarmers.length > 0) {
+          populateFarmerDropdowns();
+        }
+      }
+
+      function populateSeasonDropdowns() {
+        const selectors = ["#cropSeason", "#filterCropSeason"];
+
+        selectors.forEach((selector) => {
+          const $select = $(selector);
+          const currentVal = $select.val();
+          $select.empty();
+
+          if (selector.includes("filter")) {
+            $select.append('<option value="">Tất cả vụ mùa</option>');
+          } else {
+            $select.append('<option value="">Chọn vụ mùa...</option>');
+          }
+
+          allSeasons.forEach((season) => {
+            $select.append(
+              `<option value="${season.MaVu}">${season.TenVu}</option>`
+            );
+          });
+
+          if (currentVal) $select.val(currentVal);
+        });
+      }
+
+      function populateVarietyDropdowns() {
+        const selectors = ["#cropVariety", "#filterCropVariety"];
+
+        selectors.forEach((selector) => {
+          const $select = $(selector);
+          const currentVal = $select.val();
+          $select.empty();
+
+          if (selector.includes("filter")) {
+            $select.append('<option value="">Tất cả giống cam</option>');
+          } else {
+            $select.append('<option value="">Chọn giống cam...</option>');
+          }
+
+          allVarieties.forEach((variety) => {
+            $select.append(
+              `<option value="${variety.MaGiong}">${variety.TenGiong}</option>`
+            );
+          });
+
+          if (currentVal) $select.val(currentVal);
+        });
+      }
+
+      // Event handlers
+      $("#addRegionBtn").click(function () {
+        $("#regionModalTitle").text("Thêm vùng trồng mới");
+        $("#regionForm")[0].reset();
+        $("#regionId").val("");
+        $("#regionModal").modal("show");
+      });
+
+      $("#saveRegionBtn").click(function () {
+        saveRegion();
+      });
+
+      // Thêm event handler cho nút lưu mùa vụ
+      $("#saveSeasonBtn").click(function () {
+        saveSeason();
+      });
+
+      function saveRegion() {
+        // Validate form
+        if (!$("#regionForm")[0].checkValidity()) {
+          $("#regionForm")[0].reportValidity();
+          return;
+        }
+
+        const regionData = {
+          MaVung: $("#regionId").val(),
+          TenVung: $("#regionName").val(),
+          DiaChi: $("#regionAddress").val(),
+          Tinh: $("#regionProvince").val(),
+          Huyen: $("#regionDistrict").val(),
+          Xa: $("#regionWard").val(),
+          DienTich: $("#regionArea").val(),
+          SoHoDan: $("#regionHouseholds").val() || 0,
+          TrangThai: $("#regionStatus").val(),
+          MoTa: $("#regionDescription").val(),
+        };
+
+        const isEdit = regionData.MaVung !== "";
+        const url = "../../API/api_quan_ly_vung_trong.php";
+        const method = isEdit ? "PUT" : "POST";
+
+        $.ajax({
+          url: url,
+          type: method,
+          data: JSON.stringify(regionData),
+          contentType: "application/json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              $("#regionModal").modal("hide");
+              Swal.fire("Thành công!", res.message, "success");
+              loadRegions();
+            } else {
+              Swal.fire("Lỗi!", res.message, "error");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error saving region:", error);
+            Swal.fire("Lỗi!", "Có lỗi xảy ra khi lưu dữ liệu", "error");
+          },
+        });
+      }
+
+      function editRegion(maVung) {
+        const region = allRegions.find((r) => r.MaVung == maVung);
+        if (!region) return;
+
+        $("#regionModalTitle").text("Chỉnh sửa vùng trồng");
+        $("#regionId").val(region.MaVung);
+        $("#regionName").val(region.TenVung);
+        $("#regionAddress").val(region.DiaChi);
+        $("#regionProvince").val(region.Tinh);
+        $("#regionDistrict").val(region.Huyen);
+        $("#regionWard").val(region.Xa);
+        $("#regionArea").val(region.DienTich);
+        $("#regionHouseholds").val(region.SoHoDan);
+        $("#regionStatus").val(region.TrangThai);
+        $("#regionDescription").val(region.MoTa);
+        $("#regionModal").modal("show");
+      }
+
+      function deleteRegion(maVung) {
+        Swal.fire({
+          title: "Xác nhận xóa",
+          text: "Bạn có chắc chắn muốn xóa vùng trồng này?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Xóa",
+          cancelButtonText: "Hủy",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: "../../API/api_quan_ly_vung_trong.php",
+              type: "DELETE",
+              data: JSON.stringify({ MaVung: maVung }),
+              contentType: "application/json",
+              xhrFields: { withCredentials: true },
+              success: function (res) {
+                if (res.status === "success") {
+                  Swal.fire("Đã xóa!", res.message, "success");
+                  loadRegions();
+                } else {
+                  Swal.fire("Lỗi!", res.message, "error");
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error("Error deleting region:", error);
+                Swal.fire("Lỗi!", "Có lỗi xảy ra khi xóa dữ liệu", "error");
+              },
+            });
+          }
+        });
+      }
+
+      function viewRegionDetails(maVung) {
+        const region = allRegions.find((r) => r.MaVung == maVung);
+        if (!region) {
+          Swal.fire("Lỗi!", "Không tìm thấy thông tin vùng trồng", "error");
+          return;
+        }
+
+        // Tính toán thống kê
+        const regionFarmers = allFarmers.filter((f) => f.MaVung == maVung);
+        const regionPlots = allPlots.filter((p) => p.MaVung == maVung);
+        const totalPlotArea = regionPlots.reduce(
+          (sum, plot) => sum + parseFloat(plot.DienTich || 0),
+          0
+        );
+
+        // Thông tin địa chỉ đầy đủ
+        const fullAddress = [
+          region.DiaChi,
+          region.Xa,
+          region.Huyen,
+          region.Tinh,
+        ]
+          .filter(Boolean)
+          .join(", ");
+
+        // Hiển thị status
+        const statusBadge =
+          region.TrangThai == 1
+            ? '<span class="badge badge-success badge-lg">Hoạt động</span>'
+            : '<span class="badge badge-secondary badge-lg">Không hoạt động</span>';
+
+        // Tạo danh sách nông hộ
+        let farmersHtml = "";
+        if (regionFarmers.length > 0) {
+          farmersHtml = `
+            <h6 class="mt-4 mb-3">Danh sách nông hộ (${regionFarmers.length} hộ):</h6>
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Mã nông hộ</th>
+                    <th>Họ tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Số thửa đất</th>
+                    <th>Diện tích (km)</th>
+                  </tr>
+                </thead>
+                <tbody>
+          `;
+
+          regionFarmers.forEach((farmer) => {
+            const farmerPlots = allPlots.filter((p) => p.MaHo == farmer.MaHo);
+            const farmerTotalArea = farmerPlots.reduce(
+              (sum, plot) => sum + parseFloat(plot.DienTich || 0),
+              0
+            );
+
+            farmersHtml += `
+              <tr>
+                <td>NH${farmer.MaHo.toString().padStart(3, "0")}</td>
+                <td>${farmer.HoTen || "Chưa có tên"}</td>
+                <td>${farmer.SoDienThoai || "Chưa có SĐT"}</td>
+                <td class="text-center">${farmerPlots.length}</td>
+                <td class="text-center">${farmerTotalArea.toFixed(2)}</td>
+              </tr>
+            `;
+          });
+
+          farmersHtml += `
+                </tbody>
+              </table>
+            </div>
+          `;
+        } else {
+          farmersHtml =
+            '<p class="text-muted mt-4">Vùng trồng này chưa có nông hộ nào.</p>';
+        }
+
+        // Tạo danh sách thửa đất
+        let plotsHtml = "";
+        if (regionPlots.length > 0) {
+          plotsHtml = `
+            <h6 class="mt-4 mb-3">Danh sách thửa đất (${regionPlots.length} thửa):</h6>
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Mã thửa</th>
+                    <th>Chủ thửa</th>
+                    <th>Loại đất</th>
+                    <th>Diện tích (km)</th>
+                    <th>Vị trí</th>
+                  </tr>
+                </thead>
+                <tbody>
+          `;
+
+          regionPlots.forEach((plot) => {
+            const farmer = allFarmers.find((f) => f.MaHo == plot.MaHo);
+
+            plotsHtml += `
+              <tr>
+                <td>TD${plot.MaThua.toString().padStart(3, "0")}</td>
+                <td>${farmer ? farmer.HoTen : "Chưa có chủ"}</td>
+                <td>${plot.LoaiDat || "Chưa xác định"}</td>
+                <td class="text-center">${plot.DienTich || 0}</td>
+                <td>${plot.ViTri || "Chưa có thông tin"}</td>
+              </tr>
+            `;
+          });
+
+          plotsHtml += `
+                </tbody>
+              </table>
+            </div>
+          `;
+        } else {
+          plotsHtml =
+            '<p class="text-muted mt-4">Vùng trồng này chưa có thửa đất nào.</p>';
+        }
+
+        const regionDetailContent = `
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Thông tin cơ bản:</h6>
+              <table class="table table-borderless table-sm">
+                <tr><td class="font-weight-bold">Mã vùng trồng:</td><td>VT${region.MaVung.toString().padStart(
+                  3,
+                  "0"
+                )}</td></tr>
+                <tr><td class="font-weight-bold">Tên vùng trồng:</td><td>${
+                  region.TenVung || "Chưa có tên"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Trạng thái:</td><td>${statusBadge}</td></tr>
+                <tr><td class="font-weight-bold">Diện tích quy hoạch:</td><td>${
+                  region.DienTich || 0
+                } ha</td></tr>
+                <tr><td class="font-weight-bold">Số hộ dân:</td><td>${
+                  region.SoHoDan || 0
+                } hộ</td></tr>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <h6>Thông tin địa lý:</h6>
+              <table class="table table-borderless table-sm">
+                <tr><td class="font-weight-bold">Địa chỉ đầy đủ:</td><td>${
+                  fullAddress || "Chưa có địa chỉ"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Tỉnh/Thành phố:</td><td>${
+                  region.Tinh || "Chưa xác định"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Quận/Huyện:</td><td>${
+                  region.Huyen || "Chưa xác định"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Phường/Xã:</td><td>${
+                  region.Xa || "Chưa xác định"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Mô tả:</td><td>${
+                  region.MoTa || "Chưa có mô tả"
+                }</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="card border-primary region-stats-card">
+                    <div class="card-body text-center">
+                      <h4 class="text-primary">${regionFarmers.length}</h4>
+                      <small class="text-muted">Số nông hộ</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card border-success region-stats-card">
+                    <div class="card-body text-center">
+                      <h4 class="text-success">${regionPlots.length}</h4>
+                      <small class="text-muted">Số thửa đất</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card border-info region-stats-card">
+                    <div class="card-body text-center">
+                      <h4 class="text-info">${totalPlotArea.toFixed(1)}</h4>
+                      <small class="text-muted">Diện tích thực tế (km)</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card border-warning region-stats-card">
+                    <div class="card-body text-center">
+                      <h4 class="text-warning">${
+                        region.DienTich
+                          ? (
+                              (totalPlotArea / parseFloat(region.DienTich)) *
+                              100
+                            ).toFixed(1)
+                          : "0"
+                      }%</h4>
+                      <small class="text-muted">Tỷ lệ sử dụng</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          ${farmersHtml}
+          ${plotsHtml}
+        `;
+
+        $("#regionDetailModalTitle").text(
+          `Chi tiết vùng trồng - ${region.TenVung}`
+        );
+        $("#regionDetailContent").html(regionDetailContent);
+        $("#regionDetailModal").modal("show");
+      }
+
+      // Thêm các event handlers cho thửa đất
+      $("#addPlotBtn").click(function () {
+        $("#plotModalTitle").text("Thêm thửa đất mới");
+        $("#plotForm")[0].reset();
+        $("#plotId").val("");
+
+        // Tạo lại dropdown vùng trồng nếu đã bị xóa
+        if ($("#plotRegion").length === 0) {
+          const regionFormGroup = `
+            <div class="form-group">
+              <label for="plotRegion">Vùng trồng *</label>
+              <select class="form-control" id="plotRegion" required>
+                <option value="">Chọn vùng trồng...</option>
+              </select>
+            </div>
+          `;
+          $("#plotFarmer")
+            .closest(".form-group")
+            .parent()
+            .prepend(`<div class="col-md-6">${regionFormGroup}</div>`);
+          // Populate lại dropdown sau khi tạo
+          populateRegionDropdowns();
+        }
+
+        populatePlotFarmersDropdown(); // Load danh sách nông hộ
+        $("#plotModal").modal("show");
+      });
+
+      $("#savePlotBtn").click(function () {
+        savePlot();
+      });
+
+      // Function để populate dropdown nông hộ trong plot modal
+      function populatePlotFarmersDropdown() {
+        const $select = $("#plotFarmer");
+        $select.empty();
+        $select.append('<option value="">Chọn nông hộ...</option>');
+
+        allFarmers.forEach((farmer) => {
+          const region = allRegions.find((r) => r.MaVung == farmer.MaVung);
+          const regionName = region ? region.TenVung : "Chưa xác định";
+          $select.append(
+            `<option value="${farmer.MaHo}">${farmer.HoTen} - ${regionName}</option>`
+          );
+        });
+      }
+
+      // Function để lưu thửa đất
+      function savePlot() {
+        // Validate form
+        if (!$("#plotForm")[0].checkValidity()) {
+          $("#plotForm")[0].reportValidity();
+          return;
+        }
+
+        const isEdit = $("#plotId").val() !== "";
+
+        // Tạo plotData khác nhau cho thêm mới và chỉnh sửa
+        let plotData;
+
+        if (isEdit) {
+          // Khi chỉnh sửa: không cập nhật vùng trồng
+          plotData = {
+            MaThua: $("#plotId").val(),
+            MaHo: $("#plotFarmer").val(),
+            DienTich: $("#plotArea").val(),
+            LoaiDat: $("#plotType").val(),
+            ViTri: $("#plotLocation").val(),
+          };
+        } else {
+          // Khi thêm mới: bao gồm vùng trồng
+          plotData = {
+            MaThua: $("#plotId").val(),
+            MaVung: $("#plotRegion").val(),
+            MaHo: $("#plotFarmer").val(),
+            DienTich: $("#plotArea").val(),
+            LoaiDat: $("#plotType").val(),
+            ViTri: $("#plotLocation").val(),
+          };
+        }
+
+        const url = "../../API/api_quan_ly_thua_dat.php";
+        const method = isEdit ? "PUT" : "POST";
+
+        $.ajax({
+          url: url,
+          type: method,
+          data: JSON.stringify(plotData),
+          contentType: "application/json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              $("#plotModal").modal("hide");
+              Swal.fire("Thành công!", res.message, "success");
+              loadPlots(); // Reload dữ liệu thửa đất
+              updateRegionStats(); // Cập nhật thống kê
+            } else {
+              Swal.fire("Lỗi!", res.message, "error");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error saving plot:", error);
+            Swal.fire("Lỗi!", "Có lỗi xảy ra khi lưu dữ liệu", "error");
+          },
+        });
+      }
+
+      // Function để edit thửa đất
+      function editPlot(maThua) {
+        const plot = allPlots.find((p) => p.MaThua == maThua);
+        if (!plot) return;
+
+        $("#plotModalTitle").text("Chỉnh sửa thửa đất");
+        $("#plotId").val(plot.MaThua);
+        $("#plotFarmer").val(plot.MaHo);
+        $("#plotArea").val(plot.DienTich);
+        $("#plotType").val(plot.LoaiDat);
+        $("#plotLocation").val(plot.ViTri);
+
+        // Xóa hoàn toàn dropdown vùng trồng khi chỉnh sửa
+        $("#plotRegion").closest(".form-group").parent().remove();
+
+        populatePlotFarmersDropdown(); // Load lại dropdown nông hộ
+        $("#plotFarmer").val(plot.MaHo); // Set lại giá trị sau khi populate
+
+        $("#plotModal").modal("show");
+      }
+
+      // Function để xóa thửa đất
+      function deletePlot(maThua) {
+        Swal.fire({
+          title: "Xác nhận xóa",
+          text: "Bạn có chắc chắn muốn xóa thửa đất này?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Xóa",
+          cancelButtonText: "Hủy",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: "../../API/api_quan_ly_thua_dat.php",
+
+              type: "DELETE",
+              data: JSON.stringify({ MaThua: maThua }),
+              contentType: "application/json",
+              xhrFields: { withCredentials: true },
+              success: function (res) {
+                if (res.status === "success") {
+                  Swal.fire("Đã xóa!", res.message, "success");
+                  loadPlots();
+                } else {
+                  Swal.fire("Lỗi!", res.message, "error");
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error("Error deleting plot:", error);
+                Swal.fire("Lỗi!", "Có lỗi xảy ra khi xóa dữ liệu", "error");
+              },
+            });
+          }
+        });
+      }
+
+      // Sửa event handler cho addCropBtn
+      $("#addCropBtn").click(function () {
+        // Kiểm tra đang ở sub-tab nào
+        const activeSubTab = $("#cropSubTabs .nav-link.active").attr("href");
+
+        if (activeSubTab === "#varieties-content") {
+          // Nếu đang ở tab Giống cam - mở modal thêm giống cam
+          $("#varietyModalTitle").text("Thêm giống cam mới");
+          $("#varietyForm")[0].reset();
+          $("#varietyId").val("");
+          $("#varietyModal").modal("show");
+        } else {
+          // Nếu đang ở tab Mùa vụ - mở modal thêm mùa vụ
+          $("#seasonModalTitle").text("Thêm mùa vụ mới");
+          $("#seasonForm")[0].reset();
+          $("#seasonId").val("");
+          $("#seasonModal").modal("show");
+        }
+      });
+
+      // Thêm event handler cho sub-tab switching
+      $('#cropSubTabs a[data-toggle="pill"]').on("shown.bs.pill", function (e) {
+        const targetSubTab = $(e.target).attr("href");
+
+        // Thay đổi text button tùy theo sub-tab
+        if (targetSubTab === "#varieties-content") {
+          $("#addCropBtn").html(
+            '<i class="fas fa-seedling"></i> Thêm giống cam'
+          );
+          loadVarieties(); // Load dữ liệu giống cam
+        } else if (targetSubTab === "#seasons-content") {
+          $("#addCropBtn").html(
+            '<i class="fas fa-calendar-plus"></i> Thêm mùa vụ'
+          );
+          loadSeasons(); // Load dữ liệu mùa vụ
+        }
+      });
+
+      // Thêm event handler để load dữ liệu khi click vào sub-tab "Giống cam"
+      $("#varieties-subtab").on("shown.bs.tab", function (e) {
+        console.log("Loading varieties...");
+        loadVarieties();
+      });
+
+      // Function để load dữ liệu mùa vụ
+      function loadSeasons() {
+        $("#seasonsTableBody").html(`
+        <tr>
+          <td colspan="6" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Đang tải...</span>
+            </div>
+            <p class="mt-2">Đang tải danh sách mùa vụ...</p>
+          </td>
+        </tr>
+      `);
+
+        $.ajax({
+          url: "../../API/api_quan_ly_vu_mua.php",
+          type: "GET",
+          cache: false,
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              allSeasons = res.data || [];
+              console.log("Loaded seasons:", allSeasons);
+              renderSeasonsTable(allSeasons);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error loading seasons:", error);
+            $("#seasonsTableBody").html(`
+            <tr>
+              <td colspan="6" class="text-center text-danger">
+                Có lỗi xảy ra khi tải dữ liệu mùa vụ
+              </td>
+            </tr>
+          `);
+          },
+        });
+      }
+
+      // Function để render bảng mùa vụ
+      function renderSeasonsTable(seasons) {
+        const tbody = $("#seasonsTableBody");
+        tbody.empty();
+
+        if (seasons.length === 0) {
+          tbody.html(`
+          <tr>
+            <td colspan="6" class="text-center">
+              <i class="fas fa-calendar fa-3x text-muted mb-3"></i><br>
+              <p class="text-muted">Chưa có mùa vụ nào</p>
+            </td>
+          </tr>
+        `);
+          return;
+        }
+
+        seasons.forEach((season, index) => {
+          const row = `
+          <tr data-ma-vu="${season.MaVu}">
+            <td class="text-center font-weight-bold">${index + 1}</td>
+            <td class="font-weight-bold text-primary">MV${season.MaVu.toString().padStart(
+              3,
+              "0"
+            )}</td>
+            <td>
+              <span class="font-weight-bold">📅 ${
+                season.TenVu || "Chưa có tên"
+              }</span>
+            </td>
+            <td class="text-center">${
+              season.ThoiGianBatDau || "Chưa xác định"
+            }</td>
+            <td class="text-center">${
+              season.ThoiGianThuHoach || "Chưa tới đợt thu hoạch"
+            }</td>
+            <td class="text-center">
+              <div class="btn-group">
+                <button class="btn btn-sm btn-warning" onclick="editSeason(${
+                  season.MaVu
+                })" title="Chỉnh sửa">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="deleteSeason(${
+                  season.MaVu
+                })" title="Xóa">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+          tbody.append(row);
+        });
+      }
+
+      // Giữ nguyên các function cho giống cam như đã có:
+      // - saveVariety()
+      // - editVariety()
+      // - deleteVariety()
+      // - loadVarieties()
+      // - renderVarietiesTable()
+
+      // Thêm các function CRUD cho giống cam
+      function saveVariety() {
+        // Validate form
+        if (!$("#varietyForm")[0].checkValidity()) {
+          $("#varietyForm")[0].reportValidity();
+          return;
+        }
+
+        const varietyData = {
+          MaGiong: $("#varietyId").val(),
+          TenGiong: $("#varietyName").val(),
+          DacTinh: $("#varietyCharacteristics").val(),
+          NguonGoc: $("#varietyOrigin").val(),
+        };
+
+        const isEdit = varietyData.MaGiong !== "";
+        const url = "../../API/api_quan_ly_cay_trong.php";
+        const method = isEdit ? "PUT" : "POST";
+
+        $.ajax({
+          url: url,
+          type: method,
+          data: JSON.stringify(varietyData),
+          contentType: "application/json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              $("#varietyModal").modal("hide");
+              Swal.fire("Thành công!", res.message, "success");
+              loadVarieties();
+              populateVarietyDropdowns();
+            } else {
+              Swal.fire("Lỗi!", res.message, "error");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error saving variety:", error);
+            Swal.fire("Lỗi!", "Có lỗi xảy ra khi lưu dữ liệu", "error");
+          },
+        });
+      }
+
+      // Sửa event handler cho nút lưu giống cam
+      $("#saveVarietyBtn").click(function () {
+        saveVariety();
+      });
+
+      // Thêm các function cho mùa vụ (tương tự như giống cam)
+      function saveSeason() {
+        // Validate form
+        if (!$("#seasonForm")[0].checkValidity()) {
+          $("#seasonForm")[0].reportValidity();
+          return;
+        }
+
+        const seasonData = {
+          MaVu: $("#seasonId").val(),
+          TenVu: $("#seasonName").val(),
+          NgayBatDau: $("#seasonStartDate").val(),
+          NgayKetThuc: $("#seasonEndDate").val(),
+          MoTa: $("#seasonDescription").val(),
+        };
+
+        const isEdit = seasonData.MaVu !== "";
+        const url = "../../API/api_quan_ly_vu_mua.php";
+        const method = isEdit ? "PUT" : "POST";
+
+        $.ajax({
+          url: url,
+          type: method,
+          data: JSON.stringify(seasonData),
+          contentType: "application/json",
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              $("#seasonModal").modal("hide");
+              Swal.fire("Thành công!", res.message, "success");
+              loadSeasons();
+              populateSeasonDropdowns();
+            } else {
+              Swal.fire("Lỗi!", res.message, "error");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error saving season:", error);
+            Swal.fire("Lỗi!", "Có lỗi xảy ra khi lưu dữ liệu", "error");
+          },
+        });
+      }
+
+      // Function để chỉnh sửa mùa vụ
+      function editSeason(maVu) {
+        const season = allSeasons.find((s) => s.MaVu == maVu);
+        if (!season) return;
+
+        $("#seasonModalTitle").text("Chỉnh sửa mùa vụ");
+        $("#seasonId").val(season.MaVu);
+        $("#seasonName").val(season.TenVu);
+        $("#seasonStartDate").val(season.ThoiGianBatDau);
+        $("#seasonEndDate").val(season.ThoiGianThuHoach);
+        $("#seasonDescription").val(season.MoTaVu);
+        $("#seasonModal").modal("show");
+      }
+
+      // Function để xóa mùa vụ
+      function deleteSeason(maVu) {
+        Swal.fire({
+          title: "Xác nhận xóa",
+          text: "Bạn có chắc chắn muốn xóa mùa vụ này?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Xóa",
+          cancelButtonText: "Hủy",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: "../../API/api_quan_ly_vu_mua.php",
+              type: "DELETE",
+              data: JSON.stringify({ MaVu: maVu }),
+              contentType: "application/json",
+              xhrFields: { withCredentials: true },
+              success: function (res) {
+                if (res.status === "success") {
+                  Swal.fire("Đã xóa!", res.message, "success");
+                  loadSeasons();
+                  populateSeasonDropdowns();
+                } else {
+                  Swal.fire("Lỗi!", res.message, "error");
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error("Error deleting season:", error);
+                Swal.fire("Lỗi!", "Có lỗi xảy ra khi xóa dữ liệu", "error");
+              },
+            });
+          }
+        });
+      }
+
+      function editVariety(maGiong) {
+        const variety = allVarieties.find((v) => v.MaGiong == maGiong);
+        if (!variety) return;
+
+        $("#varietyModalTitle").text("Chỉnh sửa giống cam");
+        $("#varietyId").val(variety.MaGiong);
+        $("#varietyName").val(variety.TenGiong);
+        $("#varietyCharacteristics").val(variety.DacTinh);
+        $("#varietyOrigin").val(variety.NguonGoc);
+        $("#varietyModal").modal("show");
+      }
+
+      // Function để xóa giống cam
+      function deleteVariety(maGiong) {
+        Swal.fire({
+          title: "Xác nhận xóa",
+          text: "Bạn có chắc chắn muốn xóa giống cam này?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Xóa",
+          cancelButtonText: "Hủy",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: "../../API/api_quan_ly_cay_trong.php",
+              type: "DELETE",
+              data: JSON.stringify({ MaGiong: maGiong }),
+              contentType: "application/json",
+              xhrFields: { withCredentials: true },
+              success: function (res) {
+                if (res.status === "success") {
+                  Swal.fire("Đã xóa!", res.message, "success");
+                  loadVarieties(); // Reload danh sách giống cam
+                  populateVarietyDropdowns(); // Cập nhật dropdowns
+                } else {
+                  Swal.fire("Lỗi!", res.message, "error");
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error("Error deleting variety:", error);
+                Swal.fire("Lỗi!", "Có lỗi xảy ra khi xóa dữ liệu", "error");
+              },
+            });
+          }
+        });
+      }
+
+      // Function để load danh sách giống cam
+      function loadVarieties() {
+        $("#varietiesTableBody").html(`
+        <tr>
+          <td colspan="7" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Đang tải...</span>
+            </div>
+            <p class="mt-2">Đang tải danh sách giống cam...</p>
+          </td>
+        </tr>
+      `);
+
+        $.ajax({
+          url: "../../API/api_quan_ly_cay_trong.php",
+          type: "GET",
+          cache: false,
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            console.log("API Response:", res); // Debug log
+            if (res.status === "success") {
+              allVarieties = res.data || [];
+              console.log("Varieties loaded:", allVarieties); // Debug log
+              renderVarietiesTable(allVarieties);
+              populateVarietyDropdowns();
+            } else {
+              console.error("API Error:", res.message); // Debug log
+              $("#varietiesTableBody").html(`
+              <tr>
+                <td colspan="7" class="text-center text-danger">
+                  Lỗi: ${res.message}
+                </td>
+              </tr>
+            `);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("AJAX Error:", error, xhr.responseText); // Debug log
+            $("#varietiesTableBody").html(`
+            <tr>
+              <td colspan="7" class="text-center text-danger">
+                Có lỗi xảy ra khi tải dữ liệu giống cam
+              </td>
+            </tr>
+          `);
+          },
+        });
+      }
+
+      // ==== FARMER VIEW OPERATIONS ====
+
+      // Chỉ giữ lại tính năng xem chi tiết và chỉnh sửa nông hộ
+
+      // Function để chỉnh sửa nông hộ
+      function editFarmer(maHo) {
+        const farmer = allFarmers.find((f) => f.MaHo == maHo);
+        if (!farmer) {
+          Swal.fire("Lỗi!", "Không tìm thấy thông tin nông hộ", "error");
+          return;
+        }
+
+        $("#editFarmerModalTitle").text("Chỉnh sửa thông tin nông hộ");
+        $("#editFarmerId").val(farmer.MaHo);
+        $("#editFarmerName").val(farmer.HoTen);
+        $("#editFarmerGender").val(farmer.GioiTinh);
+        $("#editFarmerPhone").val(farmer.SoDienThoai);
+        $("#editFarmerEmail").val(farmer.Email);
+        $("#editFarmerBirthdate").val(farmer.NgaySinh);
+        $("#editFarmerAddress").val(farmer.DiaChi);
+
+        // Populate region dropdown và set giá trị
+        populateEditFarmerRegionDropdown();
+        $("#editFarmerRegion").val(farmer.MaVung);
+
+        $("#editFarmerModal").modal("show");
+      }
+
+      // Function để populate dropdown vùng trồng cho edit farmer modal
+      function populateEditFarmerRegionDropdown() {
+        const $select = $("#editFarmerRegion");
+        $select.empty();
+        $select.append('<option value="">Chọn vùng trồng...</option>');
+
+        allRegions.forEach((region) => {
+          let viTri = [region.DiaChi, region.Xa, region.Huyen, region.Tinh]
+            .filter(Boolean)
+            .join(", ");
+          $select.append(
+            `<option value="${region.MaVung}">${region.TenVung} - ${viTri}</option>`
+          );
+        });
+      }
+
+      // Function để lưu thay đổi nông hộ
+      function saveEditFarmer() {
+        // Validate form
+        if (!$("#editFarmerForm")[0].checkValidity()) {
+          $("#editFarmerForm")[0].reportValidity();
+          return;
+        }
+
+        const farmerData = {
+          MaHo: $("#editFarmerId").val(),
+          HoTen: $("#editFarmerName").val(),
+          GioiTinh: $("#editFarmerGender").val(),
+          SoDienThoai: $("#editFarmerPhone").val(),
+          Email: $("#editFarmerEmail").val(),
+          NgaySinh: $("#editFarmerBirthdate").val(),
+          DiaChi: $("#editFarmerAddress").val(),
+          MaVung: $("#editFarmerRegion").val(),
+        };
+
+        // Show loading
+        Swal.fire({
+          title: "Đang cập nhật...",
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+
+        $.ajax({
+          url: "../../API/api_quan_ly_nong_ho.php",
+          type: "PUT",
+          data: JSON.stringify(farmerData),
+          contentType: "application/json",
+          cache: false,
+          xhrFields: { withCredentials: true },
+          success: function (res) {
+            if (res.status === "success") {
+              $("#editFarmerModal").modal("hide");
+              Swal.fire("Thành công!", res.message, "success");
+              loadFarmers(); // Reload data
+              loadFarmersForDropdown(); // Reload dropdown data
+            } else {
+              Swal.fire("Lỗi!", res.message || "Có lỗi xảy ra", "error");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error saving farmer:", error);
+            if (xhr.status === 401) {
+              Swal.fire(
+                "Lỗi!",
+                "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+                "error"
+              );
+            } else {
+              console.log("Lỗi: ", xhr.responseText);
+              console.log("Status: ", status);
+              console.log("Error: ", error);
+              Swal.fire(
+                "Lỗi!",
+                "Có lỗi xảy ra khi cập nhật thông tin nông hộ",
+                "error"
+              );
+            }
+          },
+        });
+      }
+
+      // Event handler cho button save edit farmer
+      $("#saveEditFarmerBtn").click(function () {
+        saveEditFarmer();
+      });
+
+      // Function để xem chi tiết nông hộ
+      function viewFarmerDetails(maHo) {
+        const farmer = allFarmers.find((f) => f.MaHo == maHo);
+        if (!farmer) {
+          Swal.fire("Lỗi!", "Không tìm thấy thông tin nông hộ", "error");
+          return;
+        }
+
+        const region = allRegions.find((r) => r.MaVung == farmer.MaVung);
+        const farmerPlots = allPlots.filter((p) => p.MaHo == maHo);
+        const totalArea = farmerPlots.reduce(
+          (sum, plot) => sum + parseFloat(plot.DienTich || 0),
+          0
+        );
+
+        let plotsHtml = "";
+        if (farmerPlots.length > 0) {
+          plotsHtml = `
+            <h6 class="mt-3 mb-2">Danh sách thửa đất (${farmerPlots.length} thửa):</h6>
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Mã thửa</th>
+                    <th>Diện tích</th>
+                    <th>Loại đất</th>
+                    <th>Vị trí</th>
+                  </tr>
+                </thead>
+                <tbody>
+          `;
+
+          farmerPlots.forEach((plot) => {
+            plotsHtml += `
+              <tr>
+                <td>TD${plot.MaThua.toString().padStart(3, "0")}</td>
+                <td>${plot.DienTich || 0} km</td>
+                <td>${plot.LoaiDat || "Chưa xác định"}</td>
+                <td>${plot.ViTri || "Chưa có thông tin"}</td>
+              </tr>
+            `;
+          });
+
+          plotsHtml += `
+                </tbody>
+              </table>
+            </div>
+          `;
+        } else {
+          plotsHtml =
+            '<p class="text-muted mt-3">Nông hộ này chưa có thửa đất nào.</p>';
+        }
+
+        const farmerDetailContent = `
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Thông tin cá nhân:</h6>
+              <table class="table table-borderless table-sm">
+                <tr><td class="font-weight-bold">Mã nông hộ:</td><td>NH${farmer.MaHo.toString().padStart(
+                  3,
+                  "0"
+                )}</td></tr>
+                <tr><td class="font-weight-bold">Họ tên:</td><td>${
+                  farmer.HoTen || "Chưa có"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Giới tính:</td><td>${
+                  farmer.GioiTinh || "Chưa có"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Ngày sinh:</td><td>${
+                  farmer.NgaySinh || "Chưa có"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Số điện thoại:</td><td>${
+                  farmer.SoDienThoai || "Chưa có"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Email:</td><td>${
+                  farmer.Email || "Chưa có"
+                }</td></tr>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <h6>Thông tin sản xuất:</h6>
+              <table class="table table-borderless table-sm">
+                <tr><td class="font-weight-bold">Vùng trồng:</td><td>${
+                  region ? region.TenVung : "Chưa xác định"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Địa chỉ:</td><td>${
+                  farmer.DiaChi || "Chưa có"
+                }</td></tr>
+                <tr><td class="font-weight-bold">Số thửa đất:</td><td>${
+                  farmerPlots.length
+                } thửa</td></tr>
+                <tr><td class="font-weight-bold">Tổng diện tích:</td><td>${totalArea.toFixed(
+                  2
+                )} km</td></tr>
+              </table>
+            </div>
+          </div>
+          ${plotsHtml}
+        `;
+
+        $("#farmerDetailModalTitle").text(`Chi tiết nông hộ - ${farmer.HoTen}`);
+        $("#farmerDetailContent").html(farmerDetailContent);
+        $("#farmerDetailModal").modal("show");
+      }
+
+      // Function để populate dropdown nông hộ cho các form khác
+      function populateFarmerDropdowns() {
+        const selectors = ["#plotFarmer"];
+
+        selectors.forEach((selector) => {
+          const $select = $(selector);
+          const currentVal = $select.val();
+          $select.empty();
+          $select.append('<option value="">Chọn nông hộ...</option>');
+
+          // Group farmers by region for better UX
+          const regionGroups = {};
+          allFarmers.forEach((farmer) => {
+            const region = allRegions.find((r) => r.MaVung == farmer.MaVung);
+            const regionName = region ? region.TenVung : "Chưa xác định vùng";
+
+            if (!regionGroups[regionName]) {
+              regionGroups[regionName] = [];
+            }
+            regionGroups[regionName].push(farmer);
+          });
+
+          Object.keys(regionGroups)
+            .sort()
+            .forEach((regionName) => {
+              if (regionGroups[regionName].length > 0) {
+                const $optgroup = $(
+                  `<optgroup label="${regionName}"></optgroup>`
+                );
+                regionGroups[regionName].forEach((farmer) => {
+                  $optgroup.append(
+                    `<option value="${
+                      farmer.MaHo
+                    }">NH${farmer.MaHo.toString().padStart(3, "0")} - ${
+                      farmer.HoTen
+                    }</option>`
+                  );
+                });
+                $select.append($optgroup);
+              }
+            });
+
+          if (currentVal) $select.val(currentVal);
+        });
+      }
+    </script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="../../js/log_out_click_canBo.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Hỗ trợ kỹ thuật</title>
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="../../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template -->
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this page -->
+    <link
+      href="../../vendor/datatables/dataTables.bootstrap4.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <style>
+      .bg-gradient-primary {
+        background-image: linear-gradient(135deg, #ff9800 0%, #43ea2e 100%);
+        background-size: cover;
+        color: #fff !important;
+      }
+      /* Căn hàng cho phần Show entries và Search */
+      .dataTables_wrapper .dataTables_length,
+      .dataTables_wrapper .dataTables_filter {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 10px;
+        white-space: nowrap;
+      }
+
+      .dataTables_wrapper .dataTables_filter {
+        float: right;
+      }
+
+      .dataTables_wrapper .dataTables_length label,
+      .dataTables_wrapper .dataTables_filter label {
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .dataTables_wrapper .dataTables_filter input {
+        margin-left: 5px;
+      }
+      /* Đổi màu hàng đầu tiên (header) */
+      #dataTable thead tr {
+        background-color: #92927a; /* Màu xanh nhạt - bạn có thể đổi */
+        color: #000; /* Chữ màu đen */
+      }
+    </style>
+  </head>
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./main_canBo.html"
+        >
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Cam Sành Vĩnh Long</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="./main_canBo.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Báo Cáo - Thống Kê</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./quan_ly_vung_trong_canBo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>Quản Lý Vùng Trồng</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="./theo_doi_canh_tac_canBo.html"
+            aria-expanded="true"
+          >
+            <i class="fa-solid fa-hammer"></i>
+            <span>Theo Dõi Canh Tác</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          ></div>
+        </li>
+        <hr class="sidebar-divider" />
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="./quan_ly_sau_benh_canBo.html">
+            <i class="fa-solid fa-worm"></i>
+            <span>Quản lý sâu bệnh</span>
+          </a>
+          <hr class="sidebar-divider" />
+
+          <div
+            id="collapsePages"
+            class="collapse"
+            aria-labelledby="headingPages"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <div class="collapse-divider"></div>
+              <h6 class="collapse-header">Other Pages:</h6>
+              <a class="collapse-item" href="404.html">404 Page</a>
+              <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Nav Item - Charts -->
+
+        <li class="nav-item active">
+          <a class="nav-link" href="./ho_tro_ky_thuat_canBo.html">
+            <i class="fa-solid fa-headset"></i>
+            <span>Hỗ trợ kỹ thuật</span></a
+          >
+        </li>
+         <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="./thong_tin_ca_nhan_canBo.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Thông tin cá nhân</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="confirmLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            >
+              <div class="input-group">
+                <h5>QUẢN LÝ CAM SÀNH TỈNH VĨNH LONG</h5>
+              </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="searchDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                  aria-labelledby="searchDropdown"
+                >
+                  <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control bg-light border-0 small"
+                        placeholder="Search for..."
+                        aria-label="Search"
+                        aria-describedby="basic-addon2"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <!-- Nav Item - Messages -->
+          
+
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span class="mr-2 d-none d-lg-inline" id="user-fullname"
+                    ></span
+                  >
+                  <img
+                    class="img-profile rounded-circle"
+                    id="avatar-img-mini"
+                    src="../../img/undraw_profile.svg"
+                  />
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        let maCanBo = localStorage.getItem("maCanBo") || sessionStorage.getItem("maCanBo");
+        if (!maCanBo) return;
+        $.ajax({
+          url: "../../API/api_canbo_kt.php",
+          type: "GET",
+          data: { MaCanBo: maCanBo },
+          dataType: "json",
+          success: function (res) {
+            if (res.status === "success" && res.data) {
+              const cb = res.data;
+              $("#user-fullname").text(cb.HoTen || "");
+              if (cb.avatar && cb.avatar !== "") {
+                $("#avatar-img-mini").attr("src", "../../uploads/avatars/" + cb.avatar);
+              } else {
+                $("#avatar-img-mini").attr("src", "../../img/undraw_profile.svg");
+              }
+            }
+          }
+        });
+      });
+    </script>
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a class="dropdown-item" href="./thong_tin_ca_nhan_canBo.html">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang cá nhân
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#logoutModal"
+                    onclick="confirmLogout()"
+                  >
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Hỗ trợ kỹ thuật</h1>
+            <p class="mb-4"></p>
+
+            <!-- Nút thêm mới -->
+            <div class="mb-2">
+              <button class="btn btn-success" id="addHoTroBtn">
+                <i class="fa fa-plus"></i> Thêm hỗ trợ kỹ thuật
+              </button>
+            </div>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table table-bordered"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Ngày hỗ trợ</th>
+                        <th>Giờ</th>
+                        <th>Nội dung</th>
+                        <th>Cán bộ hỗ trợ</th>
+                        <th>Nông hộ được hỗ trợ</th>
+                        <th>Mã Vùng</th>
+                        <th>Thao tác</th>
+                      </tr>
+                    </thead>
+                    <tbody id="hoTroTableBody">
+                      <tr>
+                        <td colspan="8" class="text-center">
+                          Đang tải dữ liệu...
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            
+
+            <!-- Modal nhập liệu hỗ trợ kỹ thuật -->
+            <div
+              class="modal fade"
+              id="hoTroModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="hoTroModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <form id="hoTroForm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="hoTroModalLabel">
+                        Hỗ trợ kỹ thuật
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Đóng"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <input type="hidden" id="maHoTro" />
+                      <div class="form-group">
+                        <label for="ngayHoTro">Ngày hỗ trợ</label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="ngayHoTro"
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="gioHoTro">Giờ</label>
+                        <input
+                          type="time"
+                          class="form-control"
+                          id="gioHoTro"
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="noiDung">Nội dung</label>
+                        <textarea
+                          class="form-control"
+                          id="noiDung"
+                          required
+                        ></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="canBoHoTro" >Cán bộ hỗ trợ</label>
+                        <input type="text" class="form-control" id="canBoHoTro" value="" readonly/>
+                      </div>
+                      <div class="form-group">
+                      <label for="tenNongHo">Nông hộ được hỗ trợ</label>
+                        <select class="form-control" id="tenNongHo" required>
+                         <option value="">-- Chọn nông hộ --</option>
+                        </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="maVung">Mã Vùng</label>
+                            <select class="form-control" id="maVung" required>
+                                <option value="">-- Chọn mã vùng --</option>
+                            </select>
+                        </div>
+                        </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Đóng
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="saveHoTroBtn"
+                      >
+                        Lưu
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- /.container-fluid -->
+          </div>
+          <!-- End of Main Content -->
+
+          <!-- Footer -->
+          <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+              <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2021</span>
+              </div>
+            </div>
+          </footer>
+          <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+      </div>
+      <!-- End of Page Wrapper -->
+
+      <!-- Scroll to Top Button-->
+      <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+      </a>
+
+      <!-- Bootstrap core JavaScript-->
+      <script src="../../vendor/jquery/jquery.min.js"></script>
+      <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+      <!-- Core plugin JavaScript-->
+      <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+      <!-- Custom scripts for all pages-->
+      <script src="../../js/sb-admin-2.min.js"></script>
+
+      <!-- Page level plugins -->
+      <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+      <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+      <!-- Page level custom scripts -->
+      <script src="../../js/demo/datatables-demo.js"></script>
+      <script src="../../js/session_check_canBo.js"></script>
+      <script>
+        let canBoFullName = localStorage.getItem("canBoFullName");
+          if (canBoFullName) {
+            $("#user-fullname").text(canBoFullName || "Cán bộ");
+          } else {
+            $("#user-fullname").text("Cán bộ");
+          }
+      </script>
+      <script>
+        $(document).ready(function () {
+        
+
+
+// Hàm load danh sách nông hộ từ API
+function loadNongHoSelect(selectedId = "") {
+  $.ajax({
+    url: "../../API/api_quan_ly_nong_ho.php",
+    type: "GET",
+    dataType: "json",
+    xhrFields: { withCredentials: true },
+    success: function (res) {
+      if (res.status === "success" && Array.isArray(res.data)) {
+        let options = `<option value="">-- Chọn nông hộ --</option>`;
+        res.data.forEach((nh) => {
+          options += `<option value="${nh.MaHo}" ${selectedId == nh.MaHo ? "selected" : ""}>
+                        ${nh.HoTen}
+                      </option>`;
+        });
+        $("#tenNongHo").html(options);
+      } else {
+        $("#tenNongHo").html(`<option value="">Không có dữ liệu</option>`);
+      }
+    },
+    error: function () {
+      $("#tenNongHo").html(`<option value="">Lỗi tải dữ liệu</option>`);
+    },
+  });
+}
+function loadMaVungSelect(selectedId = "") {
+  $.ajax({
+    url: "../../API/api_quan_ly_vung_trong.php",
+    type: "GET",
+    dataType: "json",
+    xhrFields: { withCredentials: true },
+    success: function (res) {
+      if (res.status === "success" && Array.isArray(res.data)) {
+        let options = `<option value="">-- Chọn vùng trồng --</option>`;
+        res.data.forEach((vt) => {
+          options += `<option value="${vt.MaVung}" ${selectedId == vt.MaVung ? "selected" : ""}>
+                        V${vt.MaVung.toString().padStart(3, "0")}
+                      </option>`;
+        });
+        $("#maVung").html(options);
+      } else {
+        $("#maVung").html(`<option value="">Không có dữ liệu</option>`);
+      }
+    },
+    error: function () {
+      $("#maVung").html(`<option value="">Lỗi tải dữ liệu</option>`);
+    },
+  });
+}
+function loadCanBoSelect() {
+  $.ajax({
+    url: "../../API/api_can_bo.php",
+    type: "GET",
+    dataType: "json",
+    xhrFields: { withCredentials: true },
+    success: function (res) {
+      if (res.status === "success" && Array.isArray(res.data) && res.data.length > 0) {
+        let hoTen = res.data[0].HoTen;
+        let maCanBo = res.data[0].MaCanBo;
+        $("#canBoHoTro").val(hoTen);
+        $("#canBoHoTro").data("maCanBo", maCanBo); // Lưu mã cán bộ vào data attribute
+      } else {
+        $("#canBoHoTro").val("");
+      }
+    },
+    error: function () {
+      $("#canBoHoTro").val("");
+    },
+  });
+}
+
+          // Gọi API lấy dữ liệu canh tác
+          $.ajax({
+            url: "../../API/api_ho_tro_ky_thuat.php",
+            type: "GET",
+            dataType: "json",
+            xhrFields: { withCredentials: true },
+            success: function (res) {
+              if (res.status === "success" && Array.isArray(res.data)) {
+                renderHoTroTable(res.data);
+              } else {
+                $("#hoTroTableBody").html(
+                  `<tr><td colspan="8" class="text-center text-danger">Không có dữ liệu canh tác</td></tr>`
+                );
+              }
+            },
+            error: function () {
+              $("#hoTroTableBody").html(
+                `<tr><td colspan="8" class="text-center text-danger">Lỗi kết nối API</td></tr>`
+              );
+            },
+          });
+
+          // Hàm render bảng
+          function renderHoTroTable(data) {
+            let html = "";
+            data.forEach((row) => {
+              html += `
+              <tr>
+                <td>${row.NgayHoTro || ""}</td>
+                <td>${row.Gio || ""}</td>
+                <td>${row.NoiDung || ""}</td>
+                <td>${row.CanBoHoTro || ""}</td>
+                <td>${row.TenNongHo || ""}</td>
+                <td>V${row.MaVung.toString().padStart(3, "0")}</td>
+                <td>
+                  <button class="btn btn-sm btn-warning edit-btn" data-id="${row.MaHoTro}"><i class="fa fa-edit"></i></button>
+                  <button class="btn btn-sm btn-danger delete-btn" data-id="${row.MaHoTro}"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+            `;
+            });
+            $("#hoTroTableBody").html(html);
+          }
+
+          // Nút thêm mới
+          $("#addHoTroBtn").click(function () {
+  $("#hoTroForm")[0].reset();
+  $("#maHoTro").val("");
+  $("#hoTroModalLabel").text("Thêm hỗ trợ kỹ thuật");
+  loadNongHoSelect(); // load danh sách nông hộ khi mở modal thêm
+    loadCanBoSelect(); // load danh sách cán bộ khi mở modal thêm
+    loadMaVungSelect(); // load danh sách mã vùng khi mở modal thêm
+  $("#hoTroModal").modal("show");
+});
+
+
+// Xử lý lưu qua submit form
+$("#saveHoTroBtn").click(function () {
+  //e.preventDefault();
+  if (!$("#ngayHoTro").val() || !$("#gioHoTro").val() || !$("#noiDung").val() || !$("#canBoHoTro").val() || !$("#tenNongHo").val() || !$("#maVung").val()) {
+    Swal.fire("Lỗi!", "Vui lòng điền đầy đủ thông tin.", "error");
+    return;
+  }
+  let NgayHoTro = $("#ngayHoTro").val();
+  let Gio = $("#gioHoTro").val();
+  let thoiGianFull = NgayHoTro + " " + Gio;
+  const data = {
+    NoiDung: $("#noiDung").val(),
+    NgayHoTro: thoiGianFull,
+    CanBoHoTro: $("#canBoHoTro").data("maCanBo") || "",
+    MaNongHo: $("#tenNongHo").val(),
+    MaVung: $("#maVung").val(),
+  };
+  const maHoTro = $("#maHoTro").val();
+  console.log('Mã hỗ trợ khi lưu:', maHoTro);
+  console.log('Dữ liệu khi lưu:', data);
+  if (maHoTro) {
+    editHoTroKyThuat(maHoTro, data);
+  } else {
+    addHoTroKyThuat(data);
+  }
+});
+
+$(document).on("click", ".edit-btn", function() {
+  let maHoTro = $(this).data("id");
+  showEditHoTroModal(maHoTro); // lúc này không cần global
+});
+
+$(document).on("click", ".delete-btn", function() {
+  let maHoTro = $(this).data("id");
+  deleteHoTroKyThuat(maHoTro); // gọi hàm xóa
+});
+
+        // Hiển thị modal sửa
+        function showEditHoTroModal(maHoTro) {
+          $.ajax({
+            url: "../../API/api_ho_tro_ky_thuat.php",
+            type: "GET",
+            dataType: "json",
+            xhrFields: { withCredentials: true },
+            success: function (res) {
+              if (res.status === "success" && Array.isArray(res.data)) {
+                const row = res.data.find((r) => r.MaHoTro == maHoTro);
+                if (row) {
+                  $("#maHoTro").val(row.MaHoTro);
+                  console.log('Mã hỗ trợ:',$("#maHoTro").val());
+                  $("#ngayHoTro").val(row.NgayHoTro);
+                  $("#gioHoTro").val(row.Gio);
+                  $("#noiDung").val(row.NoiDung);
+                  loadNongHoSelect(); // load danh sách nông hộ khi mở modal thêm
+                  loadCanBoSelect(); // load danh sách cán bộ khi mở modal thêm
+                  loadMaVungSelect();
+                  $("#hoTroModalLabel").text("Chỉnh sửa hỗ trợ kỹ thuật");
+                  $("#hoTroModal").modal("show");
+                }
+              }
+            },
+          });
+        }
+
+        // Thêm hỗ trợ kỹ thuật (POST)
+function addHoTroKyThuat(data) {
+  $.ajax({
+    url: "../../API/api_ho_tro_ky_thuat.php",
+    type: "POST",
+    data: JSON.stringify(data),
+    contentType: "application/json",
+    xhrFields: { withCredentials: true },
+    success: function (res) {
+      if (res.status === "success") {
+        Swal.fire("Thành công!", "Đã thêm hỗ trợ kỹ thuật.", "success");
+        $("#hoTroModal").modal("hide");
+        $("#hoTroForm")[0].reset(); // Reset form
+        $("#maHoTro").val(""); // Reset mã hỗ trợ
+        loadHoTroKyThuat(); // Reload bảng
+
+      } else {
+        Swal.fire("Lỗi!", res.message || "Thêm thất bại.", "error");
+      }
+    },
+    error: function (e) {
+      console.log("Error:", e);
+      Swal.fire("Lỗi!", "Không thể kết nối API.", "error");
+    },
+  });
+}
+// Sửa hỗ trợ kỹ thuật (PUT)
+function editHoTroKyThuat(maHoTro, data) {
+  data.MaHoTro = maHoTro;
+  $.ajax({
+    url: "../../API/api_ho_tro_ky_thuat.php",
+    type: "PUT",
+    data: JSON.stringify(data),
+    contentType: "application/json",
+    xhrFields: { withCredentials: true },
+    success: function (res) {
+      if (res.status === "success") {
+        Swal.fire("Thành công!", "Đã cập nhật hỗ trợ kỹ thuật.", "success");
+        $("#hoTroModal").modal("hide");
+        $("#hoTroForm")[0].reset(); // Reset form
+        $("#maHoTro").val(""); // Reset mã hỗ trợ
+        loadHoTroKyThuat();
+      } else {
+        Swal.fire("Lỗi!", res.message || "Cập nhật thất bại.", "error");
+      }
+    },
+    error: function (e) {
+      Swal.fire("Lỗi!", "Không thể kết nối API.", "error");
+      console.log("Error:", e);
+    },
+  });
+}
+// Xóa hỗ trợ kỹ thuật (DELETE)
+function deleteHoTroKyThuat(maHoTro) {
+  Swal.fire({
+    title: "Bạn chắc chắn muốn xóa?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Xóa",
+    cancelButtonText: "Hủy",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: "../../API/api_ho_tro_ky_thuat.php",
+        type: "DELETE",
+        data: JSON.stringify({ MaHoTro: maHoTro }),
+        contentType: "application/json",
+        xhrFields: { withCredentials: true },
+        success: function (res) {
+          if (res.status === "success") {
+            Swal.fire("Đã xóa!", "Hỗ trợ kỹ thuật đã được xóa.", "success");
+            loadHoTroKyThuat();
+          } else {
+            Swal.fire("Lỗi!", res.message || "Xóa thất bại.", "error");
+          }
+        },
+        error: function () {
+          Swal.fire("Lỗi!", "Không thể kết nối API.", "error");
+        },
+      });
+    }
+  });
+}
+// Hàm reload bảng sau khi thao tác
+function loadHoTroKyThuat() {
+  $.ajax({
+    url: "../../API/api_ho_tro_ky_thuat.php",
+    type: "GET",
+    dataType: "json",
+    xhrFields: { withCredentials: true },
+    success: function (res) {
+      if (res.status === "success" && Array.isArray(res.data)) {
+        renderHoTroTable(res.data);
+      } else {
+        $("#hoTroTableBody").html(
+          `<tr><td colspan="8" class="text-center text-danger">Không có dữ liệu hỗ trợ kỹ thuật</td></tr>`
+        );
+      }
+    },
+    error: function () {
+      $("#hoTroTableBody").html(
+        `<tr><td colspan="8" class="text-center text-danger">Lỗi kết nối API</td></tr>`
+      );
+    },
+  });
+}
+      });
+      </script>
+      <script src="../../js/log_out_click_canBo.js"></script>
+  </body>
+</html>

@@ -592,6 +592,7 @@
           method: "GET",
           dataType: "json",
           success: function (response) {
+            console.log("Thống kê tải thành công:", response.data);
             if (response.success && response.data) {
               // Cập nhật tổng sản lượng
               $("#tongSanLuong").text(response.data.tongSanLuong + " Tấn");
@@ -604,8 +605,6 @@
 
               // Cập nhật vụ mùa hiện tại
               $("#soVuMua").text(response.data.vuMuaHienTai);
-
-              console.log("Thống kê tải thành công:", response.data);
             } else {
               $("#tongSanLuong").text("Lỗi dữ liệu");
               $("#soNongHo").text("Lỗi dữ liệu");

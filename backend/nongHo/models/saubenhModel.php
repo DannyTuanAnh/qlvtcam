@@ -11,28 +11,28 @@ class SauBenhModel {
     public function getBaoCaoSauBenhByUserID($user_id) {
         try {
             $query = "SELECT 
-                        bc.MaBaoCao,
-                        bc.NgayPhatHien,
-                        bc.MucDo,
-                        bc.MaSau,
-                        bc.MaThua,
-                        bc.MaVu,
-                        bc.GhiChu,
-                        sau.TenSauBenh,
-                        sau.TrieuChung,
-                        sau.BienPhapXuLy,
-                        td.LoaiDat,
-                        td.DienTich,
-                        td.ViTri,
-                        vu.TenVu
+                        bc.mabaocao AS \"MaBaoCao\",
+                        bc.ngayphathien AS \"NgayPhatHien\",
+                        bc.mucdo AS \"MucDo\",
+                        bc.masau AS \"MaSau\",
+                        bc.mathua AS \"MaThua\",
+                        bc.mavu AS \"MaVu\",
+                        bc.ghichu AS \"GhiChu\",
+                        sau.tensaubenh AS \"TenSauBenh\",
+                        sau.trieuchung AS \"TrieuChung\",
+                        sau.bienphapxuly AS \"BienPhapXuLy\",
+                        td.loaidat AS \"LoaiDat\",
+                        td.dientich AS \"DienTich\",
+                        td.vitri AS \"ViTri\",
+                        vu.tenvu AS \"TenVu\"
                       FROM phat_hien_sau bc
-                      INNER JOIN thua_dat td ON bc.MaThua = td.MaThua
-                      INNER JOIN nong_ho nh ON td.MaHo = nh.MaHo
-                      INNER JOIN quan_ly_nguoi_dung qlnd ON nh.MaNguoiDung = qlnd.MaNguoiDung
-                      LEFT JOIN sau_benh sau ON bc.MaSau = sau.MaSau
-                      LEFT JOIN vu_mua vu ON bc.MaVu = vu.MaVu
-                      WHERE qlnd.MaNguoiDung = ?
-                      ORDER BY bc.NgayPhatHien DESC";
+                      INNER JOIN thua_dat td ON bc.mathua = td.mathua
+                      INNER JOIN nong_ho nh ON td.maho = nh.maho
+                      INNER JOIN quan_ly_nguoi_dung qlnd ON nh.manguoidung = qlnd.manguoidung
+                      LEFT JOIN sau_benh sau ON bc.masau = sau.masau
+                      LEFT JOIN vu_mua vu ON bc.mavu = vu.mavu
+                      WHERE qlnd.manguoidung = ?
+                      ORDER BY bc.ngayphathien DESC";
             
             $stmt = $this->db->conn->prepare($query);
             $stmt->execute([$user_id]);
@@ -78,7 +78,7 @@ class SauBenhModel {
     //Hàm thêm báo cáo sâu bệnh
     public function addBaoCaoSauBenh($data) {
         try {
-            $query = "INSERT INTO phat_hien_sau (NgayPhatHien, MucDo, MaSau, MaThua, MaVu, GhiChu) 
+            $query = "INSERT INTO phat_hien_sau (ngayphathien, mucdo, masau, mathua, mavu, ghichu) 
                       VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $this->db->conn->prepare($query);
             if ($stmt->execute([
@@ -110,7 +110,7 @@ class SauBenhModel {
     public function updateBaoCaoSauBenh($maBaoCao, $maSau, $maThua, $maVu, $mucDo, $ngayPhatHien, $ghiChu) {
         try {
             // Lấy thời gian phát hiện
-            $stmt = $this->db->conn->prepare("SELECT NgayPhatHien FROM phat_hien_sau WHERE MaBaoCao = ?");
+            $stmt = $this->db->conn->prepare("SELECT ngayphathien AS \"NgayPhatHien\" FROM phat_hien_sau WHERE mabaocao = ?");
             $stmt->execute([$maBaoCao]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -129,8 +129,8 @@ class SauBenhModel {
             }
 
             $query = "UPDATE phat_hien_sau 
-                      SET NgayPhatHien = ?, MucDo = ?, MaSau = ?, MaThua = ?, MaVu = ?, GhiChu = ?
-                      WHERE MaBaoCao = ?";
+                      SET ngayphathien = ?, mucdo = ?, masau = ?, mathua = ?, mavu = ?, ghichu = ?
+                      WHERE mabaocao = ?";
             
             $stmt = $this->db->conn->prepare($query);
             
@@ -156,7 +156,7 @@ class SauBenhModel {
     public function deleteBaoCaoSauBenh($maBaoCao) {
         try {
             // Lấy thời gian phát hiện
-            $stmt = $this->db->conn->prepare("SELECT NgayPhatHien FROM phat_hien_sau WHERE MaBaoCao = ?");
+            $stmt = $this->db->conn->prepare("SELECT ngayphathien AS \"NgayPhatHien\" FROM phat_hien_sau WHERE mabaocao = ?");
             $stmt->execute([$maBaoCao]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -174,7 +174,7 @@ class SauBenhModel {
                 exit;
             }
 
-            $query = "DELETE FROM phat_hien_sau WHERE MaBaoCao = ?";
+            $query = "DELETE FROM phat_hien_sau WHERE mabaocao = ?";
             
             $stmt = $this->db->conn->prepare($query);
             
@@ -206,7 +206,7 @@ class SauBenhModel {
     //Hàm lấy thông tin sâu bệnh
     public function getAllSauBenh() {
         try {
-            $query = "SELECT MaSau, TenSauBenh, TrieuChung, BienPhapXuLy FROM sau_benh ORDER BY MaSau";
+            $query = "SELECT masau AS \"MaSau\", tensaubenh AS \"TenSauBenh\", trieuchung AS \"TrieuChung\", bienphapxuly AS \"BienPhapXuLy\" FROM sau_benh ORDER BY masau";
             
             $stmt = $this->db->conn->prepare($query);
             $stmt->execute();

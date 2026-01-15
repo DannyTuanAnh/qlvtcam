@@ -11,26 +11,26 @@ class nhatkyModel {
     public function getNhatKyById($user_id) {
         $stmt = $this->db->conn->prepare("
             SELECT 
-                td.MaThua,
-                nk.MaNhatKy,
-                vm.TenVu,
-                nk.ThoiGian,
-                nk.LoaiHoatDong,
-                nk.NoiDung
+                td.mathua AS \"MaThua\",
+                nk.manhatky AS \"MaNhatKy\",
+                vm.tenvu AS \"TenVu\",
+                nk.thoigian AS \"ThoiGian\",
+                nk.loaihoatdong AS \"LoaiHoatDong\",
+                nk.noidung AS \"NoiDung\"
             FROM 
                 quan_ly_nguoi_dung qlnd
             JOIN 
-                nong_ho nh ON qlnd.MaNguoiDung = nh.MaNguoiDung
+                nong_ho nh ON qlnd.manguoidung = nh.manguoidung
             JOIN 
-                thua_dat td ON nh.MaHo = td.MaHo
+                thua_dat td ON nh.maho = td.maho
             JOIN 
-                nhat_ky_canh_tac nk ON td.MaThua = nk.MaThua
+                nhat_ky_canh_tac nk ON td.mathua = nk.mathua
             JOIN 
-                vu_mua vm ON nk.MaVu = vm.MaVu
+                vu_mua vm ON nk.mavu = vm.mavu
             WHERE 
-                qlnd.MaNguoiDung = ?
+                qlnd.manguoidung = ?
             ORDER BY 
-                td.MaThua, nk.ThoiGian
+                td.mathua, nk.thoigian
         ");
 
         $stmt->execute([$user_id]);
@@ -53,9 +53,9 @@ class nhatkyModel {
     public function updateNhatKyById($nhatKy_id, $maVu, $thoiGian, $loaiHoatDong, $noiDung) {
         // 1. Lấy MaThua và MaVu từ nhật ký
         $stmt = $this->db->conn->prepare("
-            SELECT MaThua, MaVu 
+            SELECT mathua AS \"MaThua\", mavu AS \"MaVu\" 
             FROM nhat_ky_canh_tac 
-            WHERE MaNhatKy = ?
+            WHERE manhatky = ?
         ");
         $stmt->execute([$nhatKy_id]);
         $nhatKy = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -71,7 +71,7 @@ class nhatkyModel {
         $stmt = $this->db->conn->prepare("
             SELECT * 
             FROM thu_hoach 
-            WHERE MaThua = ? AND MaVu = ?
+            WHERE mathua = ? AND mavu = ?
             LIMIT 1
         ");
         $stmt->execute([$maThua, $maVuNhatKy]);
@@ -87,8 +87,8 @@ class nhatkyModel {
         // 3. Nếu chưa thu hoạch thì cho update
         $stmt = $this->db->conn->prepare("
             UPDATE nhat_ky_canh_tac
-            SET LoaiHoatDong = ?, NoiDung = ?, ThoiGian = ?, MaVu = ?
-            WHERE MaNhatKy = ?
+            SET loaihoatdong = ?, noidung = ?, thoigian = ?, mavu = ?
+            WHERE manhatky = ?
         ");
         $ok = $stmt->execute([$loaiHoatDong, $noiDung, $thoiGian, $maVu, $nhatKy_id]);
 
@@ -101,7 +101,7 @@ class nhatkyModel {
     public function addNhatKy($user_id, $loaiHoatDong, $noiDung, $maThua, $vuMua, $ngayThucHien) {
         // Thêm nhật ký mới
         $stmt = $this->db->conn->prepare("
-            INSERT INTO nhat_ky_canh_tac (MaThua, LoaiHoatDong, NoiDung, maVu, MaNguoiNhap, ThoiGian)
+            INSERT INTO nhat_ky_canh_tac (mathua, loaihoatdong, noidung, mavu, manguoinhap, thoigian)
             VALUES (?, ?, ?, ?, ?, ?)
         ");
         $ok = $stmt->execute([$maThua, $loaiHoatDong, $noiDung, $vuMua, $user_id, $ngayThucHien]);

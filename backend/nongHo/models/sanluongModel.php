@@ -11,28 +11,28 @@ class sanluongModel {
     public function getSanLuongById($user_id) {
         $stmt = $this->db->conn->prepare("
             SELECT 
-            th.MaThuHoach,
-    td.MaThua,
-    vm.TenVu,
-    th.MaVu,
-    th.NgayThuHoach,
-    th.SanLuong,
-    th.GhiChu,
-    th.ChatLuong
+            th.mathuhoach AS \"MaThuHoach\",
+    td.mathua AS \"MaThua\",
+    vm.tenvu AS \"TenVu\",
+    th.mavu AS \"MaVu\",
+    th.ngaythuhoach AS \"NgayThuHoach\",
+    th.sanluong AS \"SanLuong\",
+    th.ghichu AS \"GhiChu\",
+    th.chatluong AS \"ChatLuong\"
 FROM 
     quan_ly_nguoi_dung qlnd
 JOIN 
-    nong_ho nh ON qlnd.MaNguoiDung = nh.MaNguoiDung
+    nong_ho nh ON qlnd.manguoidung = nh.manguoidung
 JOIN 
-    thua_dat td ON nh.MaHo = td.MaHo
+    thua_dat td ON nh.maho = td.maho
 JOIN 
-    thu_hoach th ON td.MaThua = th.MaThua
+    thu_hoach th ON td.mathua = th.mathua
 JOIN 
-    vu_mua vm ON th.MaVu = vm.MaVu
+    vu_mua vm ON th.mavu = vm.mavu
 WHERE 
-    qlnd.MaNguoiDung = ?
+    qlnd.manguoidung = ?
 ORDER BY 
-    td.MaThua, th.NgayThuHoach
+    td.mathua, th.ngaythuhoach
         ");
 
         $stmt->execute([$user_id]);
@@ -53,28 +53,28 @@ ORDER BY
     public function getThongKeVuMuaByID($user_id){
         $stmt = $this->db->conn->prepare("
             SELECT 
-            th.MaVu,
-            vm.TenVu,
-            td.MaThua,
-            th.MaThuHoach,
-    th.NgayThuHoach,
-    th.SanLuong,
-    th.GhiChu,
-    th.ChatLuong
+            th.mavu AS \"MaVu\",
+            vm.tenvu AS \"TenVu\",
+            td.mathua AS \"MaThua\",
+            th.mathuhoach AS \"MaThuHoach\",
+    th.ngaythuhoach AS \"NgayThuHoach\",
+    th.sanluong AS \"SanLuong\",
+    th.ghichu AS \"GhiChu\",
+    th.chatluong AS \"ChatLuong\"
 FROM 
     quan_ly_nguoi_dung qlnd
 JOIN 
-    nong_ho nh ON qlnd.MaNguoiDung = nh.MaNguoiDung
+    nong_ho nh ON qlnd.manguoidung = nh.manguoidung
 JOIN 
-    thua_dat td ON nh.MaHo = td.MaHo
+    thua_dat td ON nh.maho = td.maho
 JOIN 
-    thu_hoach th ON td.MaThua = th.MaThua
+    thu_hoach th ON td.mathua = th.mathua
 JOIN 
-    vu_mua vm ON th.MaVu = vm.MaVu
+    vu_mua vm ON th.mavu = vm.mavu
 WHERE 
-    qlnd.MaNguoiDung = ?
+    qlnd.manguoidung = ?
 ORDER BY 
-    vm.MaVu, td.MaThua");
+    vm.mavu, td.mathua");
         $stmt->execute([$user_id]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -94,40 +94,40 @@ ORDER BY
     public function newThuHoach($user_id){
         $stmt = $this->db->conn->prepare("
             SELECT 
-    td.MaThua,
-    vm.TenVu,
-    th.NgayThuHoach,
-    th.SanLuong,
-    th.GhiChu,
-    th.ChatLuong,
-    td_count.SoThuaDat,
+    td.mathua AS \"MaThua\",
+    vm.tenvu AS \"TenVu\",
+    th.ngaythuhoach AS \"NgayThuHoach\",
+    th.sanluong AS \"SanLuong\",
+    th.ghichu AS \"GhiChu\",
+    th.chatluong AS \"ChatLuong\",
+    td_count.sothuadat AS \"SoThuaDat\",
     (
-        SELECT vm2.TenVu
+        SELECT vm2.tenvu
         FROM vu_mua vm2
-        WHERE CURRENT_TIMESTAMP BETWEEN vm2.ThoiGianBatDau AND vm2.ThoiGianThuHoach
-    ) AS VuHienTai
+        WHERE CURRENT_TIMESTAMP BETWEEN vm2.thoigianbatdau AND vm2.thoigianthuhoach
+    ) AS \"VuHienTai\"
 FROM 
     quan_ly_nguoi_dung qlnd
 JOIN 
-    nong_ho nh ON qlnd.MaNguoiDung = nh.MaNguoiDung
+    nong_ho nh ON qlnd.manguoidung = nh.manguoidung
 JOIN 
-    thua_dat td ON nh.MaHo = td.MaHo
+    thua_dat td ON nh.maho = td.maho
 JOIN 
-    thu_hoach th ON td.MaThua = th.MaThua
+    thu_hoach th ON td.mathua = th.mathua
 JOIN 
-    vu_mua vm ON th.MaVu = vm.MaVu
+    vu_mua vm ON th.mavu = vm.mavu
 JOIN (
-    SELECT MaHo, COUNT(*) AS SoThuaDat
+    SELECT maho, COUNT(*) AS SoThuaDat
     FROM thua_dat
-    GROUP BY MaHo
-) td_count ON nh.MaHo = td_count.MaHo
+    GROUP BY maho
+) td_count ON nh.maho = td_count.maho
 WHERE 
-    qlnd.MaNguoiDung = ?
-    AND th.NgayThuHoach = (
-        SELECT MAX(th2.NgayThuHoach)
+    qlnd.manguoidung = ?
+    AND th.ngaythuhoach = (
+        SELECT MAX(th2.ngaythuhoach)
         FROM thu_hoach th2
-        JOIN thua_dat td2 ON th2.MaThua = td2.MaThua
-        WHERE td2.MaHo = nh.MaHo
+        JOIN thua_dat td2 ON th2.mathua = td2.mathua
+        WHERE td2.maho = nh.maho
     )
         ");
 
@@ -140,8 +140,8 @@ WHERE
         // Update nhật ký
         $stmt = $this->db->conn->prepare("
         UPDATE thu_hoach
-        SET MaVu = ? ,SanLuong = ?, ChatLuong = ?, GhiChu = ?, MaThua = ?, NgayThuHoach = ?
-        WHERE MaThuHoach = ?
+        SET mavu = ? ,sanluong = ?, chatluong = ?, ghichu = ?, mathua = ?, ngaythuhoach = ?
+        WHERE mathuhoach = ?
         ");
         $ok = $stmt->execute([$maVu, $sanLuong, $chatLuong, $ghiChu, $maThua, $ngayThuHoach, $maThuHoach]);
 
@@ -151,7 +151,7 @@ WHERE
     public function addThuHoach($maThua, $vuMua, $sanLuong, $chatLuong, $ghiChu) {
         // Thêm nhật ký mới
         $stmt = $this->db->conn->prepare("
-            INSERT INTO thu_hoach (MaThua, MaVu, SanLuong, ChatLuong, GhiChu)
+            INSERT INTO thu_hoach (mathua, mavu, sanluong, chatluong, ghichu)
             VALUES (?, ?, ?, ?, ?)
         ");
         $ok = $stmt->execute([$maThua, $vuMua, $sanLuong, $chatLuong, $ghiChu]);

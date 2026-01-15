@@ -9,7 +9,13 @@ class VuMuaModel {
     }
 
     public function getInfoVuMua() {
-        $stmt = $this->db->conn->prepare("SELECT * FROM vu_mua order by MaVu");
+        $stmt = $this->db->conn->prepare("SELECT 
+            mavu AS \"MaVu\",
+            tenvu AS \"TenVu\",
+            thoigianbatdau AS \"ThoiGianBatDau\",
+            thoigianthuh AS \"ThoiGianThuHoach\",
+            motavu AS \"MoTaVu\"
+        FROM vu_mua ORDER BY mavu");
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -20,12 +26,12 @@ class VuMuaModel {
         $stmt = $this->db->conn->prepare("
         UPDATE vu_mua
         SET  
-            TenVu = ?, 
-            ThoiGianBatDau = ?, 
-            ThoiGianThuHoach = ?, 
-            MoTaVu = ?
+            tenvu = ?, 
+            thoigianbatdau = ?, 
+            thoigianthuh = ?, 
+            motavu = ?
         WHERE 
-           MaVu = ?
+           mavu = ?
         ");
         $ok = $stmt->execute([$TenVu, $NgayBatDau, $NgayKetThuc, $MoTa, $MaVu]);
         if ($ok){
@@ -38,7 +44,7 @@ class VuMuaModel {
     public function addInfoVuMua($TenVu, $NgayBatDau, $NgayKetThuc, $MoTa) {
         
         //Thêm vụ mùa mới
-        $add = $this->db->conn->prepare("INSERT INTO vu_mua (TenVu, ThoiGianBatDau, ThoiGianThuHoach, MoTaVu) VALUES (?, ?, ?, ?)");
+        $add = $this->db->conn->prepare("INSERT INTO vu_mua (tenvu, thoigianbatdau, thoigianthuh, motavu) VALUES (?, ?, ?, ?)");
         $ok = $add->execute([$TenVu, $NgayBatDau, $NgayKetThuc, $MoTa]);
         if ($ok) {
             return ["status" => "success", "message" => "Thêm vụ mùa thành công"];
@@ -49,7 +55,7 @@ class VuMuaModel {
     }
     public function deleteInfoVuMua($MaVu) {
         // Kiểm tra vụ mùa có đang được sử dụng không
-        $checkUsageQuery = "SELECT COUNT(*) as count FROM nhat_ky_canh_tac WHERE MaVu = ?";
+        $checkUsageQuery = "SELECT COUNT(*) AS \"count\" FROM nhat_ky_canh_tac WHERE mavu = ?";
         $checkUsageStmt = $this->db->conn->prepare($checkUsageQuery);
         $checkUsageStmt->execute([$MaVu]);
         $usage = $checkUsageStmt->fetch(PDO::FETCH_ASSOC);
@@ -59,7 +65,7 @@ class VuMuaModel {
         }
 
         // Xóa vụ mùa
-        $deleteQuery = "DELETE FROM vu_mua WHERE MaVu = ?";
+        $deleteQuery = "DELETE FROM vu_mua WHERE mavu = ?";
         $deleteStmt = $this->db->conn->prepare($deleteQuery);
         
         if ($deleteStmt->execute([$MaVu])) {

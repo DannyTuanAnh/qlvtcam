@@ -10,21 +10,21 @@ class NguoiDungModel {
 
     public function getInfoNguoiDung() {
         $stmt = $this->db->conn->prepare("SELECT 
-    nh.HoTen,
-    nh.GioiTinh,
-    nh.NgaySinh,
-    nh.DiaChi,
-    nh.SoDienThoai,
-    nh.Email,
-    COUNT(td.MaThua) AS SoThuaDat
+    nh.hoten AS \"HoTen\",
+    nh.gioitinh AS \"GioiTinh\",
+    nh.ngaysinh AS \"NgaySinh\",
+    nh.diachi AS \"DiaChi\",
+    nh.sodienthoai AS \"SoDienThoai\",
+    nh.email AS \"Email\",
+    COUNT(td.mathua) AS \"SoThuaDat\"
 FROM 
     nong_ho nh
 LEFT JOIN 
-    thua_dat td ON nh.MaHo = td.MaHo
+    thua_dat td ON nh.maho = td.maho
 GROUP BY 
-    nh.MaHo, nh.HoTen, nh.GioiTinh, nh.NgaySinh, nh.DiaChi, nh.SoDienThoai, nh.Email
+    nh.maho, nh.hoten, nh.gioitinh, nh.ngaysinh, nh.diachi, nh.sodienthoai, nh.email
 ORDER BY 
-    nh.MaHo");
+    nh.maho");
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;

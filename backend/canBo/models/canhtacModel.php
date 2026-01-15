@@ -10,18 +10,18 @@ class CanhTacModel {
 
     public function getInfoCayTrong() {
         $stmt = $this->db->conn->prepare("SELECT 
-    nk.MaNhatKy AS STT,
-    DATE(nk.ThoiGian) AS NgayCanhTac,
-    TO_CHAR(nk.ThoiGian, 'HH24:MI:SS') AS Gio,
-    nh.HoTen AS NongHo,
-    vm.TenVu,
-    nk.LoaiHoatDong,
-    nk.NoiDung
+    nk.manhatky AS \"STT\",
+    DATE(nk.thoigian) AS \"NgayCanhTac\",
+    TO_CHAR(nk.thoigian, 'HH24:MI:SS') AS \"Gio\",
+    nh.hoten AS \"NongHo\",
+    vm.tenvu AS \"TenVu\",
+    nk.loaihoatdong AS \"LoaiHoatDong\",
+    nk.noidung AS \"NoiDung\"
 FROM nhat_ky_canh_tac nk
-JOIN thua_dat td ON nk.MaThua = td.MaThua
-JOIN nong_ho nh ON td.MaHo = nh.MaHo
-JOIN vu_mua vm ON nk.MaVu = vm.MaVu
-ORDER BY nk.ThoiGian DESC");
+JOIN thua_dat td ON nk.mathua = td.mathua
+JOIN nong_ho nh ON td.maho = nh.maho
+JOIN vu_mua vm ON nk.mavu = vm.mavu
+ORDER BY nk.thoigian DESC");
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;

@@ -10,10 +10,19 @@ class ThoiTietModel {
     
     public function getThoiTiet() {
         try {
-            $query = "SELECT tt.*, vt.MaVung, vt.Huyen 
+            $query = "SELECT tt.mathoitiet AS \"MaThoiTiet\",
+                             tt.ngaydo AS \"NgayDo\",
+                             tt.nhietdo AS \"NhietDo\",
+                             tt.doam AS \"DoAm\",
+                             tt.luongmua AS \"LuongMua\",
+                             tt.thoitiet AS \"ThoiTiet\",
+                             tt.ghichu AS \"GhiChu\",
+                             tt.mavung AS \"MaVung\",
+                             vt.mavung AS \"MaVung\",
+                             vt.huyen AS \"Huyen\"
                       FROM thoi_tiet tt 
-                      INNER JOIN vung_trong vt ON tt.MaVung = vt.MaVung 
-                      ORDER BY tt.NgayDo DESC";
+                      INNER JOIN vung_trong vt ON tt.mavung = vt.mavung 
+                      ORDER BY tt.ngaydo DESC";
             
             $stmt = $this->db->conn->prepare($query);
             $stmt->execute();
@@ -52,7 +61,7 @@ class ThoiTietModel {
     public function updateThoiTietById($maThoiTiet, $nhietDo,$doAm,$luongMua,$thoiTiet,$ghiChu, $thoiGianDo) {
 
         // Lấy thời gian đo
-        $stmt = $this->db->conn->prepare("SELECT NgayDo FROM thoi_tiet WHERE MaThoiTiet = ?");
+        $stmt = $this->db->conn->prepare("SELECT ngaydo AS \"NgayDo\" FROM thoi_tiet WHERE mathoitiet = ?");
         $stmt->execute([$maThoiTiet]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -73,8 +82,8 @@ class ThoiTietModel {
         // Update nhật ký
         $stmt = $this->db->conn->prepare("
         UPDATE thoi_tiet
-        SET NhietDo = ?, DoAm = ?, LuongMua = ?, ThoiTiet = ?, GhiChu = ?, NgayDo = ?
-        WHERE MaThoiTiet = ?
+        SET nhietdo = ?, doam = ?, luongmua = ?, thoitiet = ?, ghichu = ?, ngaydo = ?
+        WHERE mathoitiet = ?
         ");
         $ok = $stmt->execute([$nhietDo, $doAm, $luongMua, $thoiTiet, $ghiChu, $thoiGianDo, $maThoiTiet]);
 
@@ -84,7 +93,7 @@ class ThoiTietModel {
     public function addThoiTiet($maVung, $nhietDo, $doAm, $luongMua, $thoiTiet, $ghiChu, $thoiGianDo) {
         // Thêm nhật ký mới
         $stmt = $this->db->conn->prepare("
-            INSERT INTO thoi_tiet (MaVung, NhietDo, DoAm, LuongMua, ThoiTiet, GhiChu, NgayDo)
+            INSERT INTO thoi_tiet (mavung, nhietdo, doam, luongmua, thoitiet, ghichu, ngaydo)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ");
         $ok = $stmt->execute([$maVung, $nhietDo, $doAm, $luongMua, $thoiTiet, $ghiChu, $thoiGianDo]);

@@ -10,11 +10,20 @@ class vungtrongModel {
 
     public function getInfoVungTrong() {
         $stmt = $this->db->conn->prepare("SELECT 
-    *
+    mavung AS \"MaVung\",
+    tenvung AS \"TenVung\",
+    diachi AS \"DiaChi\",
+    tinh AS \"Tinh\",
+    huyen AS \"Huyen\",
+    xa AS \"Xa\",
+    dientich AS \"DienTich\",
+    sohodan AS \"SoHoDan\",
+    trangthai AS \"TrangThai\",
+    mota AS \"MoTa\"
 FROM 
     vung_trong
 ORDER BY 
-    MaVung");
+    mavung");
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -26,17 +35,17 @@ ORDER BY
         $stmt = $this->db->conn->prepare("
         UPDATE vung_trong
         SET 
-            TenVung = ?, 
-            DiaChi = ?, 
-            Tinh = ?, 
-            Huyen = ?, 
-            Xa = ?, 
-            DienTich = ?, 
-            SoHoDan = ?, 
-            TrangThai = ?, 
-            MoTa = ?
+            tenvung = ?, 
+            diachi = ?, 
+            tinh = ?, 
+            huyen = ?, 
+            xa = ?, 
+            dientich = ?, 
+            sohodan = ?, 
+            trangthai = ?, 
+            mota = ?
         WHERE 
-            MaVung = ?
+            mavung = ?
         ");
         $ok = $stmt->execute([$TenVung, $DiaChi, $Tinh, $Huyen, $Xa, $DienTich, $SoHoDan, $TrangThai, $MoTa, $MaVung]);
         if ($ok){
@@ -48,7 +57,7 @@ ORDER BY
 
     public function addInfoVungTrong( $TenVung, $DiaChi, $Tinh, $Huyen, $Xa, $DienTich, $SoHoDan, $TrangThai, $MoTa) {
         //Kiểm tra địa chỉ vùng trồng đã tồn tại chưa
-        $stmt = $this->db->conn->prepare("SELECT COUNT(*) as count FROM vung_trong WHERE DiaChi = ? AND Tinh = ? AND Huyen = ? AND Xa = ?");
+        $stmt = $this->db->conn->prepare("SELECT COUNT(*) AS \"count\" FROM vung_trong WHERE diachi = ? AND tinh = ? AND huyen = ? AND xa = ?");
         $stmt->execute([$DiaChi, $Tinh, $Huyen, $Xa]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $count = $result['count'];
@@ -57,7 +66,7 @@ ORDER BY
             return ["status" => "error", "message" => "Địa chỉ vùng trồng đã tồn tại"];
         }
         //Thêm vùng trồng mới
-        $add = $this->db->conn->prepare("INSERT INTO vung_trong (TenVung, DiaChi, Tinh, Huyen, Xa, DienTich, SoHoDan, TrangThai, MoTa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $add = $this->db->conn->prepare("INSERT INTO vung_trong (tenvung, diachi, tinh, huyen, xa, dientich, sohodan, trangthai, mota) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $ok = $add->execute([$TenVung, $DiaChi, $Tinh, $Huyen, $Xa, $DienTich, $SoHoDan, $TrangThai, $MoTa]);
         if ($ok) {
             return ["status" => "success", "message" => "Thêm vùng trồng thành công"];
@@ -70,8 +79,8 @@ ORDER BY
     public function deleteInfoVungTrong($MaVung) {
         // Kiểm tra vùng trồng có đang được sử dụng không
         $checkUsageQuery = "SELECT 
-                              (SELECT COUNT(*) FROM thua_dat td JOIN nong_ho nh ON nh.MaHo = td.MaHo WHERE nh.MaVung = ?) as thua_count,
-                              (SELECT COUNT(*) FROM nong_ho WHERE MaVung = ?) as nong_ho_count";
+                              (SELECT COUNT(*) FROM thua_dat td JOIN nong_ho nh ON nh.maho = td.maho WHERE nh.mavung = ?) AS \"thua_count\",
+                              (SELECT COUNT(*) FROM nong_ho WHERE mavung = ?) AS \"nong_ho_count\"";
         $checkUsageStmt = $this->db->conn->prepare($checkUsageQuery);
         $checkUsageStmt->execute([$MaVung, $MaVung]);
         $usage = $checkUsageStmt->fetch(PDO::FETCH_ASSOC);
@@ -81,7 +90,7 @@ ORDER BY
         }
 
         // Xóa vùng trồng
-        $deleteQuery = "DELETE FROM vung_trong WHERE MaVung = ?";
+        $deleteQuery = "DELETE FROM vung_trong WHERE mavung = ?";
         $deleteStmt = $this->db->conn->prepare($deleteQuery);
         
         if ($deleteStmt->execute([$MaVung])) {

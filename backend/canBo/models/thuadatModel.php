@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../../config/connect.php';
 
-class ThuaDatModel {
+class ThuaDatModel{
+
     private $db;
 
     public function __construct() {
@@ -10,19 +11,19 @@ class ThuaDatModel {
 
     public function getInfoThuaDat() {
         $stmt = $this->db->conn->prepare("SELECT 
-                    td.MaThua,
-                    td.MaHo,
-                    td.DienTich,
-                    td.LoaiDat,
-                    td.ViTri,
-                    nh.MaVung,
-                    vt.TenVung,
-                    nh.HoTen,
-                    nh.SoDienThoai
+                    td.mathua AS \"MaThua\",
+                    td.maho AS \"MaHo\",
+                    td.dientich AS \"DienTich\",
+                    td.loaidat AS \"LoaiDat\",
+                    td.vitri AS \"ViTri\",
+                    nh.mavung AS \"MaVung\",
+                    vt.tenvung AS \"TenVung\",
+                    nh.hoten AS \"HoTen\",
+                    nh.sodienthoai AS \"SoDienThoai\"
                   FROM thua_dat td
-                  LEFT JOIN nong_ho nh ON td.MaHo = nh.MaHo
-                  LEFT JOIN vung_trong vt ON nh.MaVung = vt.MaVung
-                  ORDER BY td.MaThua");
+                  LEFT JOIN nong_ho nh ON td.maho = nh.maho
+                  LEFT JOIN vung_trong vt ON nh.mavung = vt.mavung
+                  ORDER BY td.mathua");
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -34,12 +35,12 @@ class ThuaDatModel {
         $stmt = $this->db->conn->prepare("
         UPDATE thua_dat
         SET  
-            MaHo = ?, 
-            DienTich = ?, 
-            LoaiDat = ?, 
-            ViTri = ?
+            maho = ?, 
+            dientich = ?, 
+            loaidat = ?, 
+            vitri = ?
         WHERE 
-            MaThua = ?
+            mathua = ?
         ");
         $ok = $stmt->execute([$maHo, $dienTich, $loaiDat, $viTri, $maThua]);
         if ($ok){
@@ -52,7 +53,7 @@ class ThuaDatModel {
     public function addInfoThuaDat( $maHo, $dienTich, $loaiDat, $viTri) {
         
         //Thêm thửa đất mới
-        $add = $this->db->conn->prepare("INSERT INTO thua_dat ( MaHo, DienTich, LoaiDat, ViTri) VALUES (?, ?, ?, ?)");
+        $add = $this->db->conn->prepare("INSERT INTO thua_dat (maho, dientich, loaidat, vitri) VALUES (?, ?, ?, ?)");
         $ok = $add->execute([$maHo, $dienTich, $loaiDat, $viTri]);
         if ($ok) {
             return ["status" => "success", "message" => "Thêm thửa đất thành công"];
@@ -64,7 +65,7 @@ class ThuaDatModel {
 
     public function deleteInfoThuaDat($MaThua) {
         // Kiểm tra thửa đất có đang được sử dụng không
-        $checkUsageQuery = "SELECT COUNT(*) as count FROM giong_trong WHERE MaThua = ?";
+        $checkUsageQuery = "SELECT COUNT(*) AS \"count\" FROM giong_trong WHERE mathua = ?";
         $checkUsageStmt = $this->db->conn->prepare($checkUsageQuery);
         $checkUsageStmt->execute([$MaThua]);
         $usage = $checkUsageStmt->fetch(PDO::FETCH_ASSOC);
@@ -74,7 +75,7 @@ class ThuaDatModel {
         }
 
         // Xóa thửa đất
-        $deleteQuery = "DELETE FROM thua_dat WHERE MaThua = ?";
+        $deleteQuery = "DELETE FROM thua_dat WHERE mathua = ?";
         $deleteStmt = $this->db->conn->prepare($deleteQuery);
         
         if ($deleteStmt->execute([$MaThua])) {

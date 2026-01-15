@@ -11,31 +11,31 @@ class giongtrongModel {
     public function getGiongTrongById($user_id) {
         $stmt = $this->db->conn->prepare("
             SELECT 
-            vm.MaVu,
-            vm.TenVu,
-            td.MaThua,
-            td.DienTich,
-            td.ViTri,
-            gc.TenGiong AS TenCayTrong,
-            gt.SoLuongCay,
-            gt.NgayTrong,
-            gt.MaTrong
+            vm.mavu AS \"MaVu\",
+            vm.tenvu AS \"TenVu\",
+            td.mathua AS \"MaThua\",
+            td.dientich AS \"DienTich\",
+            td.vitri AS \"ViTri\",
+            gc.tengiong AS \"TenCayTrong\",
+            gt.soluongcay AS \"SoLuongCay\",
+            gt.ngaytrong AS \"NgayTrong\",
+            gt.matrong AS \"MaTrong\"
         FROM 
             quan_ly_nguoi_dung qlnd
         JOIN 
-            nong_ho nh ON qlnd.MaNguoiDung = nh.MaNguoiDung
+            nong_ho nh ON qlnd.manguoidung = nh.manguoidung
         JOIN 
-            thua_dat td ON nh.MaHo = td.MaHo
+            thua_dat td ON nh.maho = td.maho
         JOIN 
-            giong_trong gt ON td.MaThua = gt.MaThua
+            giong_trong gt ON td.mathua = gt.mathua
         JOIN 
-            giong_cam gc ON gt.MaGiong = gc.MaGiong
+            giong_cam gc ON gt.magiong = gc.magiong
         JOIN 
-            vu_mua vm ON gt.MaVu = vm.MaVu
+            vu_mua vm ON gt.mavu = vm.mavu
         WHERE 
-            qlnd.MaNguoiDung = ?
+            qlnd.manguoidung = ?
         ORDER BY 
-            vm.MaVu, gt.NgayTrong
+            vm.mavu, gt.ngaytrong
         ");
 
         $stmt->execute([$user_id]);
@@ -58,7 +58,12 @@ class giongtrongModel {
     //Hàm lấy thông tin giống cam
     public function getAllCay() {
         try {
-            $query = "SELECT * FROM giong_cam ORDER BY MaGiong";
+            $query = "SELECT 
+                magiong AS \"MaGiong\",
+                tengiong AS \"TenGiong\",
+                dactinh AS \"DacTinh\",
+                nguongoc AS \"NguonGoc\"
+            FROM giong_cam ORDER BY magiong";
             
             $stmt = $this->db->conn->prepare($query);
             $stmt->execute();
@@ -77,7 +82,7 @@ class giongtrongModel {
         try {
 
             // Lấy thời gian trồng
-            $stmt = $this->db->conn->prepare("SELECT NgayTrong FROM giong_trong WHERE MaTrong = ?");
+            $stmt = $this->db->conn->prepare("SELECT ngaytrong AS \"NgayTrong\" FROM giong_trong WHERE matrong = ?");
             $stmt->execute([$maTrong]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -96,8 +101,8 @@ class giongtrongModel {
             }
 
             $query = "UPDATE giong_trong 
-                      SET MaGiong = ?, MaVu = ?, MaThua = ?, NgayTrong = ?, SoLuongCay = ?
-                      WHERE MaTrong = ?"; 
+                      SET magiong = ?, mavu = ?, mathua = ?, ngaytrong = ?, soluongcay = ?
+                      WHERE matrong = ?"; 
             
             $stmt = $this->db->conn->prepare($query);
             
@@ -123,7 +128,7 @@ class giongtrongModel {
     public function addGiongTrong( $maGiong, $maVu, $maThua, $ngayTrong, $soLuongCay) {
         // Thêm thông tin trồng cây mới
         $stmt = $this->db->conn->prepare("
-            INSERT INTO giong_trong (MaGiong, MaVu, MaThua, NgayTrong, SoLuongCay)
+            INSERT INTO giong_trong (magiong, mavu, mathua, ngaytrong, soluongcay)
             VALUES (?, ?, ?, ?, ?)
         ");
         $ok = $stmt->execute([$maGiong, $maVu, $maThua, $ngayTrong, $soLuongCay]);
@@ -137,7 +142,7 @@ class giongtrongModel {
         try {
 
             // Lấy thời gian trồng
-            $stmt = $this->db->conn->prepare("SELECT NgayTrong FROM giong_trong WHERE MaTrong = ?");
+            $stmt = $this->db->conn->prepare("SELECT ngaytrong AS \"NgayTrong\" FROM giong_trong WHERE matrong = ?");
             $stmt->execute([$maTrong]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -155,7 +160,7 @@ class giongtrongModel {
                 exit;
             }
 
-            $query = "DELETE FROM giong_trong WHERE MaTrong = ?";
+            $query = "DELETE FROM giong_trong WHERE matrong = ?";
 
             $stmt = $this->db->conn->prepare($query);
             

@@ -10,26 +10,26 @@ class ProfileModel {
 
     public function getUserById($user_id) {
         $stmt = $this->db->conn->prepare("SELECT 
-    nh.MaHo,
-    nh.HoTen AS HoTenNongHo,
-    nh.GioiTinh,
-    nh.NgaySinh,
-    nh.DiaChi,
-    nh.SoDienThoai AS SDTNongHo,
-    nh.Email AS EmailNongHo,
-    nh.MaVung,
-    nh.avatar,
-    COUNT(td.MaThua) AS SoThuadat
+    nh.maho AS \"MaHo\",
+    nh.hoten AS \"HoTenNongHo\",
+    nh.gioitinh AS \"GioiTinh\",
+    nh.ngaysinh AS \"NgaySinh\",
+    nh.diachi AS \"DiaChi\",
+    nh.sodienthoai AS \"SDTNongHo\",
+    nh.email AS \"EmailNongHo\",
+    nh.mavung AS \"MaVung\",
+    nh.avatar AS \"avatar\",
+    COUNT(td.mathua) AS \"SoThuadat\"
 FROM 
     quan_ly_nguoi_dung qlnd
 JOIN 
-    nong_ho nh ON qlnd.MaNguoiDung = nh.MaNguoiDung
+    nong_ho nh ON qlnd.manguoidung = nh.manguoidung
 LEFT JOIN 
-    thua_dat td ON nh.MaHo = td.MaHo
+    thua_dat td ON nh.maho = td.maho
 WHERE 
-    qlnd.MaNguoiDung = ?
+    qlnd.manguoidung = ?
 GROUP BY 
-    qlnd.MaNguoiDung, nh.MaHo, nh.HoTen, nh.GioiTinh, nh.NgaySinh, nh.DiaChi, nh.SoDienThoai, nh.Email, nh.MaVung, nh.Avatar");
+    qlnd.manguoidung, nh.maho, nh.hoten, nh.gioitinh, nh.ngaysinh, nh.diachi, nh.sodienthoai, nh.email, nh.mavung, nh.avatar");
         $stmt->execute([$user_id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -38,8 +38,8 @@ GROUP BY
     public function updateUserById($user_id, $hoTen, $gioiTinh, $ngaySinh, $ap, $xa, $huyen, $tinh, $diaChiFull, $sdt, $email) {
         //1. Lấy mã vùng trồng trước khi update
         $query = $this->db->conn->prepare("
-            SELECT MaVung FROM nong_ho 
-            WHERE MaNguoiDung = ?
+            SELECT mavung AS \"MaVung\" FROM nong_ho 
+            WHERE manguoidung = ?
         ");
         $query->execute([$user_id]);
         $row_cu = $query->fetch(PDO::FETCH_ASSOC);
@@ -47,8 +47,8 @@ GROUP BY
 
         // 2. Lấy MaVung từ vung_trong
         $stmt = $this->db->conn->prepare("
-            SELECT MaVung FROM vung_trong 
-            WHERE DiaChi = ? AND Xa = ? AND Huyen = ? AND Tinh = ?
+            SELECT mavung AS \"MaVung\" FROM vung_trong 
+            WHERE diachi = ? AND xa = ? AND huyen = ? AND tinh = ?
             LIMIT 1
         ");
         $stmt->execute([$ap, $xa, $huyen, $tinh]);
@@ -62,20 +62,20 @@ GROUP BY
          // 3. Update nong_ho
         $stmt = $this->db->conn->prepare("
             UPDATE nong_ho nh
-            SET nh.DiaChi = ?, nh.MaVung = ?, nh.SoDienThoai = ?, nh.Email = ?, 
-                nh.HoTen = ?, nh.GioiTinh = ?, nh.NgaySinh = ?
-            WHERE nh.MaNguoiDung = ?
+            SET nh.diachi = ?, nh.mavung = ?, nh.sodienthoai = ?, nh.email = ?, 
+                nh.hoten = ?, nh.gioitinh = ?, nh.ngaysinh = ?
+            WHERE nh.manguoidung = ?
         ");
         $ok = $stmt->execute([$diaChiFull, $maVung, $sdt, $email, $hoTen, $gioiTinh, $ngaySinh, $user_id]);
 
         // 4. Cập nhật số lượng nông hộ cho vùng trồng mới vừa chọn
         if ($maVungCu !== $maVung) {
             if ($maVungCu) {
-                $updateVungCu = $this->db->conn->prepare("UPDATE vung_trong SET SoHoDan = GREATEST(SoHoDan - 1, 0) WHERE MaVung = ?");
+                $updateVungCu = $this->db->conn->prepare("UPDATE vung_trong SET sohodan = GREATEST(sohodan - 1, 0) WHERE mavung = ?");
                 $updateVungCu->execute([$maVungCu]);
             }
             if ($maVung) {
-                $updateVungMoi = $this->db->conn->prepare("UPDATE vung_trong SET SoHoDan = SoHoDan + 1 WHERE MaVung = ?");
+                $updateVungMoi = $this->db->conn->prepare("UPDATE vung_trong SET sohodan = sohodan + 1 WHERE mavung = ?");
                 $updateVungMoi->execute([$maVung]);
             }
         }

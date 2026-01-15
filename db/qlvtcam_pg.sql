@@ -7,10 +7,6 @@
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,15 +24,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE canbo_kt (
-  MaCanBo int(11) NOT NULL,
+  MaCanBo INTEGER NOT NULL,
   HoTen varchar(100) NOT NULL,
-  GioiTinh enum('Nam','Nữ') NOT NULL,
+  GioiTinh VARCHAR(10) NOT NULL,
   NgaySinh TIMESTAMP NOT NULL,
   SoDienThoai varchar(15) NOT NULL,
   Email varchar(50) DEFAULT NULL,
-  DonViCongTac int(11) NOT NULL,
+  DonViCongTac INTEGER NOT NULL,
   TrangThai tinyint(4) NOT NULL DEFAULT 1,
-  MaNguoiDung int(11) NOT NULL,
+  MaNguoiDung INTEGER NOT NULL,
   avatar varchar(255) DEFAULT NULL
 );
 
@@ -58,7 +54,7 @@ INSERT INTO canbo_kt (MaCanBo, HoTen, GioiTinh, NgaySinh, SoDienThoai, Email, Do
 --
 
 CREATE TABLE giong_cam (
-  MaGiong int(11) NOT NULL,
+  MaGiong INTEGER NOT NULL,
   TenGiong varchar(100) NOT NULL,
   DacTinh text DEFAULT NULL,
   NguonGoc varchar(100) DEFAULT NULL
@@ -85,12 +81,12 @@ INSERT INTO giong_cam (MaGiong, TenGiong, DacTinh, NguonGoc) VALUES
 --
 
 CREATE TABLE giong_trong (
-  MaTrong int(11) NOT NULL,
-  MaGiong int(11) NOT NULL,
-  MaVu int(11) NOT NULL,
-  MaThua int(11) NOT NULL,
+  MaTrong INTEGER NOT NULL,
+  MaGiong INTEGER NOT NULL,
+  MaVu INTEGER NOT NULL,
+  MaThua INTEGER NOT NULL,
   NgayTrong TIMESTAMP DEFAULT current_timestamp(),
-  SoLuongCay int(11) DEFAULT NULL
+  SoLuongCay INTEGER DEFAULT NULL
 );
 
 --
@@ -164,12 +160,12 @@ INSERT INTO giong_trong (MaTrong, MaGiong, MaVu, MaThua, NgayTrong, SoLuongCay) 
 --
 
 CREATE TABLE ho_tro_ky_thuat (
-  MaHoTro int(11) NOT NULL,
+  MaHoTro INTEGER NOT NULL,
   NgayHoTro TIMESTAMP NOT NULL DEFAULT current_timestamp(),
   NoiDung text NOT NULL,
-  MaCanBo int(11) DEFAULT NULL,
-  MaHo int(11) DEFAULT NULL,
-  MaVung int(11) DEFAULT NULL
+  MaCanBo INTEGER DEFAULT NULL,
+  MaHo INTEGER DEFAULT NULL,
+  MaVung INTEGER DEFAULT NULL
 );
 
 --
@@ -189,13 +185,13 @@ INSERT INTO ho_tro_ky_thuat (MaHoTro, NgayHoTro, NoiDung, MaCanBo, MaHo, MaVung)
 --
 
 CREATE TABLE nhat_ky_canh_tac (
-  MaNhatKy int(11) NOT NULL,
-  ThoiGian timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  MaNhatKy INTEGER NOT NULL,
+  ThoiGian timestamp NOT NULL DEFAULT current_timestamp(),
   LoaiHoatDong varchar(100) DEFAULT NULL,
   NoiDung text DEFAULT NULL,
-  MaThua int(11) NOT NULL,
-  MaVu int(11) NOT NULL,
-  MaNguoiNhap int(11) NOT NULL
+  MaThua INTEGER NOT NULL,
+  MaVu INTEGER NOT NULL,
+  MaNguoiNhap INTEGER NOT NULL
 );
 
 --
@@ -229,15 +225,15 @@ INSERT INTO nhat_ky_canh_tac (MaNhatKy, ThoiGian, LoaiHoatDong, NoiDung, MaThua,
 --
 
 CREATE TABLE nong_ho (
-  MaHo int(11) NOT NULL,
+  MaHo INTEGER NOT NULL,
   HoTen varchar(100) NOT NULL,
-  GioiTinh enum('Nam','Nữ') NOT NULL,
+  GioiTinh VARCHAR(10) NOT NULL,
   NgaySinh TIMESTAMP NOT NULL,
   DiaChi varchar(255) DEFAULT NULL,
   SoDienThoai varchar(20) DEFAULT NULL,
   Email varchar(100) DEFAULT NULL,
-  MaVung int(11) DEFAULT NULL,
-  MaNguoiDung int(11) NOT NULL,
+  MaVung INTEGER DEFAULT NULL,
+  MaNguoiDung INTEGER NOT NULL,
   avatar varchar(255) DEFAULT NULL
 );
 
@@ -264,12 +260,12 @@ INSERT INTO nong_ho (MaHo, HoTen, GioiTinh, NgaySinh, DiaChi, SoDienThoai, Email
 --
 
 CREATE TABLE phat_hien_sau (
-  MaBaoCao int(11) NOT NULL,
+  MaBaoCao INTEGER NOT NULL,
   NgayPhatHien TIMESTAMP NOT NULL DEFAULT current_timestamp(),
   MucDo varchar(50) DEFAULT NULL,
-  MaSau int(11) NOT NULL,
-  MaThua int(11) NOT NULL,
-  MaVu int(11) NOT NULL,
+  MaSau INTEGER NOT NULL,
+  MaThua INTEGER NOT NULL,
+  MaVu INTEGER NOT NULL,
   GhiChu text DEFAULT NULL
 );
 
@@ -297,12 +293,12 @@ INSERT INTO phat_hien_sau (MaBaoCao, NgayPhatHien, MucDo, MaSau, MaThua, MaVu, G
 --
 
 CREATE TABLE quan_ly_nguoi_dung (
-  MaNguoiDung int(11) NOT NULL,
+  MaNguoiDung INTEGER NOT NULL,
   MatKhau varchar(255) NOT NULL,
   HoTen varchar(100) DEFAULT NULL,
   Email varchar(100) DEFAULT NULL,
   SoDienThoai varchar(20) DEFAULT NULL,
-  VaiTro enum('nongho','canbo') NOT NULL DEFAULT 'nongho',
+  VaiTro VARCHAR(10) NOT NULL DEFAULT 'nongho',
   NgayTao timestamp NOT NULL DEFAULT current_timestamp()
 );
 
@@ -334,7 +330,7 @@ INSERT INTO quan_ly_nguoi_dung (MaNguoiDung, MatKhau, HoTen, Email, SoDienThoai,
 --
 
 CREATE TABLE sau_benh (
-  MaSau int(11) NOT NULL,
+  MaSau INTEGER NOT NULL,
   TenSauBenh varchar(100) NOT NULL,
   TrieuChung text DEFAULT NULL,
   BienPhapXuLy text DEFAULT NULL
@@ -358,9 +354,9 @@ INSERT INTO sau_benh (MaSau, TenSauBenh, TrieuChung, BienPhapXuLy) VALUES
 --
 
 CREATE TABLE thoi_tiet (
-  MaThoiTiet int(11) NOT NULL,
+  MaThoiTiet INTEGER NOT NULL,
   NgayDo TIMESTAMP NOT NULL DEFAULT current_timestamp(),
-  MaVung int(11) NOT NULL,
+  MaVung INTEGER NOT NULL,
   NhietDo float NOT NULL,
   DoAm float NOT NULL,
   LuongMua float DEFAULT NULL,
@@ -384,11 +380,11 @@ INSERT INTO thoi_tiet (MaThoiTiet, NgayDo, MaVung, NhietDo, DoAm, LuongMua, Thoi
 --
 
 CREATE TABLE thua_dat (
-  MaThua int(11) NOT NULL,
+  MaThua INTEGER NOT NULL,
   DienTich float NOT NULL,
   LoaiDat varchar(100) NOT NULL,
   ViTri varchar(255) DEFAULT NULL,
-  MaHo int(11) NOT NULL
+  MaHo INTEGER NOT NULL
 );
 
 --
@@ -416,13 +412,13 @@ INSERT INTO thua_dat (MaThua, DienTich, LoaiDat, ViTri, MaHo) VALUES
 --
 
 CREATE TABLE thu_hoach (
-  MaThuHoach int(11) NOT NULL,
+  MaThuHoach INTEGER NOT NULL,
   NgayThuHoach TIMESTAMP NOT NULL DEFAULT current_timestamp(),
   SanLuong decimal(10,2) DEFAULT NULL,
   ChatLuong varchar(20) DEFAULT NULL,
   GhiChu text DEFAULT NULL,
-  MaThua int(11) NOT NULL,
-  MaVu int(11) NOT NULL
+  MaThua INTEGER NOT NULL,
+  MaVu INTEGER NOT NULL
 );
 
 --
@@ -486,7 +482,7 @@ INSERT INTO thu_hoach (MaThuHoach, NgayThuHoach, SanLuong, ChatLuong, GhiChu, Ma
 --
 
 CREATE TABLE vung_trong (
-  MaVung int(11) NOT NULL,
+  MaVung INTEGER NOT NULL,
   TenVung varchar(100) NOT NULL,
   DiaChi varchar(255) DEFAULT NULL,
   Tinh varchar(50) NOT NULL,
@@ -495,7 +491,7 @@ CREATE TABLE vung_trong (
   DienTich float DEFAULT NULL,
   MoTa text DEFAULT NULL,
   TrangThai tinyint(4) NOT NULL DEFAULT 1,
-  SoHoDan int(11) DEFAULT NULL
+  SoHoDan INTEGER DEFAULT NULL
 );
 
 --
@@ -514,7 +510,7 @@ INSERT INTO vung_trong (MaVung, TenVung, DiaChi, Tinh, Huyen, Xa, DienTich, MoTa
 --
 
 CREATE TABLE vu_mua (
-  MaVu int(11) NOT NULL,
+  MaVu INTEGER NOT NULL,
   TenVu varchar(100) NOT NULL,
   ThoiGianBatDau TIMESTAMP NOT NULL,
   ThoiGianThuHoach TIMESTAMP DEFAULT NULL,
@@ -543,7 +539,7 @@ INSERT INTO vu_mua (MaVu, TenVu, ThoiGianBatDau, ThoiGianThuHoach, MoTaVu) VALUE
 --
 ALTER TABLE canbo_kt
   ADD PRIMARY KEY (MaCanBo),
-  ADD UNIQUE KEY MaNguoiDung (MaNguoiDung);
+  ADD CONSTRAINT uq_manguoidung UNIQUE (MaNguoiDung);
 
 --
 -- Chỉ mục cho bảng giong_cam
@@ -556,7 +552,7 @@ ALTER TABLE giong_cam
 --
 ALTER TABLE giong_trong
   ADD PRIMARY KEY (MaTrong),
-  ADD UNIQUE KEY MaVu (MaVu,MaThua,MaGiong) USING BTREE,
+  ADD CONSTRAINT uq_mavu UNIQUE (MaVu,MaThua,MaGiong) USING BTREE,
   ADD KEY MaThua (MaThua),
   ADD KEY MaGiong (MaGiong);
 
@@ -565,7 +561,7 @@ ALTER TABLE giong_trong
 --
 ALTER TABLE ho_tro_ky_thuat
   ADD PRIMARY KEY (MaHoTro),
-  ADD UNIQUE KEY uq_nongho_vung_canbo_ngayhotro (MaHo,MaVung,MaCanBo,NgayHoTro),
+  ADD CONSTRAINT uq_nongho_vung_canbo_ngayhotro UNIQUE (MaHo,MaVung,MaCanBo,NgayHoTro),
   ADD KEY MaCanBo (MaCanBo),
   ADD KEY MaVung (MaVung);
 
@@ -574,7 +570,7 @@ ALTER TABLE ho_tro_ky_thuat
 --
 ALTER TABLE nhat_ky_canh_tac
   ADD PRIMARY KEY (MaNhatKy),
-  ADD UNIQUE KEY uq_nkct (ThoiGian,MaThua,MaVu),
+  ADD CONSTRAINT uq_nkct UNIQUE (ThoiGian,MaThua,MaVu),
   ADD KEY fk_nkct_mathua (MaThua),
   ADD KEY fk_nkct_mavu (MaVu),
   ADD KEY fk_nkct_nguoinhap (MaNguoiNhap);
@@ -584,7 +580,7 @@ ALTER TABLE nhat_ky_canh_tac
 --
 ALTER TABLE nong_ho
   ADD PRIMARY KEY (MaHo),
-  ADD UNIQUE KEY MaNguoiDung (MaNguoiDung),
+  ADD CONSTRAINT uq_ma_nguoi_dung_nong_ho UNIQUE (MaNguoiDung),
   ADD KEY MaVung (MaVung);
 
 --
@@ -592,7 +588,7 @@ ALTER TABLE nong_ho
 --
 ALTER TABLE phat_hien_sau
   ADD PRIMARY KEY (MaBaoCao),
-  ADD UNIQUE KEY unq_phat_hien_sau (MaSau,MaThua,MaVu),
+  ADD CONSTRAINT unq_phat_hien_sau UNIQUE (MaSau,MaThua,MaVu),
   ADD KEY MaThua (MaThua),
   ADD KEY MaVu (MaVu);
 
@@ -601,7 +597,7 @@ ALTER TABLE phat_hien_sau
 --
 ALTER TABLE quan_ly_nguoi_dung
   ADD PRIMARY KEY (MaNguoiDung),
-  ADD UNIQUE KEY Email (Email);
+  ADD CONSTRAINT unq_email_ql_nguoi_dung UNIQUE (Email);
 
 --
 -- Chỉ mục cho bảng sau_benh
@@ -651,85 +647,85 @@ ALTER TABLE vu_mua
 -- AUTO_INCREMENT cho bảng canbo_kt
 --
 ALTER TABLE canbo_kt
-  MODIFY MaCanBo int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY MaCanBo INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng giong_cam
 --
 ALTER TABLE giong_cam
-  MODIFY MaGiong int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY MaGiong INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng giong_trong
 --
 ALTER TABLE giong_trong
-  MODIFY MaTrong int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY MaTrong INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT cho bảng ho_tro_ky_thuat
 --
 ALTER TABLE ho_tro_ky_thuat
-  MODIFY MaHoTro int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY MaHoTro INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng nhat_ky_canh_tac
 --
 ALTER TABLE nhat_ky_canh_tac
-  MODIFY MaNhatKy int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY MaNhatKy INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng nong_ho
 --
 ALTER TABLE nong_ho
-  MODIFY MaHo int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY MaHo INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng phat_hien_sau
 --
 ALTER TABLE phat_hien_sau
-  MODIFY MaBaoCao int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY MaBaoCao INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng quan_ly_nguoi_dung
 --
 ALTER TABLE quan_ly_nguoi_dung
-  MODIFY MaNguoiDung int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY MaNguoiDung INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng sau_benh
 --
 ALTER TABLE sau_benh
-  MODIFY MaSau int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY MaSau INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng thoi_tiet
 --
 ALTER TABLE thoi_tiet
-  MODIFY MaThoiTiet int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY MaThoiTiet INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng thua_dat
 --
 ALTER TABLE thua_dat
-  MODIFY MaThua int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY MaThua INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng thu_hoach
 --
 ALTER TABLE thu_hoach
-  MODIFY MaThuHoach int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY MaThuHoach INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT cho bảng vung_trong
 --
 ALTER TABLE vung_trong
-  MODIFY MaVung int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY MaVung INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng vu_mua
 --
 ALTER TABLE vu_mua
-  MODIFY MaVu int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY MaVu INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -798,7 +794,7 @@ ALTER TABLE thua_dat
 ALTER TABLE thu_hoach
   ADD CONSTRAINT thu_hoach_ibfk_1 FOREIGN KEY (MaThua) REFERENCES thua_dat (MaThua) ON DELETE CASCADE,
   ADD CONSTRAINT thu_hoach_ibfk_2 FOREIGN KEY (MaVu) REFERENCES vu_mua (MaVu) ON DELETE CASCADE;
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

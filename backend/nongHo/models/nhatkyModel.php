@@ -30,16 +30,15 @@ class nhatkyModel {
             WHERE 
                 qlnd.MaNguoiDung = ?
             ORDER BY 
-                td.MaThua, nk.ThoiGian;
+                td.MaThua, nk.ThoiGian
         ");
 
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result(); // GÁN kết quả trả về
+        $stmt->execute([$user_id]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $data = [];
 
-        while ($row = $result->fetch_assoc()) {
+        foreach ($result as $row) {
             $maThua = $row['MaThua'];
             if (!isset($data[$maThua])) {
                 $data[$maThua] = [];
@@ -51,73 +50,62 @@ class nhatkyModel {
         return $data;
     }
 
-    
     public function updateNhatKyById($nhatKy_id, $maVu, $thoiGian, $loaiHoatDong, $noiDung) {
-    // 1. Lấy MaThua và MaVu từ nhật ký
-    $stmt = $this->db->conn->prepare("
-        SELECT MaThua, MaVu 
-        FROM nhat_ky_canh_tac 
-        WHERE MaNhatKy = ?
-    ");
-    $stmt->bind_param("i", $nhatKy_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $nhatKy = $result->fetch_assoc();
-    $stmt->close();
+        // 1. Lấy MaThua và MaVu từ nhật ký
+        $stmt = $this->db->conn->prepare("
+            SELECT MaThua, MaVu 
+            FROM nhat_ky_canh_tac 
+            WHERE MaNhatKy = ?
+        ");
+        $stmt->execute([$nhatKy_id]);
+        $nhatKy = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$nhatKy) {
-        return ["status" => "error", "message" => "Không tìm thấy nhật ký"];
+        if (!$nhatKy) {
+            return ["status" => "error", "message" => "Không tìm thấy nhật ký"];
+        }
+
+        $maThua = $nhatKy['MaThua'];
+        $maVuNhatKy = $nhatKy['MaVu'];
+
+        // 2. Kiểm tra xem thửa đất này trong vụ đó đã thu hoạch chưa
+        $stmt = $this->db->conn->prepare("
+            SELECT * 
+            FROM thu_hoach 
+            WHERE MaThua = ? AND MaVu = ?
+            LIMIT 1
+        ");
+        $stmt->execute([$maThua, $maVuNhatKy]);
+        $isHarvested = $stmt->rowCount() > 0;
+
+        if ($isHarvested) {
+            return [
+                "status" => "error",
+                "message" => "Thửa đất ở đợt này đã được thu hoạch nên không cho chỉnh sửa"
+            ];
+        }
+
+        // 3. Nếu chưa thu hoạch thì cho update
+        $stmt = $this->db->conn->prepare("
+            UPDATE nhat_ky_canh_tac
+            SET LoaiHoatDong = ?, NoiDung = ?, ThoiGian = ?, MaVu = ?
+            WHERE MaNhatKy = ?
+        ");
+        $ok = $stmt->execute([$loaiHoatDong, $noiDung, $thoiGian, $maVu, $nhatKy_id]);
+
+        return $ok 
+            ? ["status" => "success"] 
+            : ["status" => "error", "message" => "Không thể cập nhật"];
     }
-
-    $maThua = $nhatKy['MaThua'];
-    $maVuNhatKy = $nhatKy['MaVu'];
-
-    // 2. Kiểm tra xem thửa đất này trong vụ đó đã thu hoạch chưa
-    $stmt = $this->db->conn->prepare("
-        SELECT * 
-        FROM thu_hoach 
-        WHERE MaThua = ? AND MaVu = ?
-        LIMIT 1
-    ");
-    $stmt->bind_param("ii", $maThua, $maVuNhatKy);
-    $stmt->execute();
-    $stmt->store_result();
-    $isHarvested = $stmt->num_rows > 0;
-    $stmt->close();
-
-    if ($isHarvested) {
-        return [
-            "status" => "error",
-            "message" => "Thửa đất ở đợt này đã được thu hoạch nên không cho chỉnh sửa"
-        ];
-    }
-
-    // 3. Nếu chưa thu hoạch thì cho update
-    $stmt = $this->db->conn->prepare("
-        UPDATE nhat_ky_canh_tac
-        SET LoaiHoatDong = ?, NoiDung = ?, ThoiGian = ?, MaVu = ?
-        WHERE MaNhatKy = ?
-    ");
-    $stmt->bind_param("sssii", $loaiHoatDong, $noiDung, $thoiGian, $maVu, $nhatKy_id);
-    $ok = $stmt->execute();
-    $stmt->close();
-
-    return $ok 
-        ? ["status" => "success"] 
-        : ["status" => "error", "message" => "Không thể cập nhật"];
-}
 
 
     public function addNhatKy($user_id, $loaiHoatDong, $noiDung, $maThua, $vuMua, $ngayThucHien) {
         // Thêm nhật ký mới
         $stmt = $this->db->conn->prepare("
             INSERT INTO nhat_ky_canh_tac (MaThua, LoaiHoatDong, NoiDung, maVu, MaNguoiNhap, ThoiGian)
-            VALUES (?, ?, ?, ?, ?, ?);
+            VALUES (?, ?, ?, ?, ?, ?)
         ");
-        $stmt->bind_param("issiis", $maThua, $loaiHoatDong, $noiDung, $vuMua, $user_id, $ngayThucHien);
+        $ok = $stmt->execute([$maThua, $loaiHoatDong, $noiDung, $vuMua, $user_id, $ngayThucHien]);
          // ✅ SỬA: Format YYYY-MM-DD HH:mm:ss
-        $ok = $stmt->execute();
-        $stmt->close();
 
         return $ok ? ["status" => "success"] : ["status" => "error", "message" => "Không thể thêm nhật ký"];
     }

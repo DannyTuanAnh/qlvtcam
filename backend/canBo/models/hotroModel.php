@@ -12,7 +12,7 @@ class HoTroModel {
         $stmt = $this->db->conn->prepare("SELECT 
                 ht.MaHoTro,
                 DATE(ht.NgayHoTro) AS NgayHoTro,
-                TIME(ht.NgayHoTro) AS Gio,
+                TO_CHAR(ht.NgayHoTro, 'HH24:MI:SS') AS Gio,
                 ht.NoiDung,
                 cb.HoTen AS CanBoHoTro,
                 nh.HoTen AS TenNongHo,   
@@ -21,11 +21,9 @@ class HoTroModel {
                 JOIN canbo_kt cb ON ht.MaCanBo = cb.MaCanBo
                 JOIN nong_ho nh ON nh.MaHo = ht.MaHo
                 JOIN vung_trong vt ON vt.MaVung = ht.MaVung
-                ORDER BY ht.NgayHoTro DESC;
-            ");
+                ORDER BY ht.NgayHoTro DESC");
         $stmt->execute();
-        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        $stmt->close();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
         
     }
@@ -42,9 +40,7 @@ class HoTroModel {
             MaVung = ?
         WHERE 
             MaHoTro = ?");
-        $stmt->bind_param("ssiiii", $ngayHoTro, $noiDung, $maCanBo, $maNongHo, $maVung, $maHoTro);
-        $ok = $stmt->execute();
-        $stmt->close();
+        $ok = $stmt->execute([$ngayHoTro, $noiDung, $maCanBo, $maNongHo, $maVung, $maHoTro]);
         if ($ok){
             return ["status" => "success", "message" => "Cập nhật thành công"];
         } else {
@@ -56,9 +52,7 @@ class HoTroModel {
         
         //Thêm hỗ trợ mới
         $add = $this->db->conn->prepare("INSERT INTO ho_tro_ky_thuat (NgayHoTro, NoiDung, MaCanBo, MaHo, MaVung) VALUES (?, ?, ?, ?, ?)");
-        $add->bind_param("ssiii", $ngayHoTro, $noiDung, $maCanBo, $maNongHo, $maVung);
-        $ok = $add->execute();
-        $add->close();
+        $ok = $add->execute([$ngayHoTro, $noiDung, $maCanBo, $maNongHo, $maVung]);
         if ($ok) {
             return ["status" => "success", "message" => "Thêm thửa đất thành công"];
         } else {
@@ -69,13 +63,11 @@ class HoTroModel {
 
     public function deleteInfoHoTro($MaHoTro) {
         
-
         // Xóa hỗ trợ
         $deleteQuery = "DELETE FROM ho_tro_ky_thuat WHERE MaHoTro = ?";
         $deleteStmt = $this->db->conn->prepare($deleteQuery);
-        $deleteStmt->bind_param("i", $MaHoTro);
         
-        if ($deleteStmt->execute()) {
+        if ($deleteStmt->execute([$MaHoTro])) {
             return ["status" => "success", "message" => "Xóa thửa đất thành công"];
         } else {
             return ["status" => "error", "message" => "Không thể xóa thửa đất"];

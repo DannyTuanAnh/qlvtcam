@@ -24,14 +24,9 @@ LEFT JOIN
 GROUP BY 
     nh.MaHo, nh.HoTen, nh.GioiTinh, nh.NgaySinh, nh.DiaChi, nh.SoDienThoai, nh.Email
 ORDER BY 
-    nh.MaHo;
-
-
-
-");
+    nh.MaHo");
         $stmt->execute();
-        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        $stmt->close();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
         
     }

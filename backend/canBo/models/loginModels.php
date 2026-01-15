@@ -15,14 +15,13 @@ LEFT JOIN canbo_kt cb
     ON cb.MaNguoiDung = qlnd.MaNguoiDung
 WHERE qlnd.Email = ? 
   AND qlnd.MatKhau = ? 
-  AND qlnd.VaiTro = 'canbo';");
-        $stmt->bind_param("ss", $email, $password); // Ở đây chưa mã hóa password
-        $stmt->execute();
-        $result = $stmt->get_result();
+  AND qlnd.VaiTro = 'canbo'");
+        $stmt->execute([$email, $password]); // Ở đây chưa mã hóa password
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        if ($result->num_rows > 0) {
-        return $result->fetch_assoc(); // trả về mảng thông tin user
-    }
-    return false;
+        if ($result) {
+            return $result; // trả về mảng thông tin user
+        }
+        return false;
     }
 }

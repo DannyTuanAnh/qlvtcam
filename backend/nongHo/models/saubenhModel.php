@@ -35,13 +35,12 @@ class SauBenhModel {
                       ORDER BY bc.NgayPhatHien DESC";
             
             $stmt = $this->db->conn->prepare($query);
-            $stmt->bind_param("i", $user_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
+            $stmt->execute([$user_id]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             //Nhóm theo MaThua 
             $data = [];
-            while ($row = $result->fetch_assoc()) {
+            foreach ($result as $row) {
                 $maThua = $row['MaThua'];
                 if (!isset($data[$maThua])) {
                     $data[$maThua] = [];
@@ -82,22 +81,21 @@ class SauBenhModel {
             $query = "INSERT INTO phat_hien_sau (NgayPhatHien, MucDo, MaSau, MaThua, MaVu, GhiChu) 
                       VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $this->db->conn->prepare($query);
-            $stmt->bind_param("ssssss", 
+            if ($stmt->execute([
                 $data['ngayPhatHien'],
                 $data['mucDo'], 
                 $data['maSau'],
                 $data['maThua'],
                 $data['maVu'],
                 $data['ghiChu']
-            );
-            if ($stmt->execute()) {
+            ])) {
                 return [
                     'status' => 'success',
                     'message' => 'Thêm báo cáo sâu bệnh thành công',
-                    'maBaoCao' => $this->db->conn->insert_id
+                    'maBaoCao' => $this->db->conn->lastInsertId()
                 ];
             } else {
-                throw new Exception("Lỗi execute: " . $stmt->error);
+                throw new Exception("Lỗi execute");
             }
         } catch (Exception $e) {
             error_log("Error in addBaoCaoSauBenh: " . $e->getMessage());
@@ -111,42 +109,38 @@ class SauBenhModel {
     //Hàm cập nhật báo cáo sâu bệnh
     public function updateBaoCaoSauBenh($maBaoCao, $maSau, $maThua, $maVu, $mucDo, $ngayPhatHien, $ghiChu) {
         try {
-// Lấy thời gian phát hiện
-    $stmt = $this->db->conn->prepare("SELECT NgayPhatHien FROM phat_hien_sau WHERE MaBaoCao = ?");
-    $stmt->bind_param("i", $maBaoCao);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $stmt->close();
+            // Lấy thời gian phát hiện
+            $stmt = $this->db->conn->prepare("SELECT NgayPhatHien FROM phat_hien_sau WHERE MaBaoCao = ?");
+            $stmt->execute([$maBaoCao]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$row) {
-        echo json_encode(["status" => "error", "message" => "Không tìm thấy thông tin phát hiện sâu."]);
-        exit;
-    }
+            if (!$row) {
+                echo json_encode(["status" => "error", "message" => "Không tìm thấy thông tin phát hiện sâu."]);
+                exit;
+            }
 
-    $thoiGianPhatHien = $row['NgayPhatHien'];
-    $now = new DateTime();
-    $thoiGianPhatHienDT = new DateTime($thoiGianPhatHien);
-    $interval = $thoiGianPhatHienDT->diff($now);
-    if ($interval->days >= 15 && $thoiGianPhatHienDT < $now) {
-        echo json_encode(["status" => "error", "message" => "Đã quá 15 ngày kể từ thời gian phát hiện sâu, không thể chỉnh sửa/xóa."]);
-        exit;
-    }
+            $thoiGianPhatHien = $row['NgayPhatHien'];
+            $now = new DateTime();
+            $thoiGianPhatHienDT = new DateTime($thoiGianPhatHien);
+            $interval = $thoiGianPhatHienDT->diff($now);
+            if ($interval->days >= 15 && $thoiGianPhatHienDT < $now) {
+                echo json_encode(["status" => "error", "message" => "Đã quá 15 ngày kể từ thời gian phát hiện sâu, không thể chỉnh sửa/xóa."]);
+                exit;
+            }
 
             $query = "UPDATE phat_hien_sau 
                       SET NgayPhatHien = ?, MucDo = ?, MaSau = ?, MaThua = ?, MaVu = ?, GhiChu = ?
                       WHERE MaBaoCao = ?";
             
             $stmt = $this->db->conn->prepare($query);
-            $stmt->bind_param("ssiiisi", $ngayPhatHien, $mucDo, $maSau, $maThua, $maVu, $ghiChu, $maBaoCao);
             
-            if ($stmt->execute()) {
+            if ($stmt->execute([$ngayPhatHien, $mucDo, $maSau, $maThua, $maVu, $ghiChu, $maBaoCao])) {
                 return [
                     'status' => 'success',
                     'message' => 'Cập nhật báo cáo sâu bệnh thành công'
                 ];
             } else {
-                throw new Exception("Lỗi execute: " . $stmt->error);
+                throw new Exception("Lỗi execute");
             }
             
         } catch (Exception $e) {
@@ -161,35 +155,31 @@ class SauBenhModel {
     //Hàm xóa báo cáo sâu bệnh
     public function deleteBaoCaoSauBenh($maBaoCao) {
         try {
-// Lấy thời gian phát hiện
-    $stmt = $this->db->conn->prepare("SELECT NgayPhatHien FROM phat_hien_sau WHERE MaBaoCao = ?");
-    $stmt->bind_param("i", $maBaoCao);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $stmt->close();
+            // Lấy thời gian phát hiện
+            $stmt = $this->db->conn->prepare("SELECT NgayPhatHien FROM phat_hien_sau WHERE MaBaoCao = ?");
+            $stmt->execute([$maBaoCao]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$row) {
-        echo json_encode(["status" => "error", "message" => "Không tìm thấy thông tin phát hiện sâu."]);
-        exit;
-    }
+            if (!$row) {
+                echo json_encode(["status" => "error", "message" => "Không tìm thấy thông tin phát hiện sâu."]);
+                exit;
+            }
 
-    $thoiGianPhatHien = $row['NgayPhatHien'];
-    $now = new DateTime();
-    $thoiGianPhatHienDT = new DateTime($thoiGianPhatHien);
-    $interval = $thoiGianPhatHienDT->diff($now);
-    if ($interval->days >= 15 && $thoiGianPhatHienDT < $now) {
-        echo json_encode(["status" => "error", "message" => "Đã quá 15 ngày kể từ thời gian phát hiện sâu, không thể chỉnh sửa/xóa."]);
-        exit;
-    }
+            $thoiGianPhatHien = $row['NgayPhatHien'];
+            $now = new DateTime();
+            $thoiGianPhatHienDT = new DateTime($thoiGianPhatHien);
+            $interval = $thoiGianPhatHienDT->diff($now);
+            if ($interval->days >= 15 && $thoiGianPhatHienDT < $now) {
+                echo json_encode(["status" => "error", "message" => "Đã quá 15 ngày kể từ thời gian phát hiện sâu, không thể chỉnh sửa/xóa."]);
+                exit;
+            }
 
             $query = "DELETE FROM phat_hien_sau WHERE MaBaoCao = ?";
             
             $stmt = $this->db->conn->prepare($query);
-            $stmt->bind_param("i", $maBaoCao);
             
-            if ($stmt->execute()) {
-                if ($stmt->affected_rows > 0) {
+            if ($stmt->execute([$maBaoCao])) {
+                if ($stmt->rowCount() > 0) {
                     return [
                         'status' => 'success',
                         'message' => 'Xóa báo cáo sâu bệnh thành công'
@@ -201,7 +191,7 @@ class SauBenhModel {
                     ];
                 }
             } else {
-                throw new Exception("Lỗi execute: " . $stmt->error);
+                throw new Exception("Lỗi execute");
             }
             
         } catch (Exception $e) {
@@ -220,12 +210,7 @@ class SauBenhModel {
             
             $stmt = $this->db->conn->prepare($query);
             $stmt->execute();
-            $result = $stmt->get_result();
-            
-            $data = [];
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             return $data;
             

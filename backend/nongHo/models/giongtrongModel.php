@@ -35,17 +35,15 @@ class giongtrongModel {
         WHERE 
             qlnd.MaNguoiDung = ?
         ORDER BY 
-            vm.MaVu, gt.NgayTrong;
-
+            vm.MaVu, gt.NgayTrong
         ");
 
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result(); // GÁN kết quả trả về
+        $stmt->execute([$user_id]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $data = [];
 
-        while ($row = $result->fetch_assoc()) {
+        foreach ($result as $row) {
             $maVu = $row['MaVu'];
             if (!isset($data[$maVu])) {
                 $data[$maVu] = [];
@@ -64,12 +62,7 @@ class giongtrongModel {
             
             $stmt = $this->db->conn->prepare($query);
             $stmt->execute();
-            $result = $stmt->get_result();
-            
-            $data = [];
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             return $data;
             
@@ -84,41 +77,37 @@ class giongtrongModel {
         try {
 
             // Lấy thời gian trồng
-    $stmt = $this->db->conn->prepare("SELECT NgayTrong FROM giong_trong WHERE MaTrong = ?");
-    $stmt->bind_param("i", $maTrong);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $stmt->close();
+            $stmt = $this->db->conn->prepare("SELECT NgayTrong FROM giong_trong WHERE MaTrong = ?");
+            $stmt->execute([$maTrong]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$row) {
-        echo json_encode(["status" => "error", "message" => "Không tìm thấy thông tin giống trồng."]);
-        exit;
-    }
+            if (!$row) {
+                echo json_encode(["status" => "error", "message" => "Không tìm thấy thông tin giống trồng."]);
+                exit;
+            }
 
-    $thoiGianTrong = $row['NgayTrong'];
-    $now = new DateTime();
-    $thoiGianTrongDT = new DateTime($thoiGianTrong);
-    $interval = $thoiGianTrongDT->diff($now);
-    if ($interval->days >= 15 && $thoiGianTrongDT < $now) {
-        echo json_encode(["status" => "error", "message" => "Đã quá 15 ngày kể từ thời gian trồng, không thể chỉnh sửa/xóa."]);
-        exit;
-    }
+            $thoiGianTrong = $row['NgayTrong'];
+            $now = new DateTime();
+            $thoiGianTrongDT = new DateTime($thoiGianTrong);
+            $interval = $thoiGianTrongDT->diff($now);
+            if ($interval->days >= 15 && $thoiGianTrongDT < $now) {
+                echo json_encode(["status" => "error", "message" => "Đã quá 15 ngày kể từ thời gian trồng, không thể chỉnh sửa/xóa."]);
+                exit;
+            }
 
             $query = "UPDATE giong_trong 
                       SET MaGiong = ?, MaVu = ?, MaThua = ?, NgayTrong = ?, SoLuongCay = ?
                       WHERE MaTrong = ?"; 
             
             $stmt = $this->db->conn->prepare($query);
-            $stmt->bind_param("iiisii", $maGiong, $maVu, $maThua, $ngayTrong, $soLuongCay, $maTrong);
             
-            if ($stmt->execute()) {
+            if ($stmt->execute([$maGiong, $maVu, $maThua, $ngayTrong, $soLuongCay, $maTrong])) {
                 return [
                     'status' => 'success',
                     'message' => 'Cập nhật thông tin giống trồng thành công'
                 ];
             } else {
-                throw new Exception("Lỗi execute: " . $stmt->error);
+                throw new Exception("Lỗi execute");
             }
             
         } catch (Exception $e) {
@@ -135,48 +124,43 @@ class giongtrongModel {
         // Thêm thông tin trồng cây mới
         $stmt = $this->db->conn->prepare("
             INSERT INTO giong_trong (MaGiong, MaVu, MaThua, NgayTrong, SoLuongCay)
-            VALUES (?, ?, ?, ?, ?);
+            VALUES (?, ?, ?, ?, ?)
         ");
-        $stmt->bind_param("iiisi", $maGiong, $maVu, $maThua, $ngayTrong, $soLuongCay);
-        $ok = $stmt->execute();
-        $stmt->close();
+        $ok = $stmt->execute([$maGiong, $maVu, $maThua, $ngayTrong, $soLuongCay]);
 
         return $ok ? ["status" => "success"] : ["status" => "error", "message" => "Không thể thêm thông tin trồng cây"];
     }
 
     //Hàm xóa giong trong
+    //Hàm xóa giong trong
     public function deleteGiongTrong($maTrong) {
         try {
 
-    // Lấy thời gian trồng
-    $stmt = $this->db->conn->prepare("SELECT NgayTrong FROM giong_trong WHERE MaTrong = ?");
-    $stmt->bind_param("i", $maTrong);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $stmt->close();
+            // Lấy thời gian trồng
+            $stmt = $this->db->conn->prepare("SELECT NgayTrong FROM giong_trong WHERE MaTrong = ?");
+            $stmt->execute([$maTrong]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$row) {
-        echo json_encode(["status" => "error", "message" => "Không tìm thấy thông tin giống trồng."]);
-        exit;
-    }
+            if (!$row) {
+                echo json_encode(["status" => "error", "message" => "Không tìm thấy thông tin giống trồng."]);
+                exit;
+            }
 
-    $thoiGianTrong = $row['NgayTrong'];
-    $now = new DateTime();
-    $thoiGianTrongDT = new DateTime($thoiGianTrong);
-    $interval = $thoiGianTrongDT->diff($now);
-    if ($interval->days >= 15 && $thoiGianTrongDT < $now) {
-        echo json_encode(["status" => "error", "message" => "Đã quá 15 ngày kể từ thời gian trồng, không thể chỉnh sửa/xóa."]);
-        exit;
-    }
+            $thoiGianTrong = $row['NgayTrong'];
+            $now = new DateTime();
+            $thoiGianTrongDT = new DateTime($thoiGianTrong);
+            $interval = $thoiGianTrongDT->diff($now);
+            if ($interval->days >= 15 && $thoiGianTrongDT < $now) {
+                echo json_encode(["status" => "error", "message" => "Đã quá 15 ngày kể từ thời gian trồng, không thể chỉnh sửa/xóa."]);
+                exit;
+            }
 
             $query = "DELETE FROM giong_trong WHERE MaTrong = ?";
 
             $stmt = $this->db->conn->prepare($query);
-            $stmt->bind_param("i", $maTrong);
             
-            if ($stmt->execute()) {
-                if ($stmt->affected_rows > 0) {
+            if ($stmt->execute([$maTrong])) {
+                if ($stmt->rowCount() > 0) {
                     return [
                         'status' => 'success',
                         'message' => 'Xóa thông tin trồng cây thành công'
@@ -188,7 +172,7 @@ class giongtrongModel {
                     ];
                 }
             } else {
-                throw new Exception("Lỗi execute: " . $stmt->error);
+                throw new Exception("Lỗi execute");
             }
             
         } catch (Exception $e) {

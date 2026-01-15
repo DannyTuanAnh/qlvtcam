@@ -5,16 +5,31 @@ class connectDB {
     public $conn;
 
     public function __construct() {
-        $this->conn = new mysqli(servername, username, password, database);
-        if ($this->conn->connect_error) {
-            die(json_encode(["status" => "error", "message" => "Kết nối thất bại: " . $this->conn->connect_error]));
+        try {
+            $dsn = "pgsql:host=" . DB_HOST .
+                   ";port=" . DB_PORT .
+                   ";dbname=" . DB_NAME;
+
+            $this->conn = new PDO(
+                $dsn,
+                DB_USER,
+                DB_PASS,
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                ]
+            );
+
+        } catch (PDOException $e) {
+            die(json_encode([
+                "status" => "error",
+                "message" => "Kết nối PostgreSQL thất bại: " . $e->getMessage()
+            ]));
         }
-        $this->conn->set_charset("utf8mb4");
     }
 
     public function __destruct() {
-        if ($this->conn) {
-            $this->conn->close();
-        }
+        $this->conn = null;
     }
 }

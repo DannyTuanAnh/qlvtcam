@@ -3,6 +3,8 @@ require_once "connect.php";
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
+$db = new connectDB();
+$conn = $db->conn;
 
 // Truy vấn lấy số thửa theo từng vụ mùa
 $sql = "
@@ -12,19 +14,14 @@ $sql = "
     GROUP BY vu_mua.id, vu_mua.ten_vu_mua
     ORDER BY vu_mua.id
 ";
-$result = $conn->query($sql);
 
-if (!$result) {
-    echo json_encode([
-        "error" => true,
-        "message" => "Lỗi truy vấn: " . $conn->error
-    ]);
-    exit;
-}
-
-$data = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+try {
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    $data = [];
+    foreach ($result as $row) {
         $data[] = [
             "vu_mua_id" => $row['vu_mua_id'],
             "ten_vu_mua" => $row['ten_vu_mua'],
@@ -32,9 +29,10 @@ if ($result->num_rows > 0) {
         ];
     }
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
-} else {
-    echo json_encode([]);
+} catch (PDOException $e) {
+    echo json_encode([
+        "error" => true,
+        "message" => "Lỗi truy vấn: " . $e->getMessage()
+    ]);
 }
-
-$conn->close();
 ?>

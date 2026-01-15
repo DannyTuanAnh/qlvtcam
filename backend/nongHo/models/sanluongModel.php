@@ -32,17 +32,15 @@ JOIN
 WHERE 
     qlnd.MaNguoiDung = ?
 ORDER BY 
-    td.MaThua, th.NgayThuHoach;
-
+    td.MaThua, th.NgayThuHoach
         ");
 
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result(); // GÁN kết quả trả về
+        $stmt->execute([$user_id]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $data = [];
 
-        while ($row = $result->fetch_assoc()) {
+        foreach ($result as $row) {
             $maThua = $row['MaThua'];
             if (!isset($data[$maThua])) {
                 $data[$maThua] = [];
@@ -76,14 +74,13 @@ JOIN
 WHERE 
     qlnd.MaNguoiDung = ?
 ORDER BY 
-    vm.MaVu, td.MaThua;");
-    $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result(); // GÁN kết quả trả về
+    vm.MaVu, td.MaThua");
+        $stmt->execute([$user_id]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $data = [];
 
-        while ($row = $result->fetch_assoc()) {
+        foreach ($result as $row) {
             $maVu = $row['MaVu'];
             if (!isset($data[$maVu])) {
                 $data[$maVu] = [];
@@ -107,7 +104,7 @@ ORDER BY
     (
         SELECT vm2.TenVu
         FROM vu_mua vm2
-        WHERE NOW() BETWEEN vm2.ThoiGianBatDau AND vm2.ThoiGianThuHoach
+        WHERE CURRENT_TIMESTAMP BETWEEN vm2.ThoiGianBatDau AND vm2.ThoiGianThuHoach
     ) AS VuHienTai
 FROM 
     quan_ly_nguoi_dung qlnd
@@ -131,43 +128,33 @@ WHERE
         FROM thu_hoach th2
         JOIN thua_dat td2 ON th2.MaThua = td2.MaThua
         WHERE td2.MaHo = nh.MaHo
-    );
-
-
-
+    )
         ");
 
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $stmt->execute([$user_id]);
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function updateThuHoachById($maThua, $maThuHoach,$maVu,$sanLuong,$chatLuong,$ghiChu, $ngayThuHoach) {
-        //
         // Update nhật ký
         $stmt = $this->db->conn->prepare("
         UPDATE thu_hoach
         SET MaVu = ? ,SanLuong = ?, ChatLuong = ?, GhiChu = ?, MaThua = ?, NgayThuHoach = ?
-        WHERE MaThuHoach = ?;
+        WHERE MaThuHoach = ?
         ");
-        $stmt->bind_param("idssisi",$maVu,$sanLuong,$chatLuong,$ghiChu,$maThua,$ngayThuHoach,$maThuHoach);
-        $ok = $stmt->execute();
-        $stmt->close();
+        $ok = $stmt->execute([$maVu, $sanLuong, $chatLuong, $ghiChu, $maThua, $ngayThuHoach, $maThuHoach]);
 
-    return $ok ? ["status" => "success"] : ["status" => "error", "message" => "Không thể cập nhật"];
+        return $ok ? ["status" => "success"] : ["status" => "error", "message" => "Không thể cập nhật"];
     }
 
     public function addThuHoach($maThua, $vuMua, $sanLuong, $chatLuong, $ghiChu) {
         // Thêm nhật ký mới
         $stmt = $this->db->conn->prepare("
             INSERT INTO thu_hoach (MaThua, MaVu, SanLuong, ChatLuong, GhiChu)
-            VALUES (?, ?, ?, ?, ?);
+            VALUES (?, ?, ?, ?, ?)
         ");
-        $stmt->bind_param("iidss", $maThua, $vuMua, $sanLuong, $chatLuong, $ghiChu);
-        $ok = $stmt->execute();
-        $stmt->close();
+        $ok = $stmt->execute([$maThua, $vuMua, $sanLuong, $chatLuong, $ghiChu]);
 
         return $ok ? ["status" => "success"] : ["status" => "error", "message" => "Không thể thêm nhật ký"];
     }

@@ -21,17 +21,11 @@ JOIN
 JOIN 
     thua_dat td ON nh.MaHo = td.MaHo
 WHERE 
-    qlnd.MaNguoiDung = ?;
-");
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    qlnd.MaNguoiDung = ?");
+        $stmt->execute([$user_id]);
         
         // Trả về mảng tất cả các thửa đất
-        $thuaDatList = [];
-        while ($row = $result->fetch_assoc()) {
-            $thuaDatList[] = $row;
-        }
+        $thuaDatList = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         return $thuaDatList;
     }

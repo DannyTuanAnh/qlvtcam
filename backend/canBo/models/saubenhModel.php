@@ -11,7 +11,7 @@ class SauBenhModel {
     public function getInfoSauBenh() {
         $stmt = $this->db->conn->prepare("SELECT 
     DATE(phs.NgayPhatHien) AS NgayPhatHien,
-    TIME(phs.NgayPhatHien) AS Gio,
+    TO_CHAR(phs.NgayPhatHien, 'HH24:MI:SS') AS Gio,
     phs.MucDo,
     sb.TenSauBenh,
     nh.HoTen AS TenNongHo,   
@@ -22,12 +22,9 @@ JOIN sau_benh sb ON phs.MaSau = sb.MaSau
 JOIN thua_dat td ON phs.MaThua = td.MaThua
 JOIN nong_ho nh ON td.MaHo = nh.MaHo
 JOIN vu_mua vm ON phs.MaVu = vm.MaVu
-ORDER BY phs.NgayPhatHien DESC;
-
-");
+ORDER BY phs.NgayPhatHien DESC");
         $stmt->execute();
-        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        $stmt->close();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
         
     }

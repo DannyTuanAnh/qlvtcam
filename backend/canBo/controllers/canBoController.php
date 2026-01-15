@@ -6,10 +6,9 @@ class canboController {
 		$db = new connectDB();
 		$conn = $db->conn;
 		$stmt = $conn->prepare("SELECT MaCanBo, HoTen, GioiTinh, NgaySinh, SoDienThoai, Email, DonViCongTac, avatar FROM canbo_kt WHERE MaCanBo = ?");
-		$stmt->bind_param("s", $maCanBo);
-		$stmt->execute();
-		$result = $stmt->get_result();
-		if ($row = $result->fetch_assoc()) {
+		$stmt->execute([$maCanBo]);
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		if ($row) {
 			return [
 				'status' => 'success',
 				'data' => $row

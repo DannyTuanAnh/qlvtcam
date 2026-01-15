@@ -13,7 +13,7 @@ class VuMuaModel {
             mavu AS \"MaVu\",
             tenvu AS \"TenVu\",
             thoigianbatdau AS \"ThoiGianBatDau\",
-            thoigianthuh AS \"ThoiGianThuHoach\",
+            thoigianthuhoach AS \"ThoiGianThuHoach\",
             motavu AS \"MoTaVu\"
         FROM vu_mua ORDER BY mavu");
         $stmt->execute();
@@ -28,7 +28,7 @@ class VuMuaModel {
         SET  
             tenvu = ?, 
             thoigianbatdau = ?, 
-            thoigianthuh = ?, 
+            thoigianthuhoach = ?, 
             motavu = ?
         WHERE 
            mavu = ?
@@ -44,7 +44,7 @@ class VuMuaModel {
     public function addInfoVuMua($TenVu, $NgayBatDau, $NgayKetThuc, $MoTa) {
         
         //Thêm vụ mùa mới
-        $add = $this->db->conn->prepare("INSERT INTO vu_mua (tenvu, thoigianbatdau, thoigianthuh, motavu) VALUES (?, ?, ?, ?)");
+        $add = $this->db->conn->prepare("INSERT INTO vu_mua (tenvu, thoigianbatdau, thoigianthuhoach, motavu) VALUES (?, ?, ?, ?)");
         $ok = $add->execute([$TenVu, $NgayBatDau, $NgayKetThuc, $MoTa]);
         if ($ok) {
             return ["status" => "success", "message" => "Thêm vụ mùa thành công"];

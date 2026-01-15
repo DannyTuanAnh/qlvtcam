@@ -21,10 +21,9 @@ if (move_uploaded_file($_FILES['avatar']['tmp_name'], $targetFile)) {
     require_once __DIR__ . '/../backend/config/connect.php';
     $db = new connectDB();
     $avatarPath = "uploads/avatars/" . $filename;
-    $stmt = $db->conn->prepare("UPDATE nong_ho SET avatar=? WHERE MaNguoiDung=?");
-    $stmt->bind_param("si", $avatarPath, $user_id);
-    $ok = $stmt->execute();
-    $stmt->close();
+    $stmt = $db->conn->prepare("UPDATE nong_ho SET avatar=? WHERE manguoidung=?");
+    $ok = $stmt->execute([$avatarPath, $user_id]);
+    
     echo json_encode([  
         "status" => $ok ? "success" : "error",
         "message" => $ok ? "Đã cập nhật ảnh đại diện" : "Không thể cập nhật DB",

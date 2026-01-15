@@ -30,9 +30,8 @@ if (move_uploaded_file($file['tmp_name'], $targetFile)) {
     // Lưu tên file vào DB
     $db = new connectDB();
     $conn = $db->conn;
-    $stmt = $conn->prepare("UPDATE canbo_kt SET avatar = ? WHERE MaCanBo = ?");
-    $stmt->bind_param("ss", $filename, $maCanBo);
-    if ($stmt->execute()) {
+    $stmt = $conn->prepare("UPDATE canbo_kt SET avatar = ? WHERE macanbo = ?");
+    if ($stmt->execute([$filename, $maCanBo])) {
         echo json_encode(["status" => "success", "filename" => $filename]);
     } else {
         echo json_encode(["status" => "error", "message" => "Lỗi cập nhật DB"]);

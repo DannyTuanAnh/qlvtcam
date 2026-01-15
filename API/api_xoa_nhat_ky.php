@@ -9,15 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 1. Lấy MaThua và MaVu từ nhật ký
     $stmt = $db->conn->prepare("
-        SELECT MaThua, MaVu 
+        SELECT mathua AS \"MaThua\", mavu AS \"MaVu\" 
         FROM nhat_ky_canh_tac 
-        WHERE MaNhatKy = ?
+        WHERE manhatky = ?
     ");
-    $stmt->bind_param("i", $maNhatKy);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $nhatKy = $result->fetch_assoc();
-    $stmt->close();
+    $stmt->execute([$maNhatKy]);
+    $nhatKy = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$nhatKy) {
         echo json_encode(["status" => "error", "message" => "Không tìm thấy nhật ký"]);
@@ -29,16 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 2. Kiểm tra xem thửa đất này trong vụ đó đã thu hoạch chưa
     $stmt = $db->conn->prepare("
-        SELECT * 
+        SELECT COUNT(*) AS \"count\"
         FROM thu_hoach 
-        WHERE MaThua = ? AND MaVu = ?
+        WHERE mathua = ? AND mavu = ?
         LIMIT 1
     ");
-    $stmt->bind_param("ii", $maThua, $maVuNhatKy);
-    $stmt->execute();
-    $stmt->store_result();
-    $isHarvested = $stmt->num_rows > 0;
-    $stmt->close();
+    $stmt->execute([$maThua, $maVuNhatKy]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $isHarvested = $result['count'] > 0;
 
     if ($isHarvested) {
         echo json_encode([
@@ -52,10 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $stmt = $db->conn->prepare("DELETE FROM nhat_ky_canh_tac WHERE MaNhatKy = ?");
-    $stmt->bind_param("i", $maNhatKy);
+    $stmt = $db->conn->prepare("DELETE FROM nhat_ky_canh_tac WHERE manhatky = ?");
 
-    if ($stmt->execute()) {
+    if ($stmt->execute([$maNhatKy])) {
         echo json_encode(["status" => "success"]);
     } else {
         echo json_encode(["status" => "error", "message" => "Lỗi khi xóa nhật ký."]);

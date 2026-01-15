@@ -13,13 +13,21 @@ if(!isset($_SESSION['MaNguoiDung'])) {
 function getInfoCanBo() {
     $conn = new connectDB();
     
-    $sql = "SELECT * FROM canbo_kt WHERE MaNguoiDung = ?";
+    $sql = "SELECT 
+                macanbo AS \"MaCanBo\",
+                manguoidung AS \"MaNguoiDung\",
+                hoten AS \"HoTen\",
+                gioitinh AS \"GioiTinh\",
+                ngaysinh AS \"NgaySinh\",
+                sodienthoai AS \"SoDienThoai\",
+                email AS \"Email\",
+                donvicongtac AS \"DonViCongTac\",
+                avatar AS \"avatar\"
+            FROM canbo_kt WHERE manguoidung = ?";
     $stmt = $conn->conn->prepare($sql);
-    $stmt->bind_param("s", $_SESSION['MaNguoiDung']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $data = $result->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
+    $stmt->execute([$_SESSION['MaNguoiDung']]);
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
     if ($data) {
         return [
             "status" => "success",

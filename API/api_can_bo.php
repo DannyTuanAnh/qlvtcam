@@ -27,11 +27,20 @@ try {
     switch ($method) {
         case 'GET':
             $conn = new connectDB();
-            $stmt = $conn->conn->prepare("SELECT * FROM canbo_kt where MaNguoiDung = ?");
-            $stmt->bind_param("s", $_SESSION['MaNguoiDung']);
-            $stmt->execute();
-            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-            $stmt->close();
+            $stmt = $conn->conn->prepare("SELECT 
+                macanbo AS \"MaCanBo\",
+                manguoidung AS \"MaNguoiDung\",
+                hoten AS \"HoTen\",
+                gioitinh AS \"GioiTinh\",
+                ngaysinh AS \"NgaySinh\",
+                sodienthoai AS \"SoDienThoai\",
+                email AS \"Email\",
+                donvicongtac AS \"DonViCongTac\",
+                avatar AS \"avatar\"
+            FROM canbo_kt WHERE manguoidung = ?");
+            $stmt->execute([$_SESSION['MaNguoiDung']]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
             echo json_encode([
                 'status' => 'success',
                 'data' => $result

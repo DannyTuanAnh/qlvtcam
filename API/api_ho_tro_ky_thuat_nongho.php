@@ -16,17 +16,15 @@ $db = new connectDB();
 $maNguoiDung = $_SESSION['MaNguoiDung'];
 
 // Lấy MaHo của nông hộ này
-$sqlHo = "SELECT MaHo FROM nong_ho WHERE MaNguoiDung = ?";
+$sqlHo = "SELECT maho AS \"MaHo\" FROM nong_ho WHERE manguoidung = ?";
 $stmtHo = $db->conn->prepare($sqlHo);
 if (!$stmtHo) {
-    echo json_encode(["status" => "error", "message" => "SQL prepare failed: " . $db->conn->error]);
+    echo json_encode(["status" => "error", "message" => "SQL prepare failed"]);
     exit;
 }
-$stmtHo->bind_param("i", $maNguoiDung);
-$stmtHo->execute();
-$stmtHo->bind_result($maHo);
-$stmtHo->fetch();
-$stmtHo->close();
+$stmtHo->execute([$maNguoiDung]);
+$resultHo = $stmtHo->fetch(PDO::FETCH_ASSOC);
+$maHo = $resultHo ? $resultHo['MaHo'] : null;
 
 if (!$maHo) {
     echo json_encode([]);
@@ -35,22 +33,24 @@ if (!$maHo) {
 
 // Lấy các hỗ trợ kỹ thuật gửi cho nông hộ này
 // ...existing code...
-$sql = "SELECT htk.NoiDung, htk.NgayHoTro, cb.HoTen AS hoTenCanBo
+$sql = "SELECT 
+            htk.noidung AS \"NoiDung\", 
+            htk.ngayhotro AS \"NgayHoTro\", 
+            cb.hoten AS \"hoTenCanBo\"
         FROM ho_tro_ky_thuat htk
-        JOIN canbo_kt cb ON htk.MaCanBo = cb.MaCanBo
-        WHERE htk.MaHo = ?
-        ORDER BY htk.NgayHoTro DESC LIMIT 10";
+        JOIN canbo_kt cb ON htk.macanbo = cb.macanbo
+        WHERE htk.maho = ?
+        ORDER BY htk.ngayhotro DESC LIMIT 10";
 // ...existing code...
 $stmt = $db->conn->prepare($sql);
 if (!$stmt) {
-    echo json_encode(["status" => "error", "message" => "SQL prepare failed: " . $db->conn->error]);
+    echo json_encode(["status" => "error", "message" => "SQL prepare failed"]);
     exit;
 }
-$stmt->bind_param("i", $maHo);
-$stmt->execute();
-$result = $stmt->get_result();
+$stmt->execute([$maHo]);
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $messages = [];
-while ($row = $result->fetch_assoc()) {
+foreach ($result as $row) {
     $messages[] = [
         "avatar" => "img/undraw_profile.svg", // Nếu có avatar cán bộ thì lấy thêm trường này
         "hoTen" => $row["hoTenCanBo"],

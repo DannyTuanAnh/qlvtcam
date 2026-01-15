@@ -13,12 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Lấy ngày thu hoạch
-    $stmt = $db->conn->prepare("SELECT NgayThuHoach FROM thu_hoach WHERE MaThuHoach = ?");
-    $stmt->bind_param("i", $maThuHoach);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $stmt->close();
+    $stmt = $db->conn->prepare("SELECT ngaythuhoach AS \"NgayThuHoach\" FROM thu_hoach WHERE mathuhoach = ?");
+    $stmt->execute([$maThuHoach]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$row) {
         echo json_encode(["status" => "error", "message" => "Không tìm thấy thông tin thu hoạch."]);
@@ -34,10 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $stmt = $db->conn->prepare("DELETE FROM thu_hoach WHERE MaThuHoach = ?");
-    $stmt->bind_param("i", $maThuHoach);
+    $stmt = $db->conn->prepare("DELETE FROM thu_hoach WHERE mathuhoach = ?");
 
-    if ($stmt->execute()) {
+    if ($stmt->execute([$maThuHoach])) {
         echo json_encode(["status" => "success"]);
     } else {
         echo json_encode(["status" => "error", "message" => "Lỗi khi xóa nhật ký."]);

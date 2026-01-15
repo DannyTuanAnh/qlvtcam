@@ -24,9 +24,8 @@ if (!$maCanBo) {
 try {
 	$db = new connectDB();
 	$conn = $db->conn;
-	$stmt = $conn->prepare("UPDATE canbo_kt SET HoTen=?, GioiTinh=?, NgaySinh=?, SoDienThoai=?, Email=?, DonViCongTac=? WHERE MaCanBo=?");
-	$stmt->bind_param("sssssss", $hoTen, $gioiTinh, $ngaySinh, $soDienThoai, $email, $donViCongTac, $maCanBo);
-	if ($stmt->execute()) {
+	$stmt = $conn->prepare("UPDATE canbo_kt SET hoten=?, gioitinh=?, ngaysinh=?, sodienthoai=?, email=?, donvicongtac=? WHERE macanbo=?");
+	if ($stmt->execute([$hoTen, $gioiTinh, $ngaySinh, $soDienThoai, $email, $donViCongTac, $maCanBo])) {
 		echo json_encode(["status" => "success"]);
 	} else {
 		echo json_encode(["status" => "error", "message" => "Lỗi cập nhật DB"]);

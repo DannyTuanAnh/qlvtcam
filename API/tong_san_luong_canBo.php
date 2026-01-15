@@ -7,13 +7,14 @@ require_once("../backend/config/connect.php");
 function getTongSanLuong2024() {
     $conn = new connectDB();
     
-    $sql = "SELECT SUM(SanLuong) as TongSanLuong FROM thu_hoach WHERE YEAR(NgayThuHoach) = 2024";
-    $result = mysqli_query($conn->conn, $sql);
+    $sql = "SELECT SUM(sanluong) AS \"TongSanLuong\" FROM thu_hoach WHERE EXTRACT(YEAR FROM ngaythuhoach) = 2024";
+    $stmt = $conn->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $tongSanLuong = 0;
     
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $tongSanLuong = $row['TongSanLuong'] ?? 0;
+    if ($result) {
+        $tongSanLuong = $result['TongSanLuong'] ?? 0;
     }
     
     return number_format($tongSanLuong/1000, 2);
@@ -22,13 +23,14 @@ function getTongSanLuong2024() {
 function getSoNongHo() {
     $conn = new connectDB();
     
-    $sql = "SELECT COUNT(*) as SoNongHo FROM nong_ho";
-    $result = mysqli_query($conn->conn, $sql);
+    $sql = "SELECT COUNT(*) AS \"SoNongHo\" FROM nong_ho";
+    $stmt = $conn->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $soNongHo = 0;
     
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $soNongHo = $row['SoNongHo'] ?? 0;
+    if ($result) {
+        $soNongHo = $result['SoNongHo'] ?? 0;
     }
     
     return $soNongHo;
@@ -37,13 +39,14 @@ function getSoNongHo() {
 function getSoThuaDat() {
     $conn = new connectDB();
     
-    $sql = "SELECT COUNT(*) as SoThuaDat FROM thua_dat";
-    $result = mysqli_query($conn->conn, $sql);
+    $sql = "SELECT COUNT(*) AS \"SoThuaDat\" FROM thua_dat";
+    $stmt = $conn->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $soThuaDat = 0;
     
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $soThuaDat = $row['SoThuaDat'] ?? 0;
+    if ($result) {
+        $soThuaDat = $result['SoThuaDat'] ?? 0;
     }
     
     return $soThuaDat;
@@ -53,17 +56,20 @@ function getVuMuaHienTai() {
     $conn = new connectDB();
     
     // Lấy vụ mùa mới nhất dựa trên ThoiGianBatDau
-    $sql = "SELECT *
-FROM vu_mua
-WHERE NOW() BETWEEN ThoiGianBatDau AND ThoiGianThuHoach;";
+    $sql = "SELECT 
+                tenvu AS \"TenVu\",
+                thoigianbatdau AS \"ThoiGianBatDau\",
+                thoigianthuh AS \"ThoiGianThuHoach\"
+            FROM vu_mua
+            WHERE NOW() BETWEEN thoigianbatdau AND thoigianthuh";
     
-    $result = mysqli_query($conn->conn, $sql);
+    $stmt = $conn->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        
+    if ($result) {
         // Lấy thông tin vụ mùa từ database
-        $tenVu = $row['TenVu'] ?? '';
+        $tenVu = $result['TenVu'] ?? '';
         
         // Nếu có thông tin vụ mùa từ database
         if (!empty($tenVu)) {

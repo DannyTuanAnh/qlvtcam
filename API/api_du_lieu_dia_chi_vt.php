@@ -14,11 +14,13 @@ require_once __DIR__ . '/../backend/config/connect.php';
 
 try {
     $conn = new connectDB();
-    $sql = "SELECT Tinh, Huyen, Xa, DiaChi FROM vung_trong";
-    $result = $conn->conn->query($sql);
+    $sql = "SELECT tinh AS \"Tinh\", huyen AS \"Huyen\", xa AS \"Xa\", diachi AS \"DiaChi\" FROM vung_trong";
+    $stmt = $conn->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $data = [];
-    while ($row = $result->fetch_assoc()) {
+    foreach ($result as $row) {
         $tinh = $row['Tinh'];
         $huyen = $row['Huyen'];
         $xa = $row['Xa'];

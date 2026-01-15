@@ -14,22 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
         $db = new connectDB();
         $now = date('Y-m-d H:i:s');
-        $stmt = $db->conn->prepare("SELECT MaVu, TenVu FROM vu_mua WHERE ? BETWEEN ThoiGianBatDau AND ThoiGianThuHoach");
-        $stmt->bind_param("s", $now);
-        $result = $stmt->execute();
-        if ($result) {
-            $result = $stmt->get_result();
-            $data = [];
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
-            error_log("Found " . count($data) . " vu mua records");
-            echo json_encode(["status" => "success", "data" => $data, "count"=> count($data)]);
-        } else {
-            error_log("Query execution failed");
-            echo json_encode(["status" => "error", "message" => "Lỗi lấy mã vụ."]);
-        }
-        $stmt->close();
+        $stmt = $db->conn->prepare("SELECT mavu AS \"MaVu\", tenvu AS \"TenVu\" FROM vu_mua WHERE ? BETWEEN thoigianbatdau AND thoigianthuh");
+        $stmt->execute([$now]);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        error_log("Found " . count($data) . " vu mua records");
+        echo json_encode(["status" => "success", "data" => $data, "count"=> count($data)]);
+        
     } catch (Exception $e) {
         error_log("Error: " . $e->getMessage());
         echo json_encode(["status" => "error", "message" => "Lỗi hệ thống."]);

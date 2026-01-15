@@ -13,12 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Lấy thời gian đo
-    $stmt = $db->conn->prepare("SELECT NgayDo FROM thoi_tiet WHERE MaThoiTiet = ?");
-    $stmt->bind_param("i", $maThoiTiet);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $stmt->close();
+    $stmt = $db->conn->prepare("SELECT ngaydo AS \"NgayDo\" FROM thoi_tiet WHERE mathoitiet = ?");
+    $stmt->execute([$maThoiTiet]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$row) {
         echo json_encode(["status" => "error", "message" => "Không tìm thấy thông tin thời tiết."]);
@@ -34,10 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $stmt = $db->conn->prepare("DELETE FROM thoi_tiet WHERE MaThoiTiet = ?");
-    $stmt->bind_param("i", $maThoiTiet);
+    $stmt = $db->conn->prepare("DELETE FROM thoi_tiet WHERE mathoitiet = ?");
 
-    if ($stmt->execute()) {
+    if ($stmt->execute([$maThoiTiet])) {
         echo json_encode(["status" => "success"]);
     } else {
         echo json_encode(["status" => "error", "message" => "Lỗi khi xóa nhật ký."]);

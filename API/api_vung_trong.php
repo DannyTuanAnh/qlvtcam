@@ -15,22 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
         $db = new connectDB();
 
-        $stmt = $db->conn->prepare("SELECT MaVung, Huyen FROM vung_trong");
-        $result = $stmt->execute();
-       
-        if ($result) {
-            $result = $stmt->get_result();
-            $data = [];
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
-            error_log("Found " . count($data) . " vung trong records");
-            echo json_encode(["status" => "success", "data" => $data, "count" => count($data)]);
-        } else {
-            error_log("Query execution failed");
-            echo json_encode(["status" => "error", "message" => "Lỗi khi lấy thông tin vùng."]);
-        }
-        $stmt->close();
+        $stmt = $db->conn->prepare("SELECT mavung AS \"MaVung\", huyen AS \"Huyen\" FROM vung_trong");
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        error_log("Found " . count($data) . " vung trong records");
+        echo json_encode(["status" => "success", "data" => $data, "count" => count($data)]);
+        
     } catch (Exception $e) {
         error_log("Error: " . $e->getMessage());
         echo json_encode(["status" => "error", "message" => "Lỗi hệ thống."]);

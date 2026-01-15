@@ -9,25 +9,24 @@ function getSanLuongTheoMua($year = 2024) {
     
     // Lấy dữ liệu theo năm được truyền vào
     $sql = "SELECT 
-                vm.TenVu,
-                vm.MaVu,
-                vm.ThoiGianBatDau,
-                COALESCE(SUM(th.SanLuong), 0) as TongSanLuong
+                vm.tenvu AS \"TenVu\",
+                vm.mavu AS \"MaVu\",
+                vm.thoigianbatdau AS \"ThoiGianBatDau\",
+                COALESCE(SUM(th.sanluong), 0) AS \"TongSanLuong\"
             FROM vu_mua vm
-            LEFT JOIN thu_hoach th ON vm.MaVu = th.MaVu
-            WHERE YEAR(vm.ThoiGianBatDau) = ?
-            GROUP BY vm.MaVu, vm.TenVu, vm.ThoiGianBatDau
-            ORDER BY vm.ThoiGianBatDau";
+            LEFT JOIN thu_hoach th ON vm.mavu = th.mavu
+            WHERE EXTRACT(YEAR FROM vm.thoigianbatdau) = ?
+            GROUP BY vm.mavu, vm.tenvu, vm.thoigianbatdau
+            ORDER BY vm.thoigianbatdau";
     
     $stmt = $conn->conn->prepare($sql);
-    $stmt->bind_param("i", $year);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->execute([$year]);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     $data = [];
     
-    if ($result && mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
+    if ($result && count($result) > 0) {
+        foreach ($result as $row) {
             $data[] = [
                 'tenVu' => $row['TenVu'],
                 'sanLuong' => round($row['TongSanLuong'] / 1000, 2) // Chuyển kg thành tấn
@@ -35,7 +34,6 @@ function getSanLuongTheoMua($year = 2024) {
         }
     }
     
-    $stmt->close();
     return $data;
 }
 

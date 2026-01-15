@@ -18,8 +18,8 @@ class LoginController {
 
         if ($user) {
             // Lưu thông tin cần thiết vào session
-            $_SESSION["MaNguoiDung"] = $user["MaNguoiDung"];
-            $_SESSION["Email"]       = $user["Email"];
+            $_SESSION["MaNguoiDung"] = $user["manguoidung"];
+            $_SESSION["Email"]       = $user["email"];
 
             return [
                 "status"  => "success",

@@ -604,6 +604,8 @@
 
               // Cập nhật vụ mùa hiện tại
               $("#soVuMua").text(response.data.vuMuaHienTai);
+
+              console.log("Thống kê tải thành công:", response.data);
             } else {
               $("#tongSanLuong").text("Lỗi dữ liệu");
               $("#soNongHo").text("Lỗi dữ liệu");

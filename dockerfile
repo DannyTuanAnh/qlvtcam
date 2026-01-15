@@ -1,21 +1,15 @@
-FROM php:8.2-cli
+FROM php:8.2-apache
 
-# Thư mục làm việc
-WORKDIR /app
+# Cài PostgreSQL driver cho PHP (BẮT BUỘC)
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    && docker-php-ext-install pdo_pgsql pgsql
 
-# Copy toàn bộ source
-COPY . .
+# Enable Apache rewrite (nếu dùng .htaccess / routing)
+RUN a2enmod rewrite
 
-# Cài extension PHP thường dùng
-RUN docker-php-ext-install pdo pdo_mysql
+# Copy source code vào Apache web root
+COPY . /var/www/html/
 
-# Nếu có composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
- && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
- && composer install --no-dev || true
-
-# Render bắt buộc port 10000
-EXPOSE 10000
-
-# Chạy PHP built-in server, trỏ root
-CMD ["php", "-S", "0.0.0.0:10000", "-t", "."]
+# Set quyền
+RUN chown -R www-data:www-data /var/www/html

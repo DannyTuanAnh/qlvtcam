@@ -10,6 +10,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
 
+set_exception_handler(function ($e) {
+    error_log("UNCAUGHT EXCEPTION: " . $e->getMessage());
+    http_response_code(500);
+    echo json_encode([
+        'status' => 'error',
+        'message' => $e->getMessage()
+    ]);
+    exit;
+});
+
+register_shutdown_function(function () {
+    $error = error_get_last();
+    if ($error) {
+        error_log("FATAL ERROR: " . print_r($error, true));
+        http_response_code(500);
+        echo json_encode([
+            'status' => 'error',
+            'message' => $error['message']
+        ]);
+    }
+});
+
+
 require_once __DIR__ . '/../backend/canBo/controllers/saubenhController.php';
 
 // Kiểm tra session

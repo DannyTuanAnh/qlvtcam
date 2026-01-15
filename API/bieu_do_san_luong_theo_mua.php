@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: https://qlvtcam.onrender.com');
 
 require_once("../backend/config/connect.php");
 

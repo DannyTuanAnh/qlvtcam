@@ -59,9 +59,9 @@ function getVuMuaHienTai() {
     $sql = "SELECT 
                 tenvu AS \"TenVu\",
                 thoigianbatdau AS \"ThoiGianBatDau\",
-                thoigianthuh AS \"ThoiGianThuHoach\"
+                thoigianthuhoach AS \"ThoiGianThuHoach\"
             FROM vu_mua
-            WHERE NOW() BETWEEN thoigianbatdau AND thoigianthuh";
+            WHERE NOW() BETWEEN thoigianbatdau AND thoigianthuhoach";
     
     $stmt = $conn->conn->prepare($sql);
     $stmt->execute();

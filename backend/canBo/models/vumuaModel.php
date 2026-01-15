@@ -33,6 +33,7 @@ class VuMuaModel {
         WHERE 
            mavu = ?
         ");
+        // Thứ tự: tenvu, thoigianbatdau, thoigianthuhoach, motavu, mavu
         $ok = $stmt->execute([$TenVu, $NgayBatDau, $NgayKetThuc, $MoTa, $MaVu]);
         if ($ok){
             return ["status" => "success", "message" => "Cập nhật thành công"];

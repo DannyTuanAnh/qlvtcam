@@ -51,6 +51,8 @@ class VuMuaController {
         }
         
         $data = json_decode(file_get_contents("php://input"), true);
+        
+
         if (!$data) {
             return ["status" => "error", "message" => "Dữ liệu không hợp lệ"];
         }

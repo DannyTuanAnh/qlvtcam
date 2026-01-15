@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
         $db = new connectDB();
         $now = date('Y-m-d H:i:s');
-        $stmt = $db->conn->prepare("SELECT mavu AS \"MaVu\", tenvu AS \"TenVu\" FROM vu_mua WHERE ? BETWEEN thoigianbatdau AND thoigianthuh");
+        $stmt = $db->conn->prepare("SELECT mavu AS \"MaVu\", tenvu AS \"TenVu\" FROM vu_mua WHERE ? BETWEEN thoigianbatdau AND thoigianthuhoach");
         $stmt->execute([$now]);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         

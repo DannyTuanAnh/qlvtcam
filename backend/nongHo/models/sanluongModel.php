@@ -105,6 +105,8 @@ ORDER BY
         SELECT vm2.tenvu
         FROM vu_mua vm2
         WHERE CURRENT_TIMESTAMP BETWEEN vm2.thoigianbatdau AND vm2.thoigianthuhoach
+        ORDER BY vm2.thoigianbatdau DESC
+    LIMIT 1
     ) AS \"VuHienTai\"
 FROM 
     quan_ly_nguoi_dung qlnd
